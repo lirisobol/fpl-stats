@@ -22,7 +22,6 @@ export function Home():JSX.Element {
             <div className={styles.HeroSection}>
                 <img className={styles.HeroImage} src={heroImage}/>   
             </div>
-
         </div>
     )
 }
