@@ -29,7 +29,7 @@ export function LeagueTable({teams}:LeagueTableProps): JSX.Element {
         { headerName: 'Losses', field: 'losses' },
         { 
             headerName: 'Players', 
-            field: 'code', 
+            field: 'short_name', 
             cellRenderer: PlayersButtonRenderer,
             autoHeight: true
         }
