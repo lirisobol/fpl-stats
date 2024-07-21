@@ -1,12 +1,10 @@
 import { LeagueTable } from "../../components/tables/LeagueTable/LeagueTable";
-import { TeamsModel } from "../../models/DataModel";
+import { useAppSelector } from "../../hooks/redux-hooks";
 import styles from "./Teams.module.scss";
 
-interface TeamsProps {
-    teams: TeamsModel[];
-}
 
-export function Teams({ teams }: TeamsProps): JSX.Element {
+export function Teams(): JSX.Element {
+    const teams = useAppSelector((state) => state.generalInformation.data?.teams);
     return (
         <div className={styles.TeamsPage}>
             <div className={styles.TableWrapper}>

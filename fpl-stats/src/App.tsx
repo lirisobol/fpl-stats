@@ -1,30 +1,33 @@
+import { useEffect } from "react";
 import styles from "./App.module.scss";
 import "./assets/styles/main.scss";
 import { Navigation } from "./components/Navigation/Navigation";
-import { useEffect, useState } from "react";
-import { dataFetcher } from "./services/DataFetcher";
+import { useAppDispatch, useAppSelector } from "./hooks/redux-hooks";
+import { fetchGeneralInformation } from "./store/slice";
 import { Routing } from "./routes/Routing";
-import { GeneralInformation } from "./models/DataModel";
 
 function App() {
-    const [generalInformation, setGeneralInformation] = useState<GeneralInformation | null>(null);
+    const dispatch = useAppDispatch();
+    const status = useAppSelector(state => state.generalInformation.status);
+    const error = useAppSelector(state => state.generalInformation.error);
 
     useEffect(() => {
-        const fetchGeneralInformation = async () => {
-            try {
-                const data = await dataFetcher.getGeneralInformation();
-                setGeneralInformation(data);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-        fetchGeneralInformation();
-    }, []);
+        if(status === 'idle') {
+            dispatch(fetchGeneralInformation())
+        }
+    },[status,dispatch]);
+
+    if(status === 'loading') {
+        return <div>Loading...</div>
+    }
+    if(status === 'error') {
+        return <div>Error: ${error}</div>
+    }
 
     return (
         <div className={styles.App}>
             <Navigation />
-            {generalInformation && <Routing generalInformation={generalInformation} />}
+            <Routing />
         </div>
     );
 }
