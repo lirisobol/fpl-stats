@@ -1,0 +1,43 @@
+@import "../../assets/styles/variables.scss";
+
+.Home {
+    font-family: Dosis;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    .HeroSection {
+        width: 50%;
+        .HeroImage {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .HeaderSection {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        padding: 3rem;
+        gap: 1rem;
+        background-color: $secondary;
+        width: 50%;
+
+        .Header{
+            color: $primary;
+            font-size: 7rem;
+            font-weight: 400;
+        }
+        .Description {
+            color: $primary-light;
+            font-size: 3rem;
+            font-weight: 100;
+        }
+    }
+    .ButtonContainer {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: space-evenly;
+    }
+}
