@@ -3,7 +3,7 @@ import { TeamsModel } from "../../models/DataModel";
 import styles from "./Teams.module.scss";
 
 interface TeamsProps {
-  teams: TeamsModel[];
+    teams: TeamsModel[];
 }
 
 export function Teams({ teams }: TeamsProps): JSX.Element {
@@ -13,5 +13,5 @@ export function Teams({ teams }: TeamsProps): JSX.Element {
                 <LeagueTable  teams={teams}/>
             </div>
         </div>
-  );
+    );
 }
