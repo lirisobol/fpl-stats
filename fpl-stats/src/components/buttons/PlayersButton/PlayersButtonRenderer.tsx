@@ -3,14 +3,12 @@ import { faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
 import styles from "./PlayersButtonRenderer.module.scss";
 import { useNavigate } from "react-router-dom";
 interface PlayersButtonRendererProps {
-    value:number
+    value:string
 }
-  
 export const PlayersButtonRenderer: React.FC<PlayersButtonRendererProps> = ({value}:PlayersButtonRendererProps) => {
     const navigate = useNavigate();
-    
     const handleNavigate = () => {
-        navigate(`/teams/${value}`);
+        navigate(`/teams/${value.toLowerCase()}`);
     };
     return (
         <button onClick={handleNavigate} className="btn btn-sm btn-outline-dark table-button">
