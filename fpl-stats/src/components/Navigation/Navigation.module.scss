@@ -1,6 +1,14 @@
+@import "../../assets/styles/variables.scss";
+.NavWrapper{
+    height: 5%;
+    display: flex;
+    align-items: center;
+    background-color: $secondary;
+}
+
 .SmallNavLinks {
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 .SmallNavBrand {
-    font-size: 1rem;
+    font-size: 1.2rem;
 }

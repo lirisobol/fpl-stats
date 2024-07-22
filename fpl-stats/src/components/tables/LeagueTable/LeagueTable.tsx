@@ -37,7 +37,7 @@ export function LeagueTable({teams}:LeagueTableProps): JSX.Element {
     const [columnDefs, setColumnDefs] = useState(initialColumnDefs);
 
     return (
-        <div className="ag-theme-quartz" style={{height:600,width:'100%',fontSize:"0.7rem"}}>
+        <div className="ag-theme-quartz" style={{height:600,width:'100%',fontSize:"0.9rem"}}>
         <AgGridReact 
             columnDefs={columnDefs}
             rowData={teams}

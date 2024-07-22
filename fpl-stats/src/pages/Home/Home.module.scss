@@ -1,9 +1,9 @@
 @import "../../assets/styles/variables.scss";
 
-.Home {
+.HomeWrapper {
+    height: 95%;
     font-family: Dosis;
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: row;
     .HeroSection {
@@ -35,9 +35,10 @@
         }
     }
     .ButtonContainer {
+        width: 100%;
         display: flex;
         flex-direction: row;
         gap: 1rem;
-        justify-content: space-evenly;
+        justify-content: start;
     }
 }

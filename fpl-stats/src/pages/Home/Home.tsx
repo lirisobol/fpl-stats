@@ -8,7 +8,7 @@ export function Home():JSX.Element {
         navigate(path);
     };
     return (
-        <div className={styles.Home}>
+        <div className={styles.HomeWrapper}>
             <div className={styles.HeaderSection}>
                 <h1 className={styles.Header}>FPLStats</h1>
                 <p className={styles.Description}>
