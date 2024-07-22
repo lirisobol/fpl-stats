@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import usePlayersByTeam from "./usePlayersByTeam"
 
-const useFilteredPlayers = (teamCode:number, positionId:string) => {
+const useFilteredPlayers = (teamCode:number, positionId:number) => {
+    // console.log(teamCode, positionId);
+    
     const players = usePlayersByTeam(teamCode);
     const [filteredPlayers, setFilteredPlayers] = useState([]);
     useEffect(() => {

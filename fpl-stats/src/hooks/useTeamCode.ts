@@ -1,9 +1,12 @@
-import { useAppSelector } from "./redux-hooks";
+import { useSelector } from 'react-redux';
 
-const useTeamCode = (teamShortName:string) => {
-    teamShortName = teamShortName.toUpperCase();
-    const teams = useAppSelector((state) => state.generalInformation.data?.teams);
-    const team = teams.find(t => t.short_name === teamShortName);
-    return team ? team.code : null;
-}
-export default useTeamCode;
+export const useTeamCode = (teamShortName: string) => {
+    const upperTeamShortName = teamShortName.toUpperCase();
+    const teams = useSelector((state) => state.generalInformation.data.teams);
+    
+    if (!teams) {
+        return undefined;
+    }
+    const team = teams.find(team => team.short_name === upperTeamShortName);
+    return team ? team.code : undefined;
+};
