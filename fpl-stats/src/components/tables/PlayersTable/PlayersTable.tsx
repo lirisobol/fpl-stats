@@ -17,7 +17,6 @@ export function PlayersTable({players}:PlayersTableProps): JSX.Element {
     const defaultColDef = {
         sortable: true,
         resizable: true,
-        flex: 1
     };
     const initialColumnDefs = getColumnDefs();
     const [columnDefs, setColumnDefs] = useState(initialColumnDefs);
@@ -26,6 +25,10 @@ export function PlayersTable({players}:PlayersTableProps): JSX.Element {
             setColumnDefs(getColumnDefs());
         }
     }, [elements]);
+    const autoSizeStrategy = {
+        type: 'fitGridWidth',
+        defaultMinWidth: 100,
+    };
 
     return (
         <div className="ag-theme-quartz" style={{height:600,width:'100%',fontSize:"1.2rem"}}>
@@ -35,6 +38,7 @@ export function PlayersTable({players}:PlayersTableProps): JSX.Element {
             defaultColDef={defaultColDef}
             domLayout="autoHeight"
             rowHeight={80}
+            autoSizeStrategy={autoSizeStrategy}
         />
         </div>
     )

@@ -12,8 +12,15 @@ const elementStats = [
         "name": "now_cost"
     },
     {
+        "label": "Selected",
+        "name": "selected_by_percent",
+        "rank": "selected_rank"
+    },
+
+    {
         "label": "PPG",
-        "name": "points_per_game"
+        "name": "points_per_game",
+        "rank": "points_per_game_rank"
     },
 
     {
@@ -31,18 +38,6 @@ const elementStats = [
     {
         "label": "xGI",
         "name": "expected_goal_involvements"
-    },
-    {
-        "label": "Goals",
-        "name": "goals_scored"
-    },
-    {
-        "label": "Assists",
-        "name": "assists"
-    },
-    {
-        "label": "Clean sheets",
-        "name": "clean_sheets"
     },
     {
         "label": "Conceded",
@@ -69,10 +64,6 @@ const elementStats = [
         "name": "ict_index"
     },
     {
-        "label": "Starts",
-        "name": "starts"
-    },
-    {
         "label": "Expected Goals Conceded",
         "name": "expected_goals_conceded"
     },
@@ -85,18 +76,61 @@ export const getColumnDefs = (): ColDef[] => {
             return {
                 headerName: stat.label,
                 field: stat.name,
-                valueGetter: (params: any) => `${params.data.first_name} ${params.data.second_name}`
+                valueGetter: (params: any) => `${params.data.first_name} ${params.data.second_name}`,
+                width: '300px'
             };
-        } else if (stat.label === "Price") {
+        } 
+        else if (stat.label === "Price") {
             return {
                 headerName: stat.label,
                 field: stat.name,
-                valueFormatter: (params: any) => (params.value / 10).toFixed(1)
+                valueGetter: (params: any) => params.data[stat.name] / 10, // Get the numeric value
+                valueFormatter: (params: any) => params.value.toFixed(1), // Format for display
+                cellClassRules: {
+                    'high-rank': (params: any) => params.value < 5.5,
+                    'medium-rank': (params: any) => params.value >= 5.5 && params.value < 10.0,
+                    'low-rank': (params: any) => params.value >= 10.0,
+                }
             };
-        } else {
+        }
+        else if (stat.label === "Selected") {
             return {
                 headerName: stat.label,
-                field: stat.name
+                field: stat.name,
+                cellClassRules: {
+                    'high-rank': (params: any) => {
+                        return params.data[stat.rank] <= 50;
+                    },
+                    'medium-rank': (params: any) => {
+                        return params.data[stat.rank] > 50 && params.data[stat.rank] < 150;
+                    },
+                    'low-rank': (params: any) => {
+                        return params.data[stat.rank] > 150;
+                    }
+                }
+            };
+        }
+        else if (stat.label === "PPG") {
+            return {
+                headerName: stat.label,
+                field: stat.name,
+                cellClassRules: {
+                    'high-rank': (params: any) => {
+                        return params.data[stat.rank] <= 50;
+                    },
+                    'medium-rank': (params: any) => {
+                        return params.data[stat.rank] > 50 && params.data[stat.rank] <= 150;
+                    },
+                    'low-rank': (params: any) => {
+                        return params.data[stat.rank] > 150;
+                    }
+                }
+            };
+        }
+        else {
+            return {
+                headerName: stat.label,
+                field: stat.name,
             };
         }
     });
