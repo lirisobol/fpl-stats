@@ -44,7 +44,6 @@ export function PlayersFilter({ onFilterChange }: PlayersFilterProps): JSX.Eleme
     return (
         <ButtonGroup className="mb-2">
             <ToggleButton
-                size="sm"
                 key="all"
                 type="radio"
                 variant="outline-dark"
@@ -58,7 +57,6 @@ export function PlayersFilter({ onFilterChange }: PlayersFilterProps): JSX.Eleme
             </ToggleButton>
             {elementTypes.map((type) => (
                 <ToggleButton
-                    size="sm"
                     key={type.id}
                     type="radio"
                     variant="outline-dark"

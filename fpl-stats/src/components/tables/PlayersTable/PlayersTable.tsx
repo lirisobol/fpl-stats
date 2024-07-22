@@ -28,13 +28,13 @@ export function PlayersTable({players}:PlayersTableProps): JSX.Element {
     }, [elements]);
 
     return (
-        <div className="ag-theme-quartz" style={{height:600,width:'100%',fontSize:"0.9rem"}}>
+        <div className="ag-theme-quartz" style={{height:600,width:'100%',fontSize:"1.2rem"}}>
         <AgGridReact 
             columnDefs={columnDefs}
             rowData={players}
             defaultColDef={defaultColDef}
             domLayout="autoHeight"
-            rowHeight={50}
+            rowHeight={80}
         />
         </div>
     )
