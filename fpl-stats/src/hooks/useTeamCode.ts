@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 export const useTeamCode = (teamShortName: string) => {
     const upperTeamShortName = teamShortName.toUpperCase();
     const teams = useSelector((state) => state.generalInformation.data.teams);
-    
     if (!teams) {
         return undefined;
     }

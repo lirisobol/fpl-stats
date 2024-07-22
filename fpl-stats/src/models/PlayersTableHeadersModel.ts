@@ -8,6 +8,15 @@ const elementStats = [
         "name": ""
     },
     {
+        "label": "Price",
+        "name": "now_cost"
+    },
+    {
+        "label": "PPG",
+        "name": "points_per_game"
+    },
+
+    {
         "label": "BPS",
         "name": "bps"
     },
@@ -66,12 +75,29 @@ const elementStats = [
     {
         "label": "Expected Goals Conceded",
         "name": "expected_goals_conceded"
-    }
+    },
+
 ];
 
 export const getColumnDefs = (): ColDef[] => {
-    return elementStats.map(stat => ({
-        headerName: stat.label,
-        field: stat.name
-    }));
+    return elementStats.map(stat => {
+        if (stat.label === "Player name") {
+            return {
+                headerName: stat.label,
+                field: stat.name,
+                valueGetter: (params: any) => `${params.data.first_name} ${params.data.second_name}`
+            };
+        } else if (stat.label === "Price") {
+            return {
+                headerName: stat.label,
+                field: stat.name,
+                valueFormatter: (params: any) => (params.value / 10).toFixed(1)
+            };
+        } else {
+            return {
+                headerName: stat.label,
+                field: stat.name
+            };
+        }
+    });
 };

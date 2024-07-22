@@ -5,7 +5,13 @@ import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../hooks/redux-hooks";
 import { getColumnDefs } from "../../../models/PlayersTableHeadersModel";
 
-export function PlayersTable(): JSX.Element {
+interface PlayersTableProps {
+    players: []
+}
+
+export function PlayersTable({players}:PlayersTableProps): JSX.Element {
+    console.log(players);
+    
     const elements = useAppSelector((state) => state.generalInformation.data?.element_stats);
     // default column properties (optional)
     const defaultColDef = {
@@ -25,7 +31,7 @@ export function PlayersTable(): JSX.Element {
         <div className="ag-theme-quartz" style={{height:600,width:'100%',fontSize:"0.9rem"}}>
         <AgGridReact 
             columnDefs={columnDefs}
-            rowData={'teams'}
+            rowData={players}
             defaultColDef={defaultColDef}
             domLayout="autoHeight"
             rowHeight={50}
