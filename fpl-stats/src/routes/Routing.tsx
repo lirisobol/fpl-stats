@@ -3,9 +3,6 @@ import { Home } from "../pages/Home/Home";
 import { Teams } from "../pages/Teams/Teams";
 import { Fixtures } from "../pages/Fixtures/Fixtures";
 import { Players } from "../pages/Players/Players";
-
-
-
 export function Routing():JSX.Element {
     return(
         <>
