@@ -4,38 +4,31 @@ import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../hooks/redux-hooks";
 import { playersTableConfig } from "../../../utils/playerStatsTableConfig";
+import useFilteredColumns from "../../../hooks/useFilteredColumns";
 
 interface PlayersTableProps {
     players: []
 }
 export function PlayersTable({players}:PlayersTableProps): JSX.Element {
-    
+    const filteredColumns = useFilteredColumns();
+    const [columnDefs, setColumnDefs] = useState([]);
+
     const elements = useAppSelector((state) => state.generalInformation.data?.element_stats);
-    const defaultColDef = {
-        sortable: true,
-        resizable: true,
-    };
-    const initialColumnDefs = playersTableConfig.getColumnDefs();
-    const [columnDefs, setColumnDefs] = useState(initialColumnDefs);
+
     useEffect(() => {
         if (elements) {
-            setColumnDefs(playersTableConfig.getColumnDefs());
+            setColumnDefs(playersTableConfig.getColumnDefs(filteredColumns));
         }
-    }, [elements]);
-    const autoSizeStrategy = {
-        type: 'fitGridWidth',
-        defaultMinWidth: 100,
-    };
-
+    }, [elements, filteredColumns]);
     return (
         <div className="ag-theme-quartz" style={{height:600,width:'100%',fontSize:"1.2rem"}}>
         <AgGridReact 
             columnDefs={columnDefs}
             rowData={players}
-            defaultColDef={defaultColDef}
+            defaultColDef={playersTableConfig.defaultColDef}
             domLayout="autoHeight"
             rowHeight={80}
-            autoSizeStrategy={autoSizeStrategy}
+            autoSizeStrategy={playersTableConfig.autoSizeStrategy}
         />
         </div>
     )
