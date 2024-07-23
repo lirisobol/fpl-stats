@@ -13,7 +13,7 @@ export function SearchFilter({ onSearchChange }: SearchFilterProps): JSX.Element
             type="text"
             placeholder="Search players..."
             onChange={handleSearchChange}
-            className="form-control mb-2 w-25"
+            className="form-control mb-2 w-25 focus-ring focus-ring-dark"
         />
     );
 }

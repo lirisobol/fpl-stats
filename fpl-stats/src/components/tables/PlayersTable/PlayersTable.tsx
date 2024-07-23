@@ -9,7 +9,6 @@ interface PlayersTableProps {
     players: []
 }
 export function PlayersTable({players}:PlayersTableProps): JSX.Element {
-    console.log(players);
     
     const elements = useAppSelector((state) => state.generalInformation.data?.element_stats);
     const defaultColDef = {

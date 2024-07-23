@@ -1,3 +1,4 @@
+import { ColumnsFilter } from "./ColumnsFilter/ColumnsFilter";
 import styles from "./PlayersFilter.module.scss";
 import { PositionFilter } from "./PositionFilter/PositionFilter";
 import { SearchFilter } from "./SearchFilter/SearchFilter";
@@ -10,6 +11,7 @@ export function PlayersFilter({ onPositionTypeChange, onSearchChange }: PlayersF
     return (
         <div className={styles.PlayersFilterContainer}>
             <PositionFilter onPositionTypeChange={onPositionTypeChange}/>
+            <ColumnsFilter />
             <SearchFilter onSearchChange={onSearchChange} />
         </div>
     );
