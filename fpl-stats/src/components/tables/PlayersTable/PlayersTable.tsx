@@ -8,12 +8,10 @@ import { playersTableConfig } from "../../../utils/playerStatsTableConfig";
 interface PlayersTableProps {
     players: []
 }
-
 export function PlayersTable({players}:PlayersTableProps): JSX.Element {
     console.log(players);
     
     const elements = useAppSelector((state) => state.generalInformation.data?.element_stats);
-    // default column properties (optional)
     const defaultColDef = {
         sortable: true,
         resizable: true,

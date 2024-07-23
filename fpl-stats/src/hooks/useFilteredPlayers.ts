@@ -1,20 +1,28 @@
 import { useEffect, useState } from "react";
-import usePlayersByTeam from "./usePlayersByTeam"
+import { useAppSelector } from "./redux-hooks";
 
-const useFilteredPlayers = (teamCode:number, positionId:number) => {
-    // console.log(teamCode, positionId);
-    
-    const players = usePlayersByTeam(teamCode);
-    const [filteredPlayers, setFilteredPlayers] = useState([]);
+const useFilteredPlayers = (teamCode: number | undefined, selectedPositionType: number | 0, searchQuery:string) => {
+    const players = useAppSelector((state) => state.generalInformation?.data?.elements);
+    const [filteredPlayers, setFilteredPlayers] = useState([]);    
     useEffect(() => {
-        if(positionId){
-            const filtered = players.filter(player => player.element_type === positionId);
-            setFilteredPlayers(filtered)
+        if (!players) return;
+        let result = players;
+        if (teamCode) {
+            result = result.filter(player => player.team_code === teamCode);
         }
-        else {
-            setFilteredPlayers(players);
+        if (selectedPositionType) {
+            result = result.filter(player => player.element_type === selectedPositionType);
         }
-    },[teamCode, positionId]);
+        if (searchQuery) {
+            const lowerSearchQuery = searchQuery.toLowerCase();
+            result = result.filter(player => 
+                player.first_name.toLowerCase().includes(lowerSearchQuery) ||
+                player.second_name.toLowerCase().includes(lowerSearchQuery)
+            );
+        }
+        setFilteredPlayers(result);
+    }, [players, teamCode, selectedPositionType, searchQuery]);
     return filteredPlayers;
-}
+};
+
 export default useFilteredPlayers;
