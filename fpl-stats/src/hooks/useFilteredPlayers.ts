@@ -1,28 +1,23 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { useAppSelector } from "./redux-hooks";
 
-const useFilteredPlayers = (teamCode: number | undefined, selectedPositionType: number | 0, searchQuery:string) => {
+const useFilteredPlayers = (teamCode: number | undefined, selectedPositionType: number | 0, searchQuery: string) => {
     const players = useAppSelector((state) => state.generalInformation?.data?.elements);
-    const [filteredPlayers, setFilteredPlayers] = useState([]);    
-    useEffect(() => {
-        if (!players) return;
-        let result = players;
-        if (teamCode) {
-            result = result.filter(player => player.team_code === teamCode);
-        }
-        if (selectedPositionType) {
-            result = result.filter(player => player.element_type === selectedPositionType);
-        }
-        if (searchQuery) {
-            const lowerSearchQuery = searchQuery.toLowerCase();
-            result = result.filter(player => 
-                player.first_name.toLowerCase().includes(lowerSearchQuery) ||
-                player.second_name.toLowerCase().includes(lowerSearchQuery)
-            );
-        }
-        setFilteredPlayers(result);
+
+    return useMemo(() => {
+        if (!players) return [];
+
+        return players.filter(player => {
+            const matchesTeam = !teamCode || player.team_code === teamCode;
+            const matchesPosition = !selectedPositionType || player.element_type === selectedPositionType;
+            
+            const matchesSearch = !searchQuery || 
+                player.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                player.second_name.toLowerCase().includes(searchQuery.toLowerCase());
+
+            return matchesTeam && matchesPosition && matchesSearch;
+        });
     }, [players, teamCode, selectedPositionType, searchQuery]);
-    return filteredPlayers;
 };
 
 export default useFilteredPlayers;
