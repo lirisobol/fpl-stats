@@ -25,5 +25,5 @@ const filterSlice = createSlice({
         }
     }
 });
-export const { setPositionType, setSearchQuery } = filterSlice.actions;
+export const { setPositionType, setSearchQuery, setColumnGroup } = filterSlice.actions;
 export default filterSlice.reducer;

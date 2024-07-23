@@ -38,16 +38,16 @@ export function PositionFilter({onPositionTypeChange}:PositionFilterProps): JSX.
         onPositionTypeChange(typeId);
     };
     return (
-        <ButtonGroup className="mb-2 w-25">
+        <ButtonGroup className="mb-2">
         <ToggleButton
-            key="all"
+            key="all-positions"
             type="radio"
             variant="outline-dark"
             name="radio"
             value={0}
             checked={selectedPositionType === 0}
             onChange={() => handlePositionTypeChange(0)}
-            id="all-toggle"
+            id="all-positions-toggle"
         >
             All
         </ToggleButton>

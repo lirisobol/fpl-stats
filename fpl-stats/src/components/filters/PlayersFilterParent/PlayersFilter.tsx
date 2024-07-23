@@ -11,8 +11,8 @@ export function PlayersFilter({ onPositionTypeChange, onSearchChange }: PlayersF
     return (
         <div className={styles.PlayersFilterContainer}>
             <PositionFilter onPositionTypeChange={onPositionTypeChange}/>
-            <ColumnsFilter />
             <SearchFilter onSearchChange={onSearchChange} />
+            <ColumnsFilter />
         </div>
     );
 }
