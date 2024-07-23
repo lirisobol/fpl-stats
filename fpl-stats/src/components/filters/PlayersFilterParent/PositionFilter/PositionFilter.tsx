@@ -1,8 +1,6 @@
 import { ButtonGroup, ToggleButton } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/redux-hooks";
 import { setPositionType } from "../../../../store/slices/filterSlice";
-
-
 interface PositionType {
     id:number,
     plural_name: string,
@@ -33,37 +31,39 @@ const PositionTypes: PositionType[] = [
 export function PositionFilter(): JSX.Element {
     const dispatch = useAppDispatch();
     const positionType = useAppSelector((state) => state.filters.positionType);
-    const handlePositionTypeChange = (positionType: number) => {
-        dispatch(setPositionType(positionType));
+
+    const handlePositionTypeChange = (newPositionType: number) => {
+        dispatch(setPositionType(newPositionType));
     };
+
     return (
         <ButtonGroup className="mb-2">
-        <ToggleButton
-            key="all-positions"
-            type="radio"
-            variant="outline-dark"
-            name="radio"
-            value={0}
-            checked={positionType === 0}
-            onChange={() => handlePositionTypeChange(0)}
-            id="all-positions-toggle"
-        >
-            All
-        </ToggleButton>
-        {PositionTypes.map((type) => (
             <ToggleButton
-                key={type.id}
+                key="all-positions"
                 type="radio"
                 variant="outline-dark"
-                name="radio"
-                value={type.id}
-                checked={positionType === type.id}
-                onChange={() => handlePositionTypeChange(type.id)}
-                id={`${type.plural_name}`}
+                name="position-radio"
+                value={0}
+                checked={positionType === 0}
+                onChange={() => handlePositionTypeChange(0)}
+                id="all-positions-toggle"
             >
-                {type.plural_name}
+                All
             </ToggleButton>
-        ))}
-    </ButtonGroup>
+            {PositionTypes.map((type) => (
+                <ToggleButton
+                    key={type.id}
+                    type="radio"
+                    variant="outline-dark"
+                    name="position-radio"
+                    value={type.id}
+                    checked={positionType === type.id}
+                    onChange={() => handlePositionTypeChange(type.id)}
+                    id={`position-${type.plural_name}`}
+                >
+                    {type.plural_name}
+                </ToggleButton>
+            ))}
+        </ButtonGroup>
     )
 }

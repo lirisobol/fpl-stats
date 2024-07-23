@@ -1,23 +1,22 @@
 import { ButtonGroup, ToggleButton } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/redux-hooks";
-import {setColumnGroup } from "../../../../store/slices/filterSlice";
+import { setColumnGroup } from "../../../../store/slices/filterSlice";
 
-
-export function ColumnsFilter():JSX.Element {
+export function ColumnsFilter(): JSX.Element {
     const dispatch = useAppDispatch();
     const columnGroup = useAppSelector((state) => state.filters.columnGroup);
 
-    const handleColumnGroupChange = (group:string) => {
-        dispatch(setColumnGroup(group))
+    const handleColumnGroupChange = (group: string) => {
+        dispatch(setColumnGroup(group));
     }
-    
+
     return (
         <ButtonGroup className="mb-2">
             <ToggleButton
                 key="all-columns"
                 type="radio"
                 variant="outline-dark"
-                name="radio"
+                name="column-radio"
                 value="all-columns"
                 checked={columnGroup === "all"}
                 onChange={() => handleColumnGroupChange("all")}
@@ -29,7 +28,7 @@ export function ColumnsFilter():JSX.Element {
                 key="key-stats"
                 type="radio"
                 variant="outline-dark"
-                name="radio"
+                name="column-radio"
                 value="key"
                 checked={columnGroup === "key"}
                 onChange={() => handleColumnGroupChange("key")}
@@ -41,7 +40,7 @@ export function ColumnsFilter():JSX.Element {
                 key="expected-stats"
                 type="radio"
                 variant="outline-dark"
-                name="radio"
+                name="column-radio"
                 value="expected"
                 checked={columnGroup === "expected"}
                 onChange={() => handleColumnGroupChange("expected")}
@@ -53,7 +52,7 @@ export function ColumnsFilter():JSX.Element {
                 key="performance-stats"
                 type="radio"
                 variant="outline-dark"
-                name="radio"
+                name="column-radio"
                 value="performance"
                 checked={columnGroup === "performance"}
                 onChange={() => handleColumnGroupChange("performance")}
