@@ -12,8 +12,8 @@ export function Navigation() {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link className={`${styles.SmallNavLinks} me-3`} as={Link} to="/">Home</Nav.Link>
-                <Nav.Link className={`${styles.SmallNavLinks} me-3`} to="/teams">Teams</Nav.Link>
-                <Nav.Link className={`${styles.SmallNavLinks} me-3`} to="/fixtures">Fixtures</Nav.Link>
+                <Nav.Link className={`${styles.SmallNavLinks} me-3`} as={Link} to="/teams">Teams</Nav.Link>
+                <Nav.Link className={`${styles.SmallNavLinks} me-3`} as={Link} to="/fixtures">Fixtures</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
