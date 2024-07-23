@@ -1,3 +1,4 @@
+// App.tsx
 import { useEffect } from "react";
 import styles from "./App.module.scss";
 import "./assets/styles/main.scss";
@@ -12,16 +13,14 @@ function App() {
     const error = useAppSelector(state => state.generalInformation.error);
 
     useEffect(() => {
-        if(status === 'idle') {
-            dispatch(fetchGeneralInformation())
-        }
-    },[status,dispatch]);
+        dispatch(fetchGeneralInformation())
+    }, [dispatch]);
 
     if(status === 'loading') {
         return <div>Loading...</div>
     }
     if(status === 'error') {
-        return <div>Error: ${error}</div>
+        return <div>Error: {error}</div>
     }
 
     return (
