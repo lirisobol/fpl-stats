@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppSelector } from "./redux-hooks";
 
-const useFilteredPlayers = (teamCode: number | undefined, selectedType: number | 0, searchQuery:string) => {
+const useFilteredPlayers = (teamCode: number | undefined, selectedPositionType: number | 0, searchQuery:string) => {
     const players = useAppSelector((state) => state.generalInformation?.data?.elements);
     const [filteredPlayers, setFilteredPlayers] = useState([]);    
     useEffect(() => {
@@ -10,8 +10,8 @@ const useFilteredPlayers = (teamCode: number | undefined, selectedType: number |
         if (teamCode) {
             result = result.filter(player => player.team_code === teamCode);
         }
-        if (selectedType) {
-            result = result.filter(player => player.element_type === selectedType);
+        if (selectedPositionType) {
+            result = result.filter(player => player.element_type === selectedPositionType);
         }
         if (searchQuery) {
             const lowerSearchQuery = searchQuery.toLowerCase();
@@ -21,7 +21,7 @@ const useFilteredPlayers = (teamCode: number | undefined, selectedType: number |
             );
         }
         setFilteredPlayers(result);
-    }, [players, teamCode, selectedType, searchQuery]);
+    }, [players, teamCode, selectedPositionType, searchQuery]);
     return filteredPlayers;
 };
 

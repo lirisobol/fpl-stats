@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ButtonGroup, ToggleButton } from "react-bootstrap";
 
 interface PositionFilterProps {
-    onFilterChange:(selectedType:number) => void;
+    onPositionTypeChange:(positionType:number) => void;
 }
 interface PositionType {
     id:number,
@@ -31,11 +31,11 @@ const PositionTypes: PositionType[] = [
         plural_name_short: "FWD",
     },
 ]
-export function PositionFilter({onFilterChange}:PositionFilterProps): JSX.Element {
-    const [selectedType, setSelectedType] = useState<number>(0);
-    const handleFilterChange = (typeId: number) => {
-        setSelectedType(typeId);
-        onFilterChange(typeId);
+export function PositionFilter({onPositionTypeChange}:PositionFilterProps): JSX.Element {
+    const [selectedPositionType, setSelectedPositionType] = useState<number>(0);
+    const handlePositionTypeChange = (typeId: number) => {
+        setSelectedPositionType(typeId);
+        onPositionTypeChange(typeId);
     };
     return (
         <ButtonGroup className="mb-2">
@@ -45,8 +45,8 @@ export function PositionFilter({onFilterChange}:PositionFilterProps): JSX.Elemen
             variant="outline-dark"
             name="radio"
             value={0}
-            checked={selectedType === 0}
-            onChange={() => handleFilterChange(0)}
+            checked={selectedPositionType === 0}
+            onChange={() => handlePositionTypeChange(0)}
             id="all-toggle"
         >
             All
@@ -58,8 +58,8 @@ export function PositionFilter({onFilterChange}:PositionFilterProps): JSX.Elemen
                 variant="outline-dark"
                 name="radio"
                 value={type.id}
-                checked={selectedType === type.id}
-                onChange={() => handleFilterChange(type.id)}
+                checked={selectedPositionType === type.id}
+                onChange={() => handlePositionTypeChange(type.id)}
                 id={`${type.plural_name}`}
             >
                 {type.plural_name}
