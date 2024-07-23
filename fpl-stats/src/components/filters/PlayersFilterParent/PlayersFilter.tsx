@@ -1,3 +1,4 @@
+import styles from "./PlayersFilter.module.scss";
 import { PositionFilter } from "./PositionFilter/PositionFilter";
 import { SearchFilter } from "./SearchFilter/SearchFilter";
 
@@ -7,7 +8,7 @@ interface PlayersFilterProps {
 }
 export function PlayersFilter({ onPositionTypeChange, onSearchChange }: PlayersFilterProps): JSX.Element {
     return (
-        <div>
+        <div className={styles.PlayersFilterContainer}>
             <PositionFilter onPositionTypeChange={onPositionTypeChange}/>
             <SearchFilter onSearchChange={onSearchChange} />
         </div>

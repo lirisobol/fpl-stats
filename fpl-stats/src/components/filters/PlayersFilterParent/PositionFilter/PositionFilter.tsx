@@ -38,7 +38,7 @@ export function PositionFilter({onPositionTypeChange}:PositionFilterProps): JSX.
         onPositionTypeChange(typeId);
     };
     return (
-        <ButtonGroup className="mb-2">
+        <ButtonGroup className="mb-2 w-25">
         <ToggleButton
             key="all"
             type="radio"
