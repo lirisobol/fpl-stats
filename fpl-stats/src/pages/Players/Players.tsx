@@ -8,7 +8,6 @@ import { PlayersFilter } from "../../components/PlayersFilter/PlayersFilter";
 
 export function Players():JSX.Element {
     const teamShortName = useParams().teamCode;
-    
     const teamCode = useTeamCode(teamShortName);  
     const [selectedType, setSelectedType] = useState<number | 0>(0);
     const players = useFilteredPlayers(teamCode, selectedType);
@@ -16,13 +15,13 @@ export function Players():JSX.Element {
     const handleFilterChange = (typeId: number | 0) => {
         setSelectedType(typeId);        
     };
-    
+
     return (
         <div className={styles.Players}>
             <div className={styles.Filters}>
                 <PlayersFilter onFilterChange={handleFilterChange}/>
             </div>
-            <PlayersTable players={players} />
+            <PlayersTable players={players}/>
         </div>
     )
 }
