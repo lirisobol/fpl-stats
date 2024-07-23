@@ -31,7 +31,7 @@ export function LeagueTable({teams}:LeagueTableProps): JSX.Element {
             headerName: 'Players', 
             field: 'short_name', 
             cellRenderer: PlayersButtonRenderer,
-            autoHeight: true
+            cellClass: 'centered-cell',
         }
     ];
     const [columnDefs, setColumnDefs] = useState(initialColumnDefs);
@@ -46,7 +46,7 @@ export function LeagueTable({teams}:LeagueTableProps): JSX.Element {
                 PlayersButtonRenderer: PlayersButtonRenderer
             }}
             domLayout="autoHeight"
-            rowHeight={50}
+            rowHeight={80}
         />
         </div>
     )

@@ -1,12 +1,15 @@
-// Prices styles
+@import "../variables.scss";
 .high-rank {
-    background-color: rgb(3, 251, 205);
+    background-color: $accent-primary;
+    color: $light;
 }
 
 .medium-rank {
-    background-color: rgb(234, 246, 164);
+    background-color: $secondary;
+    color: $light;
 }
 
 .low-rank {
-    background-color: lightcoral;
+    background-color:$primary;
+    color: $light;
 }
