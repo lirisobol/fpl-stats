@@ -3,10 +3,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface FilterState {
     positionType: number;
     searchQuery: string;
+    columnGroup: string;
 }
 const initialState:FilterState = {
     positionType: 0,
-    searchQuery: ""
+    searchQuery: "",
+    columnGroup: "all"
 };
 const filterSlice = createSlice({
     name:'filters',
@@ -17,6 +19,9 @@ const filterSlice = createSlice({
         },
         setSearchQuery(state, action:PayloadAction<string>) {
             state.searchQuery = action.payload;
+        },
+        setColumnGroup(state, action:PayloadAction<string>) {
+            state.columnGroup = action.payload;
         }
     }
 });

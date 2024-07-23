@@ -1,6 +1,7 @@
 import { ButtonGroup, ToggleButton } from "react-bootstrap";
 
 export function ColumnsFilter():JSX.Element {
+    
     return (
         <ButtonGroup className="mb-2 w-25">
         <ToggleButton
