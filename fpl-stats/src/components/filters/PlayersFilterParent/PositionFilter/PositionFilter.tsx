@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { ButtonGroup, ToggleButton } from "react-bootstrap";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/redux-hooks";
+import { setPositionType } from "../../../../store/slices/filterSlice";
 
-interface PositionFilterProps {
-    onPositionTypeChange:(positionType:number) => void;
-}
+
 interface PositionType {
     id:number,
     plural_name: string,
@@ -31,11 +30,11 @@ const PositionTypes: PositionType[] = [
         plural_name_short: "FWD",
     },
 ]
-export function PositionFilter({onPositionTypeChange}:PositionFilterProps): JSX.Element {
-    const [selectedPositionType, setSelectedPositionType] = useState<number>(0);
-    const handlePositionTypeChange = (typeId: number) => {
-        setSelectedPositionType(typeId);
-        onPositionTypeChange(typeId);
+export function PositionFilter(): JSX.Element {
+    const dispatch = useAppDispatch();
+    const positionType = useAppSelector((state) => state.filters.positionType);
+    const handlePositionTypeChange = (positionType: number) => {
+        dispatch(setPositionType(positionType));
     };
     return (
         <ButtonGroup className="mb-2">
@@ -45,7 +44,7 @@ export function PositionFilter({onPositionTypeChange}:PositionFilterProps): JSX.
             variant="outline-dark"
             name="radio"
             value={0}
-            checked={selectedPositionType === 0}
+            checked={positionType === 0}
             onChange={() => handlePositionTypeChange(0)}
             id="all-positions-toggle"
         >
@@ -58,7 +57,7 @@ export function PositionFilter({onPositionTypeChange}:PositionFilterProps): JSX.
                 variant="outline-dark"
                 name="radio"
                 value={type.id}
-                checked={selectedPositionType === type.id}
+                checked={positionType === type.id}
                 onChange={() => handlePositionTypeChange(type.id)}
                 id={`${type.plural_name}`}
             >

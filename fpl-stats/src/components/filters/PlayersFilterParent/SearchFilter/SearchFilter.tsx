@@ -1,12 +1,14 @@
 import { ChangeEvent } from "react";
+import { useAppDispatch } from "../../../../hooks/redux-hooks";
+import { setSearchQuery } from "../../../../store/slices/filterSlice";
 
-interface SearchFilterProps {
-    onSearchChange: (query: string) => void;
-}
-export function SearchFilter({ onSearchChange }: SearchFilterProps): JSX.Element {
+
+export function SearchFilter(): JSX.Element {
+    const dispatch = useAppDispatch();
+    
     const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
         const query = event.target.value;
-        onSearchChange(query);
+        dispatch(setSearchQuery(query));
     };
     return (
         <input
