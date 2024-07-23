@@ -3,7 +3,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../hooks/redux-hooks";
-import { getColumnDefs } from "../../../models/PlayersTableHeadersModel";
+import { playersTableConfig } from "../../../utils/playerStatsTableConfig";
 
 interface PlayersTableProps {
     players: []
@@ -18,11 +18,11 @@ export function PlayersTable({players}:PlayersTableProps): JSX.Element {
         sortable: true,
         resizable: true,
     };
-    const initialColumnDefs = getColumnDefs();
+    const initialColumnDefs = playersTableConfig.getColumnDefs();
     const [columnDefs, setColumnDefs] = useState(initialColumnDefs);
     useEffect(() => {
         if (elements) {
-            setColumnDefs(getColumnDefs());
+            setColumnDefs(playersTableConfig.getColumnDefs());
         }
     }, [elements]);
     const autoSizeStrategy = {
