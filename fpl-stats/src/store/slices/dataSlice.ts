@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { dataFetcher } from "../services/DataFetcher";
+import { dataFetcher } from "../../services/DataFetcher";
 
 export const fetchGeneralInformation = createAsyncThunk(
     'generalInformation/fetchGeneralInformation',

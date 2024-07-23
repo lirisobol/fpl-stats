@@ -4,8 +4,8 @@ import styles from "./App.module.scss";
 import "./assets/styles/main.scss";
 import { Navigation } from "./components/Navigation/Navigation";
 import { useAppDispatch, useAppSelector } from "./hooks/redux-hooks";
-import { fetchGeneralInformation } from "./store/slice";
 import { Routing } from "./routes/Routing";
+import { fetchGeneralInformation } from "./store/slices/dataSlice";
 
 function App() {
     const dispatch = useAppDispatch();
