@@ -1,7 +1,7 @@
 @import "../../assets/styles/variables.scss";
 
 .HomeWrapper {
-    height: 95%;
+    height: 91%;
     font-family: Dosis;
     width: 100%;
     display: flex;
@@ -20,16 +20,16 @@
         align-items: start;
         padding: 3rem;
         gap: 1rem;
-        background-color: $secondary;
+        background-color: $primary;
         width: 50%;
 
         .Header{
-            color: $primary;
+            color: $accent-secondary;
             font-size: 7rem;
             font-weight: 400;
         }
         .Description {
-            color: $primary-light;
+            color: $accent-secondary;
             font-size: 3rem;
             font-weight: 100;
         }

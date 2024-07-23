@@ -1,5 +1,12 @@
 @import "../variables.scss";
 
-.table-button {
+.centered-cell {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.table-button { 
     font-size: 1.2rem;
+    height: auto;
 }
