@@ -6,6 +6,7 @@ import { Navigation } from "./components/Navigation/Navigation";
 import { useAppDispatch, useAppSelector } from "./hooks/redux-hooks";
 import { Routing } from "./routes/Routing";
 import { fetchGeneralInformation } from "./store/slices/dataSlice";
+import { LoadingSpinner } from "./components/LoadingSpinner/LoadingSpinner";
 
 function App() {
     const dispatch = useAppDispatch();
@@ -16,15 +17,13 @@ function App() {
         dispatch(fetchGeneralInformation())
     }, [dispatch]);
 
-    if(status === 'loading') {
-        return <div>Loading...</div>
-    }
     if(status === 'error') {
         return <div>Error: {error}</div>
     }
 
     return (
         <div className={styles.App}>
+            {status === 'loading' && <LoadingSpinner />}
             <Navigation />
             <Routing />
         </div>
