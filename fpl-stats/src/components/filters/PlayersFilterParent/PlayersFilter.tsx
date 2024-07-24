@@ -8,8 +8,8 @@ export function PlayersFilter(): JSX.Element {
     return (
         <div className={styles.PlayersFilterContainer}>
             <PositionFilter />
-            <SearchFilter />
             <ColumnsFilter />
+            <SearchFilter />
         </div>
     );
 }

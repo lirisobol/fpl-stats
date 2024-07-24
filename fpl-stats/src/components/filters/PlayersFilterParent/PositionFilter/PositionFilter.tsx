@@ -1,6 +1,9 @@
 import { ButtonGroup, ToggleButton } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/redux-hooks";
 import { setPositionType } from "../../../../store/slices/filterSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPowerOff,faHands,faShield,faCircleNodes,faBullseye} from "@fortawesome/free-solid-svg-icons";
+
 interface PositionType {
     id:number,
     plural_name: string,
@@ -35,7 +38,7 @@ export function PositionFilter(): JSX.Element {
     const handlePositionTypeChange = (newPositionType: number) => {
         dispatch(setPositionType(newPositionType));
     };
-
+    // import { faPowerOff,faHands,faShield,faCircleNodes,faBullseye} from "@fortawesome/free-solid-svg-icons";
     return (
         <ButtonGroup className="mb-2">
             <ToggleButton
@@ -47,7 +50,9 @@ export function PositionFilter(): JSX.Element {
                 checked={positionType === 0}
                 onChange={() => handlePositionTypeChange(0)}
                 id="all-positions-toggle"
+                className="p-2"
             >
+                <FontAwesomeIcon icon={faPowerOff} className="me-2"/>
                 All
             </ToggleButton>
             {PositionTypes.map((type) => (
@@ -60,7 +65,9 @@ export function PositionFilter(): JSX.Element {
                     checked={positionType === type.id}
                     onChange={() => handlePositionTypeChange(type.id)}
                     id={`position-${type.plural_name}`}
+                    className="p-2"
                 >
+                    <FontAwesomeIcon icon={faHands} className="me-2"/>
                     {type.plural_name}
                 </ToggleButton>
             ))}
