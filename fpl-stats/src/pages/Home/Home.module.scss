@@ -20,25 +20,27 @@
         align-items: start;
         padding: 3rem;
         gap: 1rem;
-        background-color: $primary;
+        background-color: $light;
         width: 50%;
 
         .Header{
-            color: $accent-secondary;
+            color: $accent-primary;
             font-size: 7rem;
             font-weight: 400;
         }
         .Description {
-            color: $accent-secondary;
+            color: $accent-primary;
             font-size: 3rem;
             font-weight: 100;
         }
     }
     .ButtonContainer {
         width: 100%;
+        height: 20%;
         display: flex;
         flex-direction: row;
-        gap: 1rem;
+        gap: 4rem;
         justify-content: start;
+        align-items: center;
     }
 }

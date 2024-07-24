@@ -15,8 +15,8 @@ export function Home():JSX.Element {
                     The ultimate resource for Fantasy Premier League statistics and insights.
                 </p>
                 <div className={styles.ButtonContainer}>
-                    <button className="btn btn-outline-light btn-lg w-25" onClick={() => handleNavigate('/teams')}>Teams</button>
-                    <button className="btn btn-outline-light btn-lg w-25" onClick={() => handleNavigate('/fixtures')}>Fixtures</button>
+                    <button className="btn btn-dark btn-lg w-25" onClick={() => handleNavigate('/teams')}>Teams</button>
+                    <button className="btn btn-dark btn-lg w-25" onClick={() => handleNavigate('/fixtures')}>Fixtures</button>
                 </div>
             </div>
             <div className={styles.HeroSection}>
