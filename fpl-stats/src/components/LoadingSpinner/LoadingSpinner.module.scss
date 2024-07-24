@@ -1,0 +1,13 @@
+/* LoadingSpinner.module.scss */
+.LoadingSpinnerContainer {
+    position: fixed; /* Use fixed positioning to cover the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(239, 239, 239, 0.9); /* Use rgba for semi-transparency */
+    z-index: 1000; /* Ensure it appears above other content */
+}
