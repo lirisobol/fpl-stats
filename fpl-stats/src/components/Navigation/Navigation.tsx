@@ -9,7 +9,9 @@ export function Navigation() {
     <div className={styles.NavWrapper}>
         <Navbar expand="lg" className="p-3">
           <Container>
-            <Navbar.Brand className={`${styles.SmallNavBrand} me-5`} as={Link} to="/">FPLStats</Navbar.Brand>
+            <Navbar.Brand className={`${styles.SmallNavBrand} me-5`} as={Link} to="/">
+                FPLStats
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
