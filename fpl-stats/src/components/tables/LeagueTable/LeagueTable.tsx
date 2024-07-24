@@ -18,7 +18,7 @@ export function LeagueTable({teams}:LeagueTableProps): JSX.Element {
         sortable: true,
         filter: true,
         resizable: true,
-        flex: 1
+        flex: 1,
     };
     // initial column definitions
     const initialColumnDefs = [
