@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-export const useTeamCode = (teamShortName: string | undefined) => {
-    if (!teamShortName) {
+export const useTeamCode = (teamCode: number | undefined) => {
+    if (!teamCode || teamCode === 0) {
         return undefined;
     }
     const upperTeamShortName = teamShortName.toUpperCase();
