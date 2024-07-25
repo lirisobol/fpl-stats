@@ -1,5 +1,6 @@
 @import "../../assets/styles/variables.scss";
 
+
 .HomeWrapper {
     height: 91%;
     font-family: Dosis;
@@ -18,11 +19,30 @@
         color: $primary;
         font-size: 7rem;
         font-weight: 400;
+        @media(min-width:$breakpoint-xs) {
+            font-size: 4rem;
+        }
+        @media(min-width:$breakpoint-sm) {
+            font-size: 5rem;
+        }
+        @media(min-width:$breakpoint-lg) {
+            font-size: 6rem;
+        }
     }
     .Description {
         color: $primary;
         font-size: 3rem;
         font-weight: 100;
-        width: 20%;
+        @media(min-width:$breakpoint-xs) {
+            font-size:1.4rem;
+            width: 90%;
+        }
+        @media(min-width:$breakpoint-sm) {
+            font-size: 2rem;
+        }
+        @media(min-width:$breakpoint-lg) {
+            font-size: 3rem;
+            width: 50%;
+        }
     }
 }
