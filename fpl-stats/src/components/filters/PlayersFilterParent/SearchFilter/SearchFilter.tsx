@@ -15,7 +15,7 @@ export function SearchFilter(): JSX.Element {
             type="text"
             placeholder="Search players..."
             onChange={handleSearchChange}
-            className="form-control mb-2 focus-ring focus-ring-dark"
+            className="form-control mb-2 focus-ring focus-ring-dark w-25"
         />
     );
 }

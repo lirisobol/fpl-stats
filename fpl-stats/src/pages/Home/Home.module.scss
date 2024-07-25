@@ -4,41 +4,25 @@
     height: 91%;
     font-family: Dosis;
     width: 100%;
+    background-color: $accent-secondary;
+    background-image: url('../../assets/svg/homeBackground.svg'); // Reference the SVG file here
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
-    flex-direction: row;
-    .HeroSection {
-        width: 50%;
-        .HeroImage {
-            height: 100%;
-            object-fit: cover;
-        }
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    padding: 3rem;
+    .Header{
+        color: $primary;
+        font-size: 7rem;
+        font-weight: 400;
     }
-    .HeaderSection {
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-        align-items: start;
-        padding: 3rem;
-        gap: 1rem;
-        background-color: $primary;
-        width: 50%;
-
-        .Header{
-            color: $accent-secondary;
-            font-size: 7rem;
-            font-weight: 400;
-        }
-        .Description {
-            color: $accent-secondary;
-            font-size: 3rem;
-            font-weight: 100;
-        }
-    }
-    .ButtonContainer {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        gap: 1rem;
-        justify-content: start;
+    .Description {
+        color: $primary;
+        font-size: 3rem;
+        font-weight: 100;
+        width: 20%;
     }
 }

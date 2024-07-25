@@ -1,6 +1,8 @@
 import { ButtonGroup, ToggleButton } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/redux-hooks";
 import { setColumnGroup } from "../../../../store/slices/filterSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faKey,faPowerOff,faLightbulb,faGears } from "@fortawesome/free-solid-svg-icons";
 
 export function ColumnsFilter(): JSX.Element {
     const dispatch = useAppDispatch();
@@ -21,7 +23,9 @@ export function ColumnsFilter(): JSX.Element {
                 checked={columnGroup === "all"}
                 onChange={() => handleColumnGroupChange("all")}
                 id="all-columns-toggle"
+                className="p-2"
             >
+                <FontAwesomeIcon icon={faPowerOff} className="me-2"/>
                 All
             </ToggleButton>
             <ToggleButton
@@ -33,7 +37,9 @@ export function ColumnsFilter(): JSX.Element {
                 checked={columnGroup === "key"}
                 onChange={() => handleColumnGroupChange("key")}
                 id="key-toggle"
+                className="p-2"
             >
+                <FontAwesomeIcon icon={faKey} className="me-2"/>
                 Key
             </ToggleButton>
             <ToggleButton
@@ -45,7 +51,9 @@ export function ColumnsFilter(): JSX.Element {
                 checked={columnGroup === "expected"}
                 onChange={() => handleColumnGroupChange("expected")}
                 id="expected-toggle"
+                className="p-2"
             >
+                <FontAwesomeIcon icon={faLightbulb} className="me-2" />
                 Expected
             </ToggleButton>
             <ToggleButton
@@ -57,7 +65,9 @@ export function ColumnsFilter(): JSX.Element {
                 checked={columnGroup === "performance"}
                 onChange={() => handleColumnGroupChange("performance")}
                 id="performance-toggle"
+                className="p-2"
             >
+                <FontAwesomeIcon icon={faGears} className="me-3"/>
                 Performance
             </ToggleButton>
         </ButtonGroup>

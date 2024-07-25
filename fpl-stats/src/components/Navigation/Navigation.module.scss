@@ -3,14 +3,21 @@
     display: flex;
     align-items: center;
     width: 100%;
-    background-color: $light;
+    background-color: $accent-secondary;
 }
-
+.LogoIconContainer {
+    width: 50px; // Adjust the size as needed
+    height: 50px; // Adjust the size as needed
+}
 .SmallNavLinks {
+    color: $primary;
     font-size: 1.3rem;
     font-weight: 200;
 }
 .SmallNavBrand {
+    display: flex;
+    flex-direction: row;
+    color: $primary;
     font-size: 1.8rem;
     font-weight: 400;
 }
