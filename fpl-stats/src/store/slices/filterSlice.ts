@@ -30,5 +30,5 @@ const filterSlice = createSlice({
         }
     }
 });
-export const { setPositionType, setSearchQuery, setColumnGroup } = filterSlice.actions;
+export const { setPositionType, setTeam, setSearchQuery, setColumnGroup } = filterSlice.actions;
 export default filterSlice.reducer;
