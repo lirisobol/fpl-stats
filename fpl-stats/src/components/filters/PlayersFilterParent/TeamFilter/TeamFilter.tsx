@@ -15,7 +15,6 @@ export function TeamFilter():JSX.Element {
             <option key='all-teams' value="0">All Teams</option>
             {teams && teams.map(team => (
                 <option key={team.code} value={team.code}>
-                    
                     {team.name}
                 </option>
             ))}

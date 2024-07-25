@@ -17,7 +17,7 @@ export function ColumnsFilter(): JSX.Element {
                 value='all'
                 id='all-columns-toggle'
             >
-                All
+                All Stats
             </option>
             <option
                 key='key'
