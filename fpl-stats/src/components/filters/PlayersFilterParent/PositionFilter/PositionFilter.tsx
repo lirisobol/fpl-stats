@@ -40,7 +40,7 @@ export function PositionFilter(): JSX.Element {
     };
     // import { faPowerOff,faHands,faShield,faCircleNodes,faBullseye} from "@fortawesome/free-solid-svg-icons";
     return (
-        <ButtonGroup className="mb-2">
+        <ButtonGroup>
             <ToggleButton
                 key="all-positions"
                 type="radio"
@@ -50,9 +50,8 @@ export function PositionFilter(): JSX.Element {
                 checked={positionType === 0}
                 onChange={() => handlePositionTypeChange(0)}
                 id="all-positions-toggle"
-                className="p-2"
             >
-                <FontAwesomeIcon icon={faPowerOff} className="me-2"/>
+                <FontAwesomeIcon icon={faPowerOff}/>
                 All
             </ToggleButton>
             {PositionTypes.map((type) => (
@@ -65,9 +64,8 @@ export function PositionFilter(): JSX.Element {
                     checked={positionType === type.id}
                     onChange={() => handlePositionTypeChange(type.id)}
                     id={`position-${type.plural_name}`}
-                    className="p-2"
-                >
-                    <FontAwesomeIcon icon={faHands} className="me-2"/>
+                    >
+                    <FontAwesomeIcon icon={faHands}/>
                     {type.plural_name}
                 </ToggleButton>
             ))}

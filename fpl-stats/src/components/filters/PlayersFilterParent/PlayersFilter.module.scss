@@ -1,9 +1,8 @@
+@import "../../../assets/styles/variables.scss";
 .PlayersFilterContainer {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    gap:1rem;
-    padding: 1rem;
+    @media(min-width: $breakpoint-xs) {
+        flex-direction: column;
+    }
 }
