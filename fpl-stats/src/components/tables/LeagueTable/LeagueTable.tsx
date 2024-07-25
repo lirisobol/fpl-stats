@@ -45,7 +45,7 @@ export function LeagueTable({teams}:LeagueTableProps): JSX.Element {
                 PlayersButtonRenderer: PlayersButtonRenderer
             }}
             domLayout="autoHeight"
-            rowHeight={80}
+            rowHeight={50}
             getRowHeight={getRowHeight}
             onGridReady={onGridReady}
             onFirstDataRendered={onFirstDataRendered}

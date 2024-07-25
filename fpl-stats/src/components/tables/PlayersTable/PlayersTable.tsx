@@ -28,7 +28,7 @@ export function PlayersTable({players}:PlayersTableProps): JSX.Element {
             rowData={players}
             defaultColDef={playersTableConfig.defaultColDef}
             domLayout="autoHeight"
-            rowHeight={80}
+            rowHeight={50}
             autoSizeStrategy={playersTableConfig.autoSizeStrategy}
             getRowHeight={getRowHeight}
             onGridReady={onGridReady}
