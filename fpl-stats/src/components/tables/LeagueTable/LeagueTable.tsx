@@ -4,6 +4,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { PlayersButtonRenderer } from "../../buttons/PlayersButton/PlayersButtonRenderer";
 import { useState } from "react";
+import { useDynamicRowHeight } from "../../../hooks/useDynamicRowHeight";
 
 
 interface LeagueTableProps {
@@ -13,6 +14,7 @@ interface LeagueTableProps {
 export function LeagueTable({teams}:LeagueTableProps): JSX.Element {
     console.log(teams);
     
+    const {getRowHeight, onGridReady, onFirstDataRendered, onGridSizeChanged} = useDynamicRowHeight();
     // default column properties (optional)
     const defaultColDef = {
         sortable: true,
@@ -24,9 +26,6 @@ export function LeagueTable({teams}:LeagueTableProps): JSX.Element {
     const initialColumnDefs = [
         { headerName: 'ID', field: 'id' },
         { headerName: 'Name', field: 'name' },
-        { headerName: 'Wins', field: 'wins' },
-        { headerName: 'Draws', field: 'draws' },
-        { headerName: 'Losses', field: 'losses' },
         { 
             headerName: 'Players', 
             field: 'short_name', 
@@ -47,6 +46,10 @@ export function LeagueTable({teams}:LeagueTableProps): JSX.Element {
             }}
             domLayout="autoHeight"
             rowHeight={80}
+            getRowHeight={getRowHeight}
+            onGridReady={onGridReady}
+            onFirstDataRendered={onFirstDataRendered}
+            onGridSizeChanged={onGridSizeChanged}
         />
         </div>
     )

@@ -11,7 +11,7 @@ export const PlayersButtonRenderer: React.FC<PlayersButtonRendererProps> = ({val
         navigate(`/teams/${value.toLowerCase()}`);
     };
     return (
-        <button onClick={handleNavigate} className="btn btn-outline-dark table-button">
+        <button onClick={handleNavigate} className="btn btn-outline-dark btn-sm">
             View Players
             <FontAwesomeIcon icon={faPeopleGroup} className={styles.buttonIcon}/>
         </button>
