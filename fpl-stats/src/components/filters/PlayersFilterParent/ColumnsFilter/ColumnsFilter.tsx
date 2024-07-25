@@ -11,7 +11,7 @@ export function ColumnsFilter(): JSX.Element {
     }
 
     return (
-        <select value={columnGroup} onChange={handleColumnGroupChange}>
+        <select value={columnGroup} onChange={handleColumnGroupChange} className="form-control">
             <option
                 key='all'
                 value='all'

@@ -12,7 +12,7 @@ export function PositionFilter(): JSX.Element {
         dispatch(setPositionType(positionType));
     };
     return (
-        <select value={positionType} onChange={handlePositionTypeChange}>
+        <select value={positionType} onChange={handlePositionTypeChange} className="form-select">
             <option
                 key='all-positions'
                 value='0'
