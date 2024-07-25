@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../hooks/redux-hooks";
 import useFilteredColumns from "../../../hooks/useFilteredColumns";
 import { playersTableConfig } from "../../../utils/playerStatsTableConfig";
+import { useDynamicRowHeight } from "../../../hooks/useDynamicRowHeight";
 
 interface PlayersTableProps {
     players: []
@@ -12,9 +13,9 @@ interface PlayersTableProps {
 export function PlayersTable({players}:PlayersTableProps): JSX.Element {
     const filteredColumns = useFilteredColumns();
     const [columnDefs, setColumnDefs] = useState([]);
-
     const elements = useAppSelector((state) => state.generalInformation.data?.element_stats);
 
+    const {getRowHeight, onGridReady, onFirstDataRendered, onGridSizeChanged} = useDynamicRowHeight();
     useEffect(() => {
         if (elements) {
             setColumnDefs(playersTableConfig.getColumnDefs(filteredColumns));
@@ -29,6 +30,10 @@ export function PlayersTable({players}:PlayersTableProps): JSX.Element {
             domLayout="autoHeight"
             rowHeight={80}
             autoSizeStrategy={playersTableConfig.autoSizeStrategy}
+            getRowHeight={getRowHeight}
+            onGridReady={onGridReady}
+            onFirstDataRendered={onFirstDataRendered}
+            onGridSizeChanged={onGridSizeChanged}
         />
         </div>
     )
