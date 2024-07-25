@@ -3,8 +3,8 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../hooks/redux-hooks";
-import { playersTableConfig } from "../../../utils/playerStatsTableConfig";
 import useFilteredColumns from "../../../hooks/useFilteredColumns";
+import { playersTableConfig } from "../../../utils/playerStatsTableConfig";
 
 interface PlayersTableProps {
     players: []
