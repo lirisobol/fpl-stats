@@ -10,7 +10,7 @@ export function Routing():JSX.Element {
                 <Route path="/" element={<Home />} />
                 <Route path="/teams" element={<Teams />} />
                 <Route path="/fixtures" element={<Fixtures />} />
-                <Route path="/teams/:teamCode" element={<Players/>} />
+                <Route path="/players" element={<Players/>} />
             </Routes>
         </>
     )

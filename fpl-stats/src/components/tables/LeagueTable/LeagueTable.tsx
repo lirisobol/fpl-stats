@@ -28,7 +28,7 @@ export function LeagueTable({teams}:LeagueTableProps): JSX.Element {
         { headerName: 'Name', field: 'name' },
         { 
             headerName: 'Players', 
-            field: 'short_name', 
+            field: 'code', 
             cellRenderer: PlayersButtonRenderer,
             cellClass: 'centered-cell',
         }

@@ -23,7 +23,7 @@ export function Navigation() {
                     <FontAwesomeIcon icon={faPeopleGroup} className={styles.NavIcon}/>
                     Teams
                 </Nav.Link>
-                <Nav.Link className={`${styles.NavLink} me-3`} as={Link} to="/">
+                <Nav.Link className={`${styles.NavLink} me-3`} as={Link} to="/players">
                     <FontAwesomeIcon icon={faPerson} className={styles.NavIcon}/>
                     Players
                 </Nav.Link>
