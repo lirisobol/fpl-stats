@@ -15,6 +15,7 @@ const filterSlice = createSlice({
     initialState,
     reducers: {
         setPositionType(state, action:PayloadAction<number>) {
+            console.log('redux position:',state.positionType);
             state.positionType = action.payload;
         },
         setSearchQuery(state, action:PayloadAction<string>) {
