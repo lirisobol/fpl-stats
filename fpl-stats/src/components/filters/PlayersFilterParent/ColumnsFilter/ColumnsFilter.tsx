@@ -23,7 +23,7 @@ export function ColumnsFilter(): JSX.Element {
                 checked={columnGroup === "all"}
                 onChange={() => handleColumnGroupChange("all")}
                 id="all-columns-toggle"
-                className="p-2"
+                className="p-1"
             >
                 <FontAwesomeIcon icon={faPowerOff} className="me-2"/>
                 All
@@ -37,7 +37,7 @@ export function ColumnsFilter(): JSX.Element {
                 checked={columnGroup === "key"}
                 onChange={() => handleColumnGroupChange("key")}
                 id="key-toggle"
-                className="p-2"
+                className="p-1"
             >
                 <FontAwesomeIcon icon={faKey} className="me-2"/>
                 Key
@@ -51,7 +51,7 @@ export function ColumnsFilter(): JSX.Element {
                 checked={columnGroup === "expected"}
                 onChange={() => handleColumnGroupChange("expected")}
                 id="expected-toggle"
-                className="p-2"
+                className="p-1"
             >
                 <FontAwesomeIcon icon={faLightbulb} className="me-2" />
                 Expected
@@ -65,7 +65,7 @@ export function ColumnsFilter(): JSX.Element {
                 checked={columnGroup === "performance"}
                 onChange={() => handleColumnGroupChange("performance")}
                 id="performance-toggle"
-                className="p-2"
+                className="p-1"
             >
                 <FontAwesomeIcon icon={faGears} className="me-3"/>
                 Performance
