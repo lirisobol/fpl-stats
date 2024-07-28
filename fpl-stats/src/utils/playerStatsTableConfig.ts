@@ -17,9 +17,9 @@ class PlayersTableConfig {
                         valueGetter: (params: any) => params.data[stat.name] / 10,
                         valueFormatter: (params: any) => params.value.toFixed(1),
                         cellClassRules: {
-                            'high-rank': (params: any) => params.value < 5.5,
-                            'medium-rank': (params: any) => params.value >= 5.5 && params.value < 10.0,
-                            'low-rank': (params: any) => params.value >= 10.0,
+                            'table-high-rank': (params: any) => params.value < 5.5,
+                            'table-mid-rank': (params: any) => params.value >= 5.5 && params.value < 10.0,
+                            'table-low-rank': (params: any) => params.value >= 10.0,
                         }
                         
                     };
@@ -29,9 +29,9 @@ class PlayersTableConfig {
                         headerName: stat.label,
                         field: stat.name,
                         cellClassRules: {
-                            'high-rank': (params: any) => params.data[stat.rank] <= 50,
-                            'medium-rank': (params: any) => params.data[stat.rank] > 50 && params.data[stat.rank] <= 150,
-                            'low-rank': (params: any) => params.data[stat.rank] > 150,
+                            'table-high-rank': (params: any) => params.data[stat.rank] <= 50,
+                            'table-mid-rank': (params: any) => params.data[stat.rank] > 50 && params.data[stat.rank] <= 150,
+                            'table-low-rank': (params: any) => params.data[stat.rank] > 150,
                         }
                     };
                 default:

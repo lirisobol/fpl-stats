@@ -1,15 +1,12 @@
 @import "../variables.scss";
-.high-rank {
-    background-color: $accent-primary;
-    color: $light;
-}
 
-.medium-rank {
-    background-color: $secondary;
-    color: $light;
+.table-low-rank {
+    background-color: $table-low;
+    color: white;
 }
-
-.low-rank {
-    background-color:$primary;
-    color: $light;
+.table-mid-rank {
+    background-color: $table-mid;
+}
+.table-high-rank {
+    background-color: $table-high;
 }
