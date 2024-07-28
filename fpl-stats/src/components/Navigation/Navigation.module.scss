@@ -4,6 +4,10 @@
     background-color: $accent-secondary;
     padding: 0;
     .NavBrand {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
         color: $primary;
         font-size: 1.8rem;
         font-weight: 300;

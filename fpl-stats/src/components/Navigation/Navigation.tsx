@@ -3,6 +3,7 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 import styles from "./Navigation.module.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse,faPeopleGroup,faFutbol,faPeopleArrows,faPerson } from '@fortawesome/free-solid-svg-icons';
+import LogoIcon from '../Logo';
 
 export function Navigation() {
   return (
@@ -10,6 +11,7 @@ export function Navigation() {
         <Navbar expand="lg" className="p-1">
           <Container className={`${styles.NavContainer} ms-4`}>
             <Navbar.Brand className={`${styles.NavBrand} me-5`} as={Link} to="/">
+                <LogoIcon/>
                 FPLStats
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
