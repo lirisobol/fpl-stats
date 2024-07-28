@@ -19,7 +19,7 @@ export function PlayerSearchModal(props: PlayerSearchModalProps) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                
+
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>

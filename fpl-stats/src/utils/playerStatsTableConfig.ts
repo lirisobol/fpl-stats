@@ -1,15 +1,12 @@
 import { ColDef } from "ag-grid-community";
 import { playerStatsModel } from "../models/PlayerStatsModel";
+
 class PlayersTableConfig {
     public getColumnDefs = (filteredColumns: typeof playerStatsModel): ColDef[] => {
-        return filteredColumns.map(stat => {
+        const columnDefs = filteredColumns.map(stat => {
             switch (stat.label) {
                 case "Player name":
-                    return {
-                        headerName: stat.label,
-                        field: stat.name,
-                        valueGetter: (params: any) => `${params.data.first_name} ${params.data.second_name}`,
-                    };
+                    return this.getPlayerNameColumn();
                 case "Price":
                     return {
                         headerName: stat.label,
@@ -21,7 +18,6 @@ class PlayersTableConfig {
                             'table-mid-rank': (params: any) => params.value >= 5.5 && params.value < 10.0,
                             'table-low-rank': (params: any) => params.value >= 10.0,
                         }
-                        
                     };
                 case "Selected":
                 case "PPG":
@@ -41,14 +37,28 @@ class PlayersTableConfig {
                     };
             }
         });
+
+        // Ensure player name column is always included
+        if (!columnDefs.some(colDef => colDef.field === 'playerName')) {
+            columnDefs.unshift(this.getPlayerNameColumn());
+        }
+
+        return columnDefs;
     }
+
+    public getPlayerNameColumn = (): ColDef => ({
+        headerName: 'Player Name',
+        field: 'playerName',
+        valueGetter: (params: any) => `${params.data.first_name} ${params.data.second_name}`,
+    });
+
     public autoSizeStrategy = {
         type: 'fitGridWidth' as const,
         defaultMinWidth: 75,
         columnLimits: [
             {
                 colId: 'player_name',
-                minWidth:150
+                minWidth: 150
             }
         ]
     };
@@ -58,4 +68,5 @@ class PlayersTableConfig {
         resizable: true,
     };
 }
+
 export const playersTableConfig = new PlayersTableConfig();
