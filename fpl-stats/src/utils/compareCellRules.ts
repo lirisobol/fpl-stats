@@ -1,4 +1,10 @@
+/* Future -> 
+    1. conditional coloring ->
+        a. price - lower value is better
+        b. goals conceded - lower value is better
 
+    2. price should be displayed as float, 60 -> 6.0
+*/
 export const getCellClassRules = (numPlayers: number) => {
     if(numPlayers === 2) return {
         // For two-player comparison
