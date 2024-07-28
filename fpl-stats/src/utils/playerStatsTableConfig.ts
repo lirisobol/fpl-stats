@@ -9,7 +9,6 @@ class PlayersTableConfig {
                         headerName: stat.label,
                         field: stat.name,
                         valueGetter: (params: any) => `${params.data.first_name} ${params.data.second_name}`,
-                        width: '300px'
                     };
                 case "Price":
                     return {
@@ -45,7 +44,7 @@ class PlayersTableConfig {
     }
     public autoSizeStrategy = {
         type: 'fitGridWidth' as const,
-        defaultMinWidth: 100,
+        defaultMinWidth: 50,
     };
 
     public defaultColDef = {

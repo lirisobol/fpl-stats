@@ -30,13 +30,12 @@ export function LeagueTable({teams}:LeagueTableProps): JSX.Element {
             headerName: 'Players', 
             field: 'code', 
             cellRenderer: PlayersButtonRenderer,
-            cellClass: 'centered-cell',
         }
     ];
     const [columnDefs, setColumnDefs] = useState(initialColumnDefs);
 
     return (
-        <div className="ag-theme-quartz" style={{height:600,width:'100%',fontSize:"1.2rem"}}>
+        <div className="ag-theme-quartz" style={{height:600,width:'100%',fontSize:"1rem"}}>
         <AgGridReact 
             columnDefs={columnDefs}
             rowData={teams}
@@ -45,7 +44,6 @@ export function LeagueTable({teams}:LeagueTableProps): JSX.Element {
                 PlayersButtonRenderer: PlayersButtonRenderer
             }}
             domLayout="autoHeight"
-            rowHeight={50}
             getRowHeight={getRowHeight}
             onGridReady={onGridReady}
             onFirstDataRendered={onFirstDataRendered}

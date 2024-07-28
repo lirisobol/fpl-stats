@@ -22,13 +22,12 @@ export function PlayersTable({players}:PlayersTableProps): JSX.Element {
         }
     }, [elements, filteredColumns]);
     return (
-        <div className="ag-theme-quartz" style={{height:600,width:'100%',fontSize:"1.2rem"}}>
+        <div className="ag-theme-quartz" style={{height:600,width:'100%',fontSize:"1rem"}}>
         <AgGridReact 
             columnDefs={columnDefs}
             rowData={players}
             defaultColDef={playersTableConfig.defaultColDef}
             domLayout="autoHeight"
-            rowHeight={50}
             autoSizeStrategy={playersTableConfig.autoSizeStrategy}
             getRowHeight={getRowHeight}
             onGridReady={onGridReady}

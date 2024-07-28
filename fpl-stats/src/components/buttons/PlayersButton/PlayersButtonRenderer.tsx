@@ -17,7 +17,7 @@ export const PlayersButtonRenderer: React.FC<PlayersButtonRendererProps> = ({val
     
     return (
         <button onClick={handleTeamClick} className="btn btn-outline-dark btn-sm" >
-            View Players
+            Players
             <FontAwesomeIcon icon={faPeopleGroup} className={styles.buttonIcon}/>
         </button>
     );
