@@ -47,7 +47,7 @@ export function Navigation() {
                             <FontAwesomeIcon icon={faPerson} className={styles.NavIcon} />
                             Players
                         </Nav.Link>
-                        <Nav.Link className={styles.NavLink} as={Link} to="/" onClick={handleClose}>
+                        <Nav.Link className={styles.NavLink} as={Link} to="/compare" onClick={handleClose}>
                             <FontAwesomeIcon icon={faPeopleArrows} className={styles.NavIcon} />
                             Compare
                         </Nav.Link>

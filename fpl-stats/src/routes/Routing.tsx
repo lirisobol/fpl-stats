@@ -3,6 +3,7 @@ import { Home } from "../pages/Home/Home";
 import { Teams } from "../pages/Teams/Teams";
 import { Fixtures } from "../pages/Fixtures/Fixtures";
 import { Players } from "../pages/Players/Players";
+import { Compare } from "../pages/Compare/Compare";
 export function Routing():JSX.Element {
     return(
         <>
@@ -11,6 +12,7 @@ export function Routing():JSX.Element {
                 <Route path="/teams" element={<Teams />} />
                 <Route path="/fixtures" element={<Fixtures />} />
                 <Route path="/players" element={<Players/>} />
+                <Route path="/compare" element={<Compare />}/>
             </Routes>
         </>
     )
