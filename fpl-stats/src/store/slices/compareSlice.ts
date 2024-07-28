@@ -19,7 +19,7 @@ const compareSlice = createSlice({
         addPlayerToCompare(state, action: PayloadAction<Player>) {
             state.selectedPlayers.push(action.payload);
         },
-        removePlayerFromCompare(state, action: PayloadAction<number>) {
+        removePlayerFromCompare(state,action: PayloadAction<number>) {
             state.selectedPlayers = state.selectedPlayers.filter(player => player.id !== action.payload);
         },
         clearAllPlayersFromCompare(state) {
