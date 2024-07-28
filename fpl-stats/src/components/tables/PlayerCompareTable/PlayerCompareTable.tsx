@@ -6,7 +6,6 @@ import { playersTableConfig } from "../../../utils/playerStatsTableConfig";
 import { playerStatsModel } from "../../../models/PlayerStatsModel";
 import { getCellClassRules } from "../../../utils/compareCellRules";
 import { PlayerRemoverHeader } from "./PlayerRemoverHeader/PlayerRemoverHeader";
-import { useAppSelector } from "../../../../hooks/redux-hooks";
 
 interface PlayerCompareTableProps {
     selectedPlayers: any[];

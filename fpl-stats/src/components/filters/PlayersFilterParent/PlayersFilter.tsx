@@ -8,10 +8,10 @@ import { TeamFilter } from "./TeamFilter/TeamFilter";
 export function PlayersFilter(): JSX.Element {
     return (
         <div className={styles.PlayersFilterContainer}>
+            <SearchFilter />
             <TeamFilter />
             <PositionFilter />
             <ColumnsFilter />
-            <SearchFilter />
         </div>
     );
 }

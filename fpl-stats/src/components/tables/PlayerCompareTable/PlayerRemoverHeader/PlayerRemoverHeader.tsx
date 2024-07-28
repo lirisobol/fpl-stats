@@ -17,7 +17,7 @@ export function PlayerRemoverHeader({playerId, playerName}:PlayerRemoverHeaderPr
     return (
         <div className="custom-header">
             <span>{playerName}</span>
-            <button onClick={handleRemove} className='btn btn-outline-dark btn-sm rounded-pill ms-3'>Remove</button>
+            <button onClick={handleRemove} className='btn btn-outline-dark btn-sm ms-3' style={{fontSize:'0.6rem'}}>X</button>
         </div>
     );
 }
