@@ -10,3 +10,16 @@
 .table-high-rank {
     background-color: $table-high;
 }
+.compare-high {
+    background-color: $table-high;
+}
+.compare-equal {
+    background-color: $table-mid-alt;
+}
+.compare-mid {
+    background-color: $table-mid;
+}
+.compare-low {
+    background-color: $table-low;
+    color: white;
+}
