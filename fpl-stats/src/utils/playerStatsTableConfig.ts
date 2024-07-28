@@ -57,7 +57,7 @@ class PlayersTableConfig {
         defaultMinWidth: 75,
         columnLimits: [
             {
-                colId: 'player_name',
+                colId: 'playerName',
                 minWidth: 150
             }
         ]

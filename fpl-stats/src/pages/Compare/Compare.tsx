@@ -4,6 +4,13 @@ import { Button } from "react-bootstrap";
 import { PlayerSearchModal } from "../../components/modals/PlayerSearchModal/PlayerSearchModal";
 export function Compare(): JSX.Element {
     const [modalShow, setModalShow] = useState(false);
+    const [selectedPlayers, setSelectedPlayers] = useState([]);
+    
+    const handlePlayerSelect = (player) => {
+        setSelectedPlayers(prevPlayers => [...prevPlayers, player]);
+        console.log(selectedPlayers);        
+        setModalShow(false);
+    }
     
     const handleModalOpen = () => {
         setModalShow(true);
@@ -24,6 +31,7 @@ export function Compare(): JSX.Element {
             <PlayerSearchModal 
                 show={modalShow}
                 onHide={handleModalClose}
+                onPlayerSelect={handlePlayerSelect}
             />
         </div>
     )

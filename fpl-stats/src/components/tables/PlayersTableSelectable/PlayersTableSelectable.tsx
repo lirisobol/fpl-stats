@@ -1,7 +1,7 @@
 import { AgGridReact } from "ag-grid-react";
 import 'ag-grid-community/styles/ag-grid.css'; 
 import 'ag-grid-community/styles/ag-theme-quartz.css';
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useAppSelector } from "../../../hooks/redux-hooks";
 import useFilteredColumns from "../../../hooks/useFilteredColumns";
 import { useDynamicRowHeight } from "../../../hooks/useDynamicRowHeight";
@@ -9,7 +9,10 @@ import { PlayersFilter } from "../../filters/PlayersFilterParent/PlayersFilter";
 import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
 import { playersTableConfig } from "../../../utils/playerStatsTableConfig";
 
-export function PlayersTable(): JSX.Element {
+interface PlayersTableSelectableProps {
+    onPlayerSelect: (player:any) => void;
+}
+export function PlayersTableSelectable({onPlayerSelect}: PlayersTableSelectableProps): JSX.Element {
     const positionType = useAppSelector((state) => state.filters.positionType);
     const teamCode = useAppSelector((state) => state.filters.teamCode);
     const searchQuery = useAppSelector((state) => state.filters.searchQuery);
@@ -31,6 +34,14 @@ export function PlayersTable(): JSX.Element {
     const memoizedPlayers = useMemo(() => players, [players]);
     const memoizedColumnDefs = useMemo(() => columnDefs, [columnDefs]);
 
+    const onSelectionChanged = useCallback((event) => {
+        const selectedNode = event.api.getSelectedNodes()[0];
+        const selectedData = selectedNode ? selectedNode.data : null;
+        if (selectedData) {
+            onPlayerSelect(selectedData);
+        }
+    }, [onPlayerSelect]);
+    
     return (
         <div>
             <PlayersFilter />
@@ -45,6 +56,8 @@ export function PlayersTable(): JSX.Element {
                     onGridReady={onGridReady}
                     onFirstDataRendered={onFirstDataRendered}
                     onGridSizeChanged={onGridSizeChanged}
+                    rowSelection={"single"}
+                    onSelectionChanged={onSelectionChanged}
                 />
             </div>
         </div>
