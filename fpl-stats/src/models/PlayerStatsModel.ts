@@ -2,7 +2,7 @@ export const playerStatsModel = [
     {
         "id": 1,
         "label": "Player name",
-        "name": ""
+        "name": "player_name"
     },
     {
         "id": 2,

@@ -44,7 +44,13 @@ class PlayersTableConfig {
     }
     public autoSizeStrategy = {
         type: 'fitGridWidth' as const,
-        defaultMinWidth: 50,
+        defaultMinWidth: 75,
+        columnLimits: [
+            {
+                colId: 'player_name',
+                minWidth:150
+            }
+        ]
     };
 
     public defaultColDef = {
