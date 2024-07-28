@@ -2,17 +2,18 @@ import { AgGridReact } from "ag-grid-react";
 import 'ag-grid-community/styles/ag-grid.css'; 
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { useEffect, useState, useMemo, useCallback } from "react";
-import { useAppSelector } from "../../../hooks/redux-hooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux-hooks";
 import useFilteredColumns from "../../../hooks/useFilteredColumns";
 import { useDynamicRowHeight } from "../../../hooks/useDynamicRowHeight";
 import { PlayersFilter } from "../../filters/PlayersFilterParent/PlayersFilter";
 import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
 import { playersTableConfig } from "../../../utils/playerStatsTableConfig";
-
+import { addPlayerToCompare } from "../../../store/slices/compareSlice";
 interface PlayersTableSelectableProps {
-    onPlayerSelect: (player:any) => void;
+    onHide: () => void;
 }
-export function PlayersTableSelectable({onPlayerSelect}: PlayersTableSelectableProps): JSX.Element {
+export function PlayersTableSelectable({ onHide }: PlayersTableSelectableProps): JSX.Element {
+    const dispatch = useAppDispatch();
     const positionType = useAppSelector((state) => state.filters.positionType);
     const teamCode = useAppSelector((state) => state.filters.teamCode);
     const searchQuery = useAppSelector((state) => state.filters.searchQuery);
@@ -38,9 +39,10 @@ export function PlayersTableSelectable({onPlayerSelect}: PlayersTableSelectableP
         const selectedNode = event.api.getSelectedNodes()[0];
         const selectedData = selectedNode ? selectedNode.data : null;
         if (selectedData) {
-            onPlayerSelect(selectedData);
+            dispatch(addPlayerToCompare(selectedData));
+            onHide(); // Close the modal
         }
-    }, [onPlayerSelect]);
+    }, [dispatch, onHide]);
     
     return (
         <div>

@@ -4,10 +4,9 @@ import { PlayersTableSelectable } from "../../tables/PlayersTableSelectable/Play
 interface PlayerSearchModalProps {
     show: boolean;
     onHide: () => void;
-    onPlayerSelect: (player: any) => void;
 }
 
-export function PlayerSearchModal({ show, onHide, onPlayerSelect }: PlayerSearchModalProps) {
+export function PlayerSearchModal({ show, onHide}: PlayerSearchModalProps) {
     return (
         <Modal
             show={show}
@@ -23,7 +22,7 @@ export function PlayerSearchModal({ show, onHide, onPlayerSelect }: PlayerSearch
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <PlayersTableSelectable onPlayerSelect={onPlayerSelect} />
+                <PlayersTableSelectable onHide={onHide}/>
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={onHide}>Close</Button>

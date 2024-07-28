@@ -1,23 +1,29 @@
-import { useState } from "react";
-import styles from "./Compare.module.scss";
-import { Button } from "react-bootstrap";
-import { PlayerSearchModal } from "../../components/modals/PlayerSearchModal/PlayerSearchModal";
+import { useEffect, useState } from 'react';
+import styles from './Compare.module.scss';
+import { Button} from 'react-bootstrap';
+import { PlayerSearchModal } from '../../components/modals/PlayerSearchModal/PlayerSearchModal';
+import { PlayerCompareCard } from '../../components/cards/PlayerCompareCard/PlayerCompareCard';
+import { useAppSelector } from '../../hooks/redux-hooks';
+import { PlayerCompareTable } from '../../components/tables/PlayerCompareTable/PlayerCompareTable';
+
 export function Compare(): JSX.Element {
     const [modalShow, setModalShow] = useState(false);
-    const [selectedPlayers, setSelectedPlayers] = useState([]);
-    
-    const handlePlayerSelect = (player) => {
-        setSelectedPlayers(prevPlayers => [...prevPlayers, player]);
-        console.log(selectedPlayers);        
-        setModalShow(false);
-    }
-    
+    const selectedPlayersFromRedux = useAppSelector((state) => state.compare.selectedPlayers);
+    const [selectedPlayers, setSelectedPlayers] = useState(selectedPlayersFromRedux);
+
+    useEffect(() => {
+        setSelectedPlayers(selectedPlayersFromRedux);
+        console.log(selectedPlayers);
+        
+    }, [selectedPlayersFromRedux]);
+
     const handleModalOpen = () => {
         setModalShow(true);
-    }
+    };
+
     const handleModalClose = () => {
-        setModalShow(false)
-    }
+        setModalShow(false);
+    };
 
     return (
         <div className={styles.CompareWrapper}>
@@ -31,8 +37,12 @@ export function Compare(): JSX.Element {
             <PlayerSearchModal 
                 show={modalShow}
                 onHide={handleModalClose}
-                onPlayerSelect={handlePlayerSelect}
             />
+            
+            <div className={styles.ComparedPlayersWrapper}>
+                <PlayerCompareTable selectedPlayers={selectedPlayers} />
+            </div>
+            
         </div>
-    )
+    );
 }
