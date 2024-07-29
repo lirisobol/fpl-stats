@@ -1,4 +1,4 @@
-import { GeneralInformation } from "../models/DataModel";
+import { GeneralInformation } from "../models/GeneralInformation";
 import api from "../utils/axiosConfig";
 
 class DataFetcher {

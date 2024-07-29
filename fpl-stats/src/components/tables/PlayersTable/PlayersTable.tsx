@@ -7,7 +7,8 @@ import useFilteredColumns from "../../../hooks/useFilteredColumns";
 import { useDynamicRowHeight } from "../../../hooks/useDynamicRowHeight";
 import { PlayersFilter } from "../../filters/PlayersFilterParent/PlayersFilter";
 import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
-import { playersTableConfig } from "../../../utils/playerStatsTableConfig";
+import { playersTableConfig } from "../../../utils/playersTableConfig";
+import { ColDef } from "ag-grid-community";
 
 export function PlayersTable(): JSX.Element {
     const positionType = useAppSelector((state) => state.filters.positionType);
@@ -16,15 +17,15 @@ export function PlayersTable(): JSX.Element {
 
     const players = useFilteredPlayers(teamCode, positionType, searchQuery);
     const filteredColumns = useFilteredColumns();
-    const elements = useAppSelector((state) => state.generalInformation.data?.element_stats);
+    const elements_stats = useAppSelector((state) => state.generalInformation.data?.element_stats);
 
-    const [columnDefs, setColumnDefs] = useState([]);
+    const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
     
     useEffect(() => {
-        if (elements) {
+        if (elements_stats) {
             setColumnDefs(playersTableConfig.getColumnDefs(filteredColumns));
         }
-    }, [elements, filteredColumns]);
+    }, [elements_stats, filteredColumns]);
     
     const { getRowHeight, onGridReady, onFirstDataRendered, onGridSizeChanged } = useDynamicRowHeight();
     

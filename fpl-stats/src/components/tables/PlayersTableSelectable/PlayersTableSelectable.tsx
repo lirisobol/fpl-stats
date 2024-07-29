@@ -7,8 +7,10 @@ import useFilteredColumns from "../../../hooks/useFilteredColumns";
 import { useDynamicRowHeight } from "../../../hooks/useDynamicRowHeight";
 import { PlayersFilter } from "../../filters/PlayersFilterParent/PlayersFilter";
 import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
-import { playersTableConfig } from "../../../utils/playerStatsTableConfig";
+import { playersTableConfig } from "../../../utils/playersTableConfig";
 import { addPlayerToCompare } from "../../../store/slices/compareSlice";
+import { ColDef, SelectionChangedEvent } from "ag-grid-community";
+
 interface PlayersTableSelectableProps {
     onHide: () => void;
 }
@@ -20,22 +22,25 @@ export function PlayersTableSelectable({ onHide }: PlayersTableSelectableProps):
 
     const players = useFilteredPlayers(teamCode, positionType, searchQuery);
     const filteredColumns = useFilteredColumns();
-    const elements = useAppSelector((state) => state.generalInformation.data?.element_stats);
+    const elements_stats = useAppSelector((state) => state.generalInformation.data?.element_stats);
 
-    const [columnDefs, setColumnDefs] = useState([]);
+    const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
+
+    console.log('filteredColumns',filteredColumns);
+    
     
     useEffect(() => {
-        if (elements) {
+        if (elements_stats) {
             setColumnDefs(playersTableConfig.getColumnDefs(filteredColumns));
         }
-    }, [elements, filteredColumns]);
+    }, [elements_stats, filteredColumns]);
     
     const { getRowHeight, onGridReady, onFirstDataRendered, onGridSizeChanged } = useDynamicRowHeight();
     
     const memoizedPlayers = useMemo(() => players, [players]);
     const memoizedColumnDefs = useMemo(() => columnDefs, [columnDefs]);
 
-    const onSelectionChanged = useCallback((event) => {
+    const onSelectionChanged = useCallback((event:SelectionChangedEvent) => {
         const selectedNode = event.api.getSelectedNodes()[0];
         const selectedData = selectedNode ? selectedNode.data : null;
         if (selectedData) {

@@ -1,9 +1,8 @@
-// App.tsx
-import { useEffect } from "react";
-import styles from "./App.module.scss";
 import "./assets/styles/main.scss";
-import { Navigation } from "./components/Navigation/Navigation";
+import styles from "./App.module.scss";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks/redux-hooks";
+import { Navigation } from "./components/Navigation/Navigation";
 import { Routing } from "./routes/Routing";
 import { fetchGeneralInformation } from "./store/slices/dataSlice";
 import { LoadingSpinner } from "./components/LoadingSpinner/LoadingSpinner";

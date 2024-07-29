@@ -40,9 +40,6 @@ export function Compare(): JSX.Element {
                 show={modalShow}
                 onHide={handleModalClose}
             />
-            
-
-            
         </div>
     );
 }
