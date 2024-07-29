@@ -13,11 +13,11 @@ function App() {
     const error = useAppSelector(state => state.generalInformation.error);
 
     useEffect(() => {
-        dispatch(fetchGeneralInformation())
+        dispatch(fetchGeneralInformation());
     }, [dispatch]);
 
-    if(status === 'error') {
-        return <div>Error: {error}</div>
+    if (status === 'failed') {
+        return <div>Error: {error}</div>;
     }
 
     return (
