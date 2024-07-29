@@ -1,5 +1,5 @@
 import { CellClassParams, ColDef, ValueFormatterParams, ValueGetterParams } from "ag-grid-community";
-import { PlayerData, PlayerStat } from "../models/PlayerModel";
+import { PlayerData, PlayerStat } from "../models/Player";
 
 class PlayersTableConfig {
     public getColumnDefs = (filteredColumns: PlayerStat[]): ColDef[] => {
