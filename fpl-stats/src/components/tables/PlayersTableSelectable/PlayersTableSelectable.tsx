@@ -9,7 +9,7 @@ import { PlayersFilter } from "../../filters/PlayersFilterParent/PlayersFilter";
 import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
 import { playersTableConfig } from "../../../utils/playersTableConfig";
 import { addPlayerToCompare } from "../../../store/slices/compareSlice";
-import { SelectionChangedEvent } from "ag-grid-community";
+import { ColDef, SelectionChangedEvent } from "ag-grid-community";
 
 interface PlayersTableSelectableProps {
     onHide: () => void;
@@ -24,7 +24,10 @@ export function PlayersTableSelectable({ onHide }: PlayersTableSelectableProps):
     const filteredColumns = useFilteredColumns();
     const elements_stats = useAppSelector((state) => state.generalInformation.data?.element_stats);
 
-    const [columnDefs, setColumnDefs] = useState([]);
+    const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
+
+    console.log('filteredColumns',filteredColumns);
+    
     
     useEffect(() => {
         if (elements_stats) {

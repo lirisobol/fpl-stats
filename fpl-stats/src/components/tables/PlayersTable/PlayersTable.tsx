@@ -8,6 +8,7 @@ import { useDynamicRowHeight } from "../../../hooks/useDynamicRowHeight";
 import { PlayersFilter } from "../../filters/PlayersFilterParent/PlayersFilter";
 import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
 import { playersTableConfig } from "../../../utils/playersTableConfig";
+import { ColDef } from "ag-grid-community";
 
 export function PlayersTable(): JSX.Element {
     const positionType = useAppSelector((state) => state.filters.positionType);
@@ -18,7 +19,7 @@ export function PlayersTable(): JSX.Element {
     const filteredColumns = useFilteredColumns();
     const elements_stats = useAppSelector((state) => state.generalInformation.data?.element_stats);
 
-    const [columnDefs, setColumnDefs] = useState([]);
+    const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
     
     useEffect(() => {
         if (elements_stats) {
