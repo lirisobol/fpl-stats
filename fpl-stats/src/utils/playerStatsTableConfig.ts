@@ -1,8 +1,8 @@
-import { ColDef } from "ag-grid-community";
-import { playerStatsModel } from "../models/PlayerStatsModel";
+import { CellClassParams, ColDef, ValueFormatterParams, ValueGetterParams } from "ag-grid-community";
+import { PlayerData, PlayerStat } from "../models/PlayerModel";
 
 class PlayersTableConfig {
-    public getColumnDefs = (filteredColumns: typeof playerStatsModel): ColDef[] => {
+    public getColumnDefs = (filteredColumns: PlayerStat[]): ColDef[] => {
         const columnDefs = filteredColumns.map(stat => {
             switch (stat.label) {
                 case "Player name":
@@ -11,12 +11,27 @@ class PlayersTableConfig {
                     return {
                         headerName: stat.label,
                         field: stat.name,
-                        valueGetter: (params: any) => params.data[stat.name] / 10,
-                        valueFormatter: (params: any) => params.value.toFixed(1),
+                        valueGetter: (params: ValueGetterParams<PlayerData>) => {
+                            const value = params.data?.[stat.name as keyof PlayerData];
+                            return typeof value === 'number' ? value / 10 : undefined;
+                        },
+                        valueFormatter: (params: ValueFormatterParams) => {
+                            const value = params.value as number;
+                            return value ? value.toFixed(1) : '';
+                        },
                         cellClassRules: {
-                            'table-high-rank': (params: any) => params.value < 5.5,
-                            'table-mid-rank': (params: any) => params.value >= 5.5 && params.value < 10.0,
-                            'table-low-rank': (params: any) => params.value >= 10.0,
+                            'table-high-rank': (params: CellClassParams<PlayerData>) => {
+                                const value = params.value as number;
+                                return value < 5.5;
+                            },
+                            'table-mid-rank': (params: CellClassParams<PlayerData>) => {
+                                const value = params.value as number;
+                                return value >= 5.5 && value < 10.0;
+                            },
+                            'table-low-rank': (params: CellClassParams<PlayerData>) => {
+                                const value = params.value as number;
+                                return value >= 10.0;
+                            },
                         }
                     };
                 case "Selected":
@@ -25,9 +40,18 @@ class PlayersTableConfig {
                         headerName: stat.label,
                         field: stat.name,
                         cellClassRules: {
-                            'table-high-rank': (params: any) => params.data[stat.rank] <= 50,
-                            'table-mid-rank': (params: any) => params.data[stat.rank] > 50 && params.data[stat.rank] <= 150,
-                            'table-low-rank': (params: any) => params.data[stat.rank] > 150,
+                            'table-high-rank': (params: CellClassParams<PlayerData>) => {
+                                const rankValue = params.data?.[stat.rank as keyof PlayerData] as number;
+                                return rankValue <= 50;
+                            },
+                            'table-mid-rank': (params: CellClassParams<PlayerData>) => {
+                                const rankValue = params.data?.[stat.rank as keyof PlayerData] as number;
+                                return rankValue > 50 && rankValue <= 150;
+                            },
+                            'table-low-rank': (params: CellClassParams<PlayerData>) => {
+                                const rankValue = params.data?.[stat.rank as keyof PlayerData] as number;
+                                return rankValue > 150;
+                            },
                         }
                     };
                 default:
@@ -38,7 +62,6 @@ class PlayersTableConfig {
             }
         });
 
-        // Ensure player name column is always included
         if (!columnDefs.some(colDef => colDef.field === 'playerName')) {
             columnDefs.unshift(this.getPlayerNameColumn());
         }
@@ -49,7 +72,11 @@ class PlayersTableConfig {
     public getPlayerNameColumn = (): ColDef => ({
         headerName: 'Player Name',
         field: 'playerName',
-        valueGetter: (params: any) => `${params.data.first_name} ${params.data.second_name}`,
+        valueGetter: (params: ValueGetterParams<PlayerData>) => {
+            const firstName = params.data?.first_name || '';
+            const secondName = params.data?.second_name || '';
+            return `${firstName} ${secondName}`;
+        },
     });
 
     public autoSizeStrategy = {

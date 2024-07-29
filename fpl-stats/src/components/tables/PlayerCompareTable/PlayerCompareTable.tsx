@@ -3,7 +3,7 @@ import { AgGridReact } from "ag-grid-react";
 import 'ag-grid-community/styles/ag-grid.css'; 
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { playersTableConfig } from "../../../utils/playerStatsTableConfig";
-import { playerStatsModel } from "../../../models/PlayerStatsModel";
+import { playerStatsModel } from "../../../models/PlayerModel";
 import { getCellClassRules } from "../../../utils/compareCellRules";
 import { PlayerRemoverHeader } from "./PlayerRemoverHeader/PlayerRemoverHeader";
 

@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { useAppSelector } from './redux-hooks';
-import { playerStatsModel } from '../models/PlayerStatsModel';
+import { PlayerStat, playerStatsModel } from '../models/PlayerModel'; // Ensure correct path
 
-const useFilteredColumns = () => {
+const useFilteredColumns = (): PlayerStat[] => {
     const columnGroup = useAppSelector((state) => state.filters.columnGroup);
 
     return useMemo(() => {
-        const alwaysIncluded = ["", "now_cost", "selected_by_percent"];
+        const alwaysIncluded = ["now_cost", "selected_by_percent"];
         let groupStats: string[] = [];
 
         switch (columnGroup) {
@@ -20,7 +20,8 @@ const useFilteredColumns = () => {
                 groupStats = ["goals_conceded", "influence", "creativity", "threat"];
                 break;
             default:
-                return playerStatsModel;
+                // If default case needs to return all columns, modify accordingly
+                return playerStatsModel; // Assuming `PlayerStat[]` type is correct
         }
 
         return playerStatsModel.filter(stat => 

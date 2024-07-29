@@ -76,4 +76,32 @@ export const playerStatsModel = [
         "label": "Expected Goals Conceded",
         "name": "expected_goals_conceded"
     },
-];
+]
+export interface PlayerStat {
+    id: number;
+    label: string;
+    name: string;
+    rank?: string; // Optional since not all stats have a rank
+}
+export interface PlayerData {
+    [key: string]: number | string; // Allows for additional dynamic fields
+    first_name: string; // Optional, as not all data might have this field
+    second_name: string; // Optional, as not all data might have this field
+    player_name: string; // Optional, based on your data structure
+    now_cost: number; // Price
+    selected_by_percent: number; // Selected
+    selected_rank: number; // Rank for Selected
+    points_per_game: number; // PPG
+    points_per_game_rank: number; // Rank for PPG
+    bps: number; // BPS
+    expected_goals: number; // xG
+    expected_assists: number; // xA
+    expected_goal_involvements: number; // xGI
+    goals_conceded: number; // Conceded
+    bonus: number; // Bonus
+    influence: number; // Influence
+    creativity: number; // Creativity
+    threat: number; // Threat
+    ict_index: number; // ICT Index
+    expected_goals_conceded: number; // Expected Goals Conceded
+}
