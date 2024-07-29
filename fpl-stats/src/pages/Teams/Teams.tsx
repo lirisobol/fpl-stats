@@ -4,17 +4,21 @@ import { useAppSelector } from "../../hooks/redux-hooks";
 import { RootState } from "../../store/store";
 
 export function Teams(): JSX.Element {
-    // Use a default empty array if `teams` is null
+    // Ensure teams is typed correctly, here as an array of Team objects
     const teams = useAppSelector((state: RootState) => state.generalInformation.data?.teams ?? []);
     const status = useAppSelector((state: RootState) => state.generalInformation.status);
-    // const error = useAppSelector((state: RootState) => state.generalInformation.error);
 
     return (
         <div>
             {status === "loading" && <LoadingSpinner />}
-            <div>
-                <LeagueTable teams={teams} />
-            </div>
+            {status === "succeeded" && (
+                <div>
+                    <LeagueTable teams={teams} />
+                </div>
+            )}
+            {status === "failed" && (
+                <div>Error loading data</div>
+            )}
         </div>
     );
 }
