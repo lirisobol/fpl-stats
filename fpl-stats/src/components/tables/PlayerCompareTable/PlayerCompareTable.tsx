@@ -1,26 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import 'ag-grid-community/styles/ag-grid.css'; 
 import 'ag-grid-community/styles/ag-theme-quartz.css';
-import { playersTableConfig } from "../../../utils/playersTableConfig";
-import { playerStatsModel } from "../../../models/Player";
+import { PlayerData, playerStatsModel } from "../../../models/Player";
 import { getCellClassRules } from "../../../utils/compareCellRules";
 import { PlayerRemoverHeader } from "./PlayerRemoverHeader/PlayerRemoverHeader";
+import { playersTableConfig } from "../../../utils/playersTableConfig";
+import { ColDef } from "ag-grid-community";
 
 interface PlayerCompareTableProps {
-    selectedPlayers: any[];
+    selectedPlayers: PlayerData[];
 }
-
+interface RowData {
+    stat: string;
+    [key: string]: unknown; // This allows for dynamic keys and values
+}
 export function PlayerCompareTable({ selectedPlayers }: PlayerCompareTableProps): JSX.Element {
-    const [columnDefs, setColumnDefs] = useState([]);
-    const [rowData, setRowData] = useState([]);
-    const gridApiRef = useState<any>(null); // Ref to store the grid API
+    const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [rowData, setRowData] = useState<any[]>([]);
+    const gridApiRef = useRef<AgGridReact>(null); 
 
     useEffect(() => {
         console.log(selectedPlayers);
 
         if (selectedPlayers.length > 0) {
-            const columns = [
+            const columns: ColDef[] = [
                 { headerName: "Stat", field: "stat", pinned: 'left', width: 110 },
                 ...selectedPlayers.map((player, index) => ({
                     headerName: `${player.first_name} ${player.second_name}`,
@@ -28,20 +33,20 @@ export function PlayerCompareTable({ selectedPlayers }: PlayerCompareTableProps)
                     flex: 1,
                     cellClassRules: getCellClassRules(selectedPlayers.length),
                     suppressHeaderFilterButton: true,
-                    sortable:false,
+                    sortable: false,
                     headerComponent: PlayerRemoverHeader,
                     headerComponentParams: {
                         playerId: player.id,
                         playerName: `${player.first_name} ${player.second_name}`
                     }
-                })),
+                } as ColDef)),
             ];
             setColumnDefs(columns);
 
             const rows = playerStatsModel
                 .filter(stat => stat.name !== "player_name")
                 .map(stat => {
-                    const row = { stat: stat.label };
+                    const row: RowData = { stat: stat.label };
                     selectedPlayers.forEach((player, index) => {
                         const value = player[stat.name];
                         row[`player${index}`] = isNaN(Number(value)) ? value : Number(value);
@@ -53,11 +58,10 @@ export function PlayerCompareTable({ selectedPlayers }: PlayerCompareTableProps)
 
             // Force grid update
             if (gridApiRef.current) {
-                gridApiRef.current.api.setColumnDefs(columns);
-                gridApiRef.current.api.setRowData(rows);
+                gridApiRef.current.api.refreshCells();
             }
-        } else {
-            // Clear columns and rows if no players are selected
+        } 
+        else {
             setColumnDefs([]);
             setRowData([]);
         }
@@ -70,7 +74,6 @@ export function PlayerCompareTable({ selectedPlayers }: PlayerCompareTableProps)
                 rowData={rowData}
                 domLayout="autoHeight"
                 autoSizeStrategy={playersTableConfig.autoSizeStrategy}
-                onGridReady={(params) => gridApiRef.current = params} // Store grid API
             />
         </div>
     );
