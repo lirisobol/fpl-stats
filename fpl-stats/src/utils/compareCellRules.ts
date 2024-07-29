@@ -1,3 +1,5 @@
+import { CellClassParams } from "ag-grid-community";
+
 /* Future -> 
     1. conditional coloring ->
         a. price - lower value is better
@@ -8,7 +10,7 @@
 export const getCellClassRules = (numPlayers: number) => {
     if(numPlayers === 2) return {
         // For two-player comparison
-        'compare-high': (params: any) => {
+        'compare-high': (params: CellClassParams) => {
             if (numPlayers === 2) {
                 const val1 = params.data[`player0`];
                 const val2 = params.data[`player1`];
@@ -16,7 +18,7 @@ export const getCellClassRules = (numPlayers: number) => {
             }
             return false;
         },
-        'compare-low': (params: any) => {
+        'compare-low': (params: CellClassParams) => {
             if (numPlayers === 2) {
                 const val1 = params.data[`player0`];
                 const val2 = params.data[`player1`];
@@ -24,7 +26,7 @@ export const getCellClassRules = (numPlayers: number) => {
             }
             return false;
         },
-        'compare-equal': (params: any) => {
+        'compare-equal': (params: CellClassParams) => {
             if (numPlayers === 2) {
                 const val1 = params.data[`player0`];
                 const val2 = params.data[`player1`];
@@ -35,7 +37,7 @@ export const getCellClassRules = (numPlayers: number) => {
     }
     if(numPlayers === 3) return {
         // For three-player comparison
-        'compare-high': (params: any) => {
+        'compare-high': (params: CellClassParams) => {
             if (numPlayers === 3) {
                 const val1 = params.data[`player0`];
                 const val2 = params.data[`player1`];
@@ -46,7 +48,7 @@ export const getCellClassRules = (numPlayers: number) => {
             }
             return false;
         },
-        'compare-low': (params: any) => {
+        'compare-low': (params: CellClassParams) => {
             if (numPlayers === 3) {
                 const val1 = params.data[`player0`];
                 const val2 = params.data[`player1`];
@@ -57,7 +59,7 @@ export const getCellClassRules = (numPlayers: number) => {
             }
             return false;
         },
-        'compare-mid': (params: any) => {
+        'compare-mid': (params: CellClassParams) => {
             if (numPlayers === 3) {
                 const val1 = params.data[`player0`];
                 const val2 = params.data[`player1`];
