@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import 'ag-grid-community/styles/ag-grid.css'; 
 import 'ag-grid-community/styles/ag-theme-quartz.css';
-import { playersTableConfig } from "../../../utils/playerStatsTableConfig";
+import { playersTableConfig } from "../../../utils/playersTableConfig";
 import { playerStatsModel } from "../../../models/Player";
 import { getCellClassRules } from "../../../utils/compareCellRules";
 import { PlayerRemoverHeader } from "./PlayerRemoverHeader/PlayerRemoverHeader";

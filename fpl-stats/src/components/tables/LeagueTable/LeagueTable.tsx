@@ -1,14 +1,14 @@
 import { AgGridReact } from "ag-grid-react";
-import { TeamsModel } from "../../../models/DataModel"
 import 'ag-grid-community/styles/ag-grid.css'; 
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { PlayersButtonRenderer } from "../../buttons/PlayersButton/PlayersButtonRenderer";
 import { useState } from "react";
 import { useDynamicRowHeight } from "../../../hooks/useDynamicRowHeight";
+import { Team } from "../../../models/Team";
 
 
 interface LeagueTableProps {
-    teams: TeamsModel[];
+    teams: Team[];
 }
 
 export function LeagueTable({teams}:LeagueTableProps): JSX.Element {
