@@ -1,0 +1,32 @@
+@import "../variables.scss";
+
+.warning-alert {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    color: $light; // Adjust based on your theme
+    -webkit-box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.75);
+}
+
+.warning-alert-sm {
+    background-color: $table-low;
+    color: $light;
+    border-color: $light;
+    width: 15%;
+    height: 32px;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.warning-alert-lg {
+    background-color: $table-low;
+    color: $light;
+    border-color: $light;
+    width: 100%;
+    height: 60px;
+    justify-content: center;
+    gap: 0.9rem;
+}

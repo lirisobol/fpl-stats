@@ -1,48 +1,54 @@
 import { useEffect, useState } from 'react';
 import styles from './Compare.module.scss';
-import { Button } from 'react-bootstrap';
+import { Alert, Button} from 'react-bootstrap'; // Import Alert for messaging
 import { PlayerSearchModal } from '../../components/modals/PlayerSearchModal/PlayerSearchModal';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { PlayerCompareTable } from '../../components/tables/PlayerCompareTable/PlayerCompareTable';
-import { RootState } from '../../store/store';
 import { PlayerData } from '../../models/Player';
+import { WarningAlert } from '../../components/alerts/WarningAlert';
 
 export function Compare(): JSX.Element {
     const [modalShow, setModalShow] = useState<boolean>(false);
-    const selectedPlayersFromRedux = useAppSelector((state: RootState) => state.compare.selectedPlayers ?? []);
+    const selectedPlayersFromRedux = useAppSelector((state) => state.compare.selectedPlayers ?? []);
     const [selectedPlayers, setSelectedPlayers] = useState<PlayerData[]>(selectedPlayersFromRedux);
+    
+    // Determine if the "Add Players" button should be disabled
+    const isButtonDisabled = selectedPlayers.length >= 3;
 
     useEffect(() => {
         setSelectedPlayers(selectedPlayersFromRedux);
     }, [selectedPlayersFromRedux]);
 
     const handleModalOpen = () => {
-        console.log('inside handleModalOpen before:',typeof modalShow);
-        setModalShow(true);
-        console.log('inside handleModalOpen after:',typeof modalShow);
-        
+        if (!isButtonDisabled) {
+            setModalShow(true);
+        }
     };
 
     const handleModalClose = () => {
-        console.log('inside handleModalClose, before:',typeof modalShow);
         setModalShow(false);
-        console.log('inside handleModalClose, after:',typeof modalShow);
-
     };
-    console.log(typeof modalShow);
-    
     return (
         <div className={styles.CompareWrapper}>
-            <Button
-                className='w-25'
-                variant="outline-dark"
-                onClick={handleModalOpen}
-            >
-                Add Players
-            </Button>
+            <div className={styles.ButtonWrapper}>
+                <Button
+                    className='btn-sm'
+                    variant={isButtonDisabled ? 'secondary' : 'outline-dark'}
+                    onClick={handleModalOpen}
+                    disabled={isButtonDisabled}
+                >
+                    Add Players
+                </Button>
+
+                {isButtonDisabled && (
+                    <WarningAlert size="sm" message="Cannot Add More Than 3 Players"/>
+                )}
+            </div>
+
             <div className={styles.ComparedPlayersWrapper}>
                 <PlayerCompareTable selectedPlayers={selectedPlayers} />
             </div>
+
             <PlayerSearchModal 
                 onHide={handleModalClose}
                 show={modalShow}

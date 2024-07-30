@@ -7,8 +7,6 @@ interface PlayerSearchModalProps {
 }
 
 export function PlayerSearchModal({ show, onHide}: PlayerSearchModalProps) {
-    console.log('modal show type:', typeof show);
-    
     return (
         <Modal
             onHide={onHide}

@@ -14,7 +14,9 @@ const compareSlice = createSlice({
     initialState,
     reducers: {
         addPlayerToCompare(state, action: PayloadAction<PlayerData>) {
-            state.selectedPlayers.push(action.payload);
+            if(state.selectedPlayers.length < 3) {
+                state.selectedPlayers.push(action.payload);
+            }
         },
         removePlayerFromCompare(state,action: PayloadAction<number>) {
             state.selectedPlayers = state.selectedPlayers.filter(player => player.id !== action.payload);
