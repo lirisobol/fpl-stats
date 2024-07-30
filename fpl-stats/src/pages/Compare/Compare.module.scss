@@ -3,7 +3,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 0.8rem;
     gap: 1rem;
+    .ButtonWrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        gap: 1rem;
+    }
     .ComparedPlayersWrapper {
         width: 100%;
     }
