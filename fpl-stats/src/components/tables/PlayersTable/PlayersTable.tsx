@@ -9,8 +9,10 @@ import { PlayersFilter } from "../../filters/PlayersFilterParent/PlayersFilter";
 import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
 import useFilteredColumns from "../../../hooks/useFilteredColumns";
 import { tableConfig } from '../TableConfig';
+import { LoadingSpinner } from '../../shared/LoadingSpinner/LoadingSpinner';
 
 export function PlayersTable(): JSX.Element {
+    const status = useAppSelector((state) => state.generalInformation.status);
     const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
 
     const positionType = useAppSelector((state) => state.filters.positionType);
@@ -27,6 +29,9 @@ export function PlayersTable(): JSX.Element {
             setColumnDefs(columns);
         }
     }, [elements_stats, filteredColumns]);
+    useEffect(() => {
+        
+    },[])
     
     const { getRowHeight, onGridReady, onFirstDataRendered, onGridSizeChanged } = useDynamicRowHeight();
     
@@ -37,17 +42,23 @@ export function PlayersTable(): JSX.Element {
         <div>
             <PlayersFilter />
             <div className="ag-theme-quartz" style={{height: 600, width: '100%', fontSize: "0.8rem"}}>
-                <AgGridReact 
-                    columnDefs={memoizedColumnDefs}
-                    rowData={memoizedPlayers}
-                    defaultColDef={tableConfig.defaultColDef}
-                    autoSizeStrategy={tableConfig.autoSizeStrategy}
-                    domLayout="autoHeight"
-                    getRowHeight={getRowHeight}
-                    onGridReady={onGridReady}
-                    onFirstDataRendered={onFirstDataRendered}
-                    onGridSizeChanged={onGridSizeChanged}
-                />
+                {status === 'loading' ? (
+                    <div style={{ textAlign: 'center', padding: '20px' }}>
+                        <LoadingSpinner />
+                    </div>
+                ) : (
+                    <AgGridReact 
+                        columnDefs={memoizedColumnDefs}
+                        rowData={memoizedPlayers}
+                        defaultColDef={tableConfig.defaultColDef}
+                        autoSizeStrategy={tableConfig.autoSizeStrategy}
+                        domLayout="autoHeight"
+                        getRowHeight={getRowHeight}
+                        onGridReady={onGridReady}
+                        onFirstDataRendered={onFirstDataRendered}
+                        onGridSizeChanged={onGridSizeChanged}
+                    />
+                )}
             </div>
         </div>
     );

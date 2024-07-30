@@ -6,8 +6,10 @@ import { useAppSelector } from '../../hooks/redux-hooks';
 import { PlayerCompareTable } from '../../components/tables/PlayerCompareTable/PlayerCompareTable';
 import { PlayerData } from '../../models/Player';
 import { WarningAlert } from '../../components/alerts/WarningAlert';
+import { LoadingSpinner } from '../../components/shared/LoadingSpinner/LoadingSpinner';
 
 export function Compare(): JSX.Element {
+    const status = useAppSelector((state) => state.generalInformation.status);
     const [modalShow, setModalShow] = useState<boolean>(false);
     const selectedPlayersFromRedux = useAppSelector((state) => state.compare.selectedPlayers ?? []);
     const [selectedPlayers, setSelectedPlayers] = useState<PlayerData[]>(selectedPlayersFromRedux);
@@ -30,6 +32,7 @@ export function Compare(): JSX.Element {
     };
     return (
         <div className={styles.CompareWrapper}>
+            {status === 'loading' && <LoadingSpinner />}
             <div className={styles.ButtonWrapper}>
                 <Button
                     className='btn-sm'

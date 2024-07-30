@@ -9,8 +9,7 @@ import { LoadingSpinner } from "./components/shared/LoadingSpinner/LoadingSpinne
 
 function App() {
     const dispatch = useAppDispatch();
-    const status = useAppSelector(state => state.generalInformation.status);
-    const error = useAppSelector(state => state.generalInformation.error);
+    const { status, error } = useAppSelector(state => state.generalInformation);
 
     useEffect(() => {
         dispatch(fetchGeneralInformation());
