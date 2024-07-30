@@ -1,11 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface Player {
-    id: number;
-}
+import { PlayerData } from "../../models/Player";
 
 interface CompareState {
-    selectedPlayers: Player[];
+    selectedPlayers: PlayerData[];
 }
 
 const initialState: CompareState = {
@@ -16,7 +13,7 @@ const compareSlice = createSlice({
     name: 'compare',
     initialState,
     reducers: {
-        addPlayerToCompare(state, action: PayloadAction<Player>) {
+        addPlayerToCompare(state, action: PayloadAction<PlayerData>) {
             state.selectedPlayers.push(action.payload);
         },
         removePlayerFromCompare(state,action: PayloadAction<number>) {

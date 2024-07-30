@@ -26,7 +26,6 @@ export function PlayersTableSelectable({ onHide }: PlayersTableSelectableProps):
 
     const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
 
-    console.log('filteredColumns',filteredColumns);
     
     
     useEffect(() => {
