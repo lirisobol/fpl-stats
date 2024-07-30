@@ -7,6 +7,15 @@ import { ColDef } from "ag-grid-community";
 import { tableConfig } from "../TableConfig";
 import { LoadingSpinner } from "../../shared/LoadingSpinner/LoadingSpinner";
 
+
+/* 
+    KEY BUG !
+    ---------
+    * text overflow on headers will make remove button invisible ->
+    solution -> 
+        * custom header should only be the remove button
+        * player name should be displayed as the first column in the table instead of as the header
+*/
 interface PlayerCompareTableProps {
     selectedPlayers: PlayerData[];
 }
