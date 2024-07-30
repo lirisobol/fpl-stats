@@ -1,7 +1,7 @@
+import styles from "./Navigation.module.scss";
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Offcanvas } from 'react-bootstrap';
-import styles from "./Navigation.module.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faPeopleGroup, faFutbol, faPeopleArrows, faPerson } from '@fortawesome/free-solid-svg-icons';
 import LogoIcon from '../Logo';

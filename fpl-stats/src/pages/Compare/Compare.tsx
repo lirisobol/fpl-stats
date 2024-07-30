@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './Compare.module.scss';
-import { Alert, Button} from 'react-bootstrap'; // Import Alert for messaging
+import { Button} from 'react-bootstrap'; // Import Alert for messaging
 import { PlayerSearchModal } from '../../components/modals/PlayerSearchModal/PlayerSearchModal';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { PlayerCompareTable } from '../../components/tables/PlayerCompareTable/PlayerCompareTable';

@@ -1,4 +1,4 @@
-import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner";
+import { LoadingSpinner } from "../../components/shared/LoadingSpinner/LoadingSpinner";
 import { LeagueTable } from "../../components/tables/LeagueTable/LeagueTable";
 import { useAppSelector } from "../../hooks/redux-hooks";
 

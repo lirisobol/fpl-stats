@@ -1,11 +1,11 @@
 import { AgGridReact } from "ag-grid-react";
 import 'ag-grid-community/styles/ag-grid.css'; 
 import 'ag-grid-community/styles/ag-theme-quartz.css';
-import { PlayersButtonRenderer } from "../../buttons/PlayersButton/PlayersButtonRenderer";
 import { useState, useEffect } from "react";
 import { useDynamicRowHeight } from "../../../hooks/useDynamicRowHeight";
 import { Team } from "../../../models/Team";
 import { ColDef } from "ag-grid-community";
+import { ViewPlayersButtons } from "./ViewPlayersButton/ViewPlayersButton";
 
 interface LeagueTableProps {
     teams: Team[];
@@ -23,7 +23,7 @@ export function LeagueTable({ teams }: LeagueTableProps): JSX.Element {
             { 
                 headerName: 'Players', 
                 field: 'code', 
-                cellRenderer: PlayersButtonRenderer // Use the string name of the component
+                cellRenderer: ViewPlayersButtons // Use the string name of the component
             }
         ];
         setColumnDefs(initialColumnDefs);
