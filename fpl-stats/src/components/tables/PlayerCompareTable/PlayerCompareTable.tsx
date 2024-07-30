@@ -3,9 +3,8 @@ import { AgGridReact } from "ag-grid-react";
 import 'ag-grid-community/styles/ag-grid.css'; 
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { PlayerData} from "../../../models/Player";
-import { playersTableConfig } from "../../../utils/playersTableConfig";
 import { ColDef } from "ag-grid-community";
-import { generateCompareColDef, generateCompareRowDef } from "./TableDefs";
+import { tableConfig } from "../TableConfig";
 
 interface PlayerCompareTableProps {
     selectedPlayers: PlayerData[];
@@ -19,11 +18,10 @@ export function PlayerCompareTable({ selectedPlayers }: PlayerCompareTableProps)
     useEffect(() => {
         if (selectedPlayers.length <= 3) {
             if (selectedPlayers.length > 0) {
-                const columns = generateCompareColDef(selectedPlayers);
+                const columns = tableConfig.generateCompareColDef(selectedPlayers);
                 setColumnDefs(columns);
-                const rows = generateCompareRowDef(selectedPlayers)
+                const rows = tableConfig.generateCompareRowDef(selectedPlayers)
                 setRowData(rows);
-    
                 // Force grid update
                 if (gridApiRef.current) {
                     gridApiRef.current.api.refreshCells();
@@ -39,14 +37,13 @@ export function PlayerCompareTable({ selectedPlayers }: PlayerCompareTableProps)
         }
 
     }, [selectedPlayers]);
-
     return (
         <div className="ag-theme-quartz" style={{ height: 600, width: '100%', fontSize: "0.8rem" }}>
             <AgGridReact
+                autoSizeStrategy={tableConfig.autoSizeStrategy}
                 columnDefs={columnDefs}
                 rowData={rowData}
                 domLayout="autoHeight"
-                autoSizeStrategy={playersTableConfig.autoSizeStrategy}
             />
         </div>
     );

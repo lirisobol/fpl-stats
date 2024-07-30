@@ -1,15 +1,15 @@
-import { AgGridReact } from "ag-grid-react";
-import 'ag-grid-community/styles/ag-grid.css'; 
 import 'ag-grid-community/styles/ag-theme-quartz.css';
+import 'ag-grid-community/styles/ag-grid.css'; 
+import { AgGridReact } from "ag-grid-react";
 import { useEffect, useState, useMemo, useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux-hooks";
-import useFilteredColumns from "../../../hooks/useFilteredColumns";
 import { useDynamicRowHeight } from "../../../hooks/useDynamicRowHeight";
 import { PlayersFilter } from "../../filters/PlayersFilterParent/PlayersFilter";
-import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
-import { playersTableConfig } from "../../../utils/playersTableConfig";
 import { addPlayerToCompare } from "../../../store/slices/compareSlice";
 import { ColDef, SelectionChangedEvent } from "ag-grid-community";
+import { tableConfig } from "../TableConfig";
+import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
+import useFilteredColumns from "../../../hooks/useFilteredColumns";
 
 interface PlayersTableSelectableProps {
     onHide: () => void;
@@ -21,14 +21,14 @@ export function PlayersTableSelectable({ onHide }: PlayersTableSelectableProps):
     const searchQuery = useAppSelector((state) => state.filters.searchQuery);
 
     const players = useFilteredPlayers(teamCode, positionType, searchQuery);
-    const filteredColumns = useFilteredColumns();
     const elements_stats = useAppSelector((state) => state.generalInformation.data?.element_stats);
+    const filteredColumns = useFilteredColumns();
 
     const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
 
     useEffect(() => {
         if (elements_stats) {
-            setColumnDefs(playersTableConfig.getColumnDefs(filteredColumns));
+            setColumnDefs(tableConfig.generatePlayersColumnDefs(filteredColumns));
         }
     }, [elements_stats, filteredColumns]);
     
@@ -42,7 +42,7 @@ export function PlayersTableSelectable({ onHide }: PlayersTableSelectableProps):
         const selectedData = selectedNode ? selectedNode.data : null;
         if (selectedData) {
             dispatch(addPlayerToCompare(selectedData));
-            onHide(); // Close the modal
+            onHide();
         }
     }, [dispatch, onHide]);
     
@@ -53,14 +53,14 @@ export function PlayersTableSelectable({ onHide }: PlayersTableSelectableProps):
                 <AgGridReact 
                     columnDefs={memoizedColumnDefs}
                     rowData={memoizedPlayers}
-                    defaultColDef={playersTableConfig.defaultColDef}
+                    defaultColDef={tableConfig.defaultColDef}
+                    autoSizeStrategy={tableConfig.autoSizeStrategy}
                     domLayout="autoHeight"
-                    autoSizeStrategy={playersTableConfig.autoSizeStrategy}
+                    rowSelection={"single"}
                     getRowHeight={getRowHeight}
                     onGridReady={onGridReady}
                     onFirstDataRendered={onFirstDataRendered}
                     onGridSizeChanged={onGridSizeChanged}
-                    rowSelection={"single"}
                     onSelectionChanged={onSelectionChanged}
                 />
             </div>

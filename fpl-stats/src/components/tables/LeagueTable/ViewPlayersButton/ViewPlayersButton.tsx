@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
-import styles from "./PlayersButtonRenderer.module.scss";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../hooks/redux-hooks";
-import { setTeam } from "../../../store/slices/filterSlice";
-interface PlayersButtonRendererProps {
+import { useAppDispatch } from "../../../../hooks/redux-hooks";
+import { setTeam } from "../../../../store/slices/filterSlice";
+import styles from "./ViewPlayersButton.module.scss";
+interface ViewPlayersButtonsProps {
     value:number
 }
-export const PlayersButtonRenderer: React.FC<PlayersButtonRendererProps> = ({value}:PlayersButtonRendererProps) => {
+export const ViewPlayersButtons: React.FC<ViewPlayersButtonsProps> = ({value}:ViewPlayersButtonsProps) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const handleTeamClick = () => {
