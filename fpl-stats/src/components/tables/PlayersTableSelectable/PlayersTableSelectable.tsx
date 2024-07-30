@@ -10,12 +10,14 @@ import { ColDef, SelectionChangedEvent } from "ag-grid-community";
 import { tableConfig } from "../TableConfig";
 import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
 import useFilteredColumns from "../../../hooks/useFilteredColumns";
+import { LoadingSpinner } from '../../shared/LoadingSpinner/LoadingSpinner';
 
 interface PlayersTableSelectableProps {
     onHide: () => void;
 }
 export function PlayersTableSelectable({ onHide }: PlayersTableSelectableProps): JSX.Element {
     const dispatch = useAppDispatch();
+    const [loading, setLoading] = useState(false);
     const positionType = useAppSelector((state) => state.filters.positionType);
     const teamCode = useAppSelector((state) => state.filters.teamCode);
     const searchQuery = useAppSelector((state) => state.filters.searchQuery);
@@ -27,9 +29,11 @@ export function PlayersTableSelectable({ onHide }: PlayersTableSelectableProps):
     const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
 
     useEffect(() => {
+        setLoading(true)
         if (elements_stats) {
             setColumnDefs(tableConfig.generatePlayersColumnDefs(filteredColumns));
         }
+        setLoading(false)
     }, [elements_stats, filteredColumns]);
     
     const { getRowHeight, onGridReady, onFirstDataRendered, onGridSizeChanged } = useDynamicRowHeight();
@@ -51,12 +55,14 @@ export function PlayersTableSelectable({ onHide }: PlayersTableSelectableProps):
             <PlayersFilter />
             <div className="ag-theme-quartz" style={{height: 600, width: '100%', fontSize: "0.8rem"}}>
                 <AgGridReact 
+                    loading={loading}
+                    loadingOverlayComponent={LoadingSpinner}
                     columnDefs={memoizedColumnDefs}
                     rowData={memoizedPlayers}
                     defaultColDef={tableConfig.defaultColDef}
                     autoSizeStrategy={tableConfig.autoSizeStrategy}
-                    domLayout="autoHeight"
                     rowSelection={"single"}
+                    domLayout='autoHeight'
                     getRowHeight={getRowHeight}
                     onGridReady={onGridReady}
                     onFirstDataRendered={onFirstDataRendered}

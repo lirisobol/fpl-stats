@@ -15,26 +15,33 @@ class TableConfig {
         columnLimits: [
             {
                 colId: 'playerName',
-                minWidth: 150
+                minWidth: 150,
             }
         ]
     };
     public defaultColDef = {
         sortable: true,
         resizable: true,
-        flex: 1,
-
+    };
+    public defaultColDefFlexed = {
+        sortable: true,
+        resizable: true,
+        flex:1
     };
     // Players Table Columns Config, used in <PlayersTable> & <PlayersTableSelectable>
     public generatePlayersColumnDefs = (filteredColumns: PlayerStat[]): ColDef[] => {
         const columnDefs = filteredColumns.map(stat => {
             switch (stat.label) {
                 case "Player name":
-                    return this.getPlayerNameColumn();
+                    return {
+                        ...this.getPlayerNameColumn(),
+                        width:150,
+                    }
                 case "Price":
                     return {
                         headerName: stat.label,
                         field: stat.name,
+                        width: 75,
                         valueGetter: (params: ValueGetterParams<PlayerData>) => {
                             const value = params.data?.[stat.name as keyof PlayerData];
                             return typeof value === 'number' ? value / 10 : undefined;
@@ -63,6 +70,7 @@ class TableConfig {
                     return {
                         headerName: stat.label,
                         field: stat.name,
+                        width:75,
                         cellClassRules: {
                             'table-high-rank': (params: CellClassParams<PlayerData>) => {
                                 const rankValue = params.data?.[stat.rank as keyof PlayerData] as number;
@@ -82,12 +90,17 @@ class TableConfig {
                     return {
                         headerName: stat.label,
                         field: stat.name,
+                        width:75,
                     };
             }
         })
         
+        // Ensure the Player Name column is always included and has a fixed width
         if (!columnDefs.some(colDef => colDef.field === 'playerName')) {
-            columnDefs.unshift(this.getPlayerNameColumn());
+            columnDefs.unshift({
+                ...this.getPlayerNameColumn(),
+                width: 150,
+            });
         }
     
         return columnDefs;

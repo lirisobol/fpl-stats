@@ -9,8 +9,10 @@ import { PlayersFilter } from "../../filters/PlayersFilterParent/PlayersFilter";
 import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
 import useFilteredColumns from "../../../hooks/useFilteredColumns";
 import { tableConfig } from '../TableConfig';
+import { LoadingSpinner } from '../../shared/LoadingSpinner/LoadingSpinner';
 
 export function PlayersTable(): JSX.Element {
+    const [loading, setLoading] = useState(true);
     const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
 
     const positionType = useAppSelector((state) => state.filters.positionType);
@@ -25,6 +27,7 @@ export function PlayersTable(): JSX.Element {
         if (elements_stats) {
             const columns = tableConfig.generatePlayersColumnDefs(filteredColumns)
             setColumnDefs(columns);
+            setLoading(false)
         }
     }, [elements_stats, filteredColumns]);
     
@@ -37,7 +40,10 @@ export function PlayersTable(): JSX.Element {
         <div>
             <PlayersFilter />
             <div className="ag-theme-quartz" style={{height: 600, width: '100%', fontSize: "0.8rem"}}>
+                
                 <AgGridReact 
+                    loading={loading}
+                    loadingOverlayComponent={LoadingSpinner}
                     columnDefs={memoizedColumnDefs}
                     rowData={memoizedPlayers}
                     defaultColDef={tableConfig.defaultColDef}
