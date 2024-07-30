@@ -2,20 +2,20 @@ import { AgGridReact } from "ag-grid-react";
 import 'ag-grid-community/styles/ag-grid.css'; 
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { useEffect, useState, useMemo, useCallback } from "react";
-import { useAppDispatch, useAppSelector } from "../../../hooks/redux-hooks";
+import {  useAppSelector } from "../../../hooks/redux-hooks";
 import useFilteredColumns from "../../../hooks/useFilteredColumns";
 import { useDynamicRowHeight } from "../../../hooks/useDynamicRowHeight";
 import { PlayersFilter } from "../../filters/PlayersFilterParent/PlayersFilter";
 import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
 import { playersTableConfig } from "../../../utils/playersTableConfig";
-import { addPlayerToCompare } from "../../../store/slices/compareSlice";
 import { ColDef, SelectionChangedEvent } from "ag-grid-community";
+import { PlayerData } from "../../../models/Player";
 
 interface PlayersTableSelectableProps {
+    onPlayerSelect: (player:PlayerData) => void;
     onHide: () => void;
 }
-export function PlayersTableSelectable({ onHide }: PlayersTableSelectableProps): JSX.Element {
-    const dispatch = useAppDispatch();
+export function PlayersTableSelectable({ onHide,onPlayerSelect }: PlayersTableSelectableProps): JSX.Element {
     const positionType = useAppSelector((state) => state.filters.positionType);
     const teamCode = useAppSelector((state) => state.filters.teamCode);
     const searchQuery = useAppSelector((state) => state.filters.searchQuery);
@@ -42,11 +42,11 @@ export function PlayersTableSelectable({ onHide }: PlayersTableSelectableProps):
     const onSelectionChanged = useCallback((event:SelectionChangedEvent) => {
         const selectedNode = event.api.getSelectedNodes()[0];
         const selectedData = selectedNode ? selectedNode.data : null;
-        if (selectedData) {
-            dispatch(addPlayerToCompare(selectedData));
-            onHide(); // Close the modal
+        if(selectedData) {
+            onPlayerSelect(selectedData);
+            onHide();
         }
-    }, [dispatch, onHide]);
+    }, [onPlayerSelect, onHide]);
     
     return (
         <div>
