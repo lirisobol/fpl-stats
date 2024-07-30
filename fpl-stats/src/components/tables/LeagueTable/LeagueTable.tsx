@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useDynamicRowHeight } from "../../../hooks/useDynamicRowHeight";
 import { Team } from "../../../models/Team";
 import { ColDef } from "ag-grid-community";
-import { defaultColDef, generateLeagueColDef } from "./TableDefs";
+import { tableConfig } from "../TableConfig";
 
 interface LeagueTableProps {
     teams: Team[];
@@ -14,7 +14,7 @@ export function LeagueTable({ teams }: LeagueTableProps): JSX.Element {
     const { getRowHeight, onGridReady, onFirstDataRendered, onGridSizeChanged } = useDynamicRowHeight();
     const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
     useEffect(() => {
-        const initialColumnDefs = generateLeagueColDef();
+        const initialColumnDefs = tableConfig.generateLeagueColDef();
         setColumnDefs(initialColumnDefs);
     }, []); 
     return (
@@ -22,7 +22,7 @@ export function LeagueTable({ teams }: LeagueTableProps): JSX.Element {
             <AgGridReact 
                 columnDefs={columnDefs}
                 rowData={teams}
-                defaultColDef={defaultColDef}
+                defaultColDef={tableConfig.defaultColDef}
                 domLayout="autoHeight"
                 getRowHeight={getRowHeight}
                 onGridReady={onGridReady}

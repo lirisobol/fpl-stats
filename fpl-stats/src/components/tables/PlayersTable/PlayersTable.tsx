@@ -1,16 +1,18 @@
-import { AgGridReact } from "ag-grid-react";
 import 'ag-grid-community/styles/ag-grid.css'; 
 import 'ag-grid-community/styles/ag-theme-quartz.css';
+import { AgGridReact } from "ag-grid-react";
+import { ColDef } from "ag-grid-community";
 import { useEffect, useState, useMemo } from "react";
 import { useAppSelector } from "../../../hooks/redux-hooks";
-import useFilteredColumns from "../../../hooks/useFilteredColumns";
 import { useDynamicRowHeight } from "../../../hooks/useDynamicRowHeight";
 import { PlayersFilter } from "../../filters/PlayersFilterParent/PlayersFilter";
 import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
-import { playersTableConfig } from "../../../utils/playersTableConfig";
-import { ColDef } from "ag-grid-community";
+import useFilteredColumns from "../../../hooks/useFilteredColumns";
+import { tableConfig } from '../TableConfig';
 
 export function PlayersTable(): JSX.Element {
+    const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
+
     const positionType = useAppSelector((state) => state.filters.positionType);
     const teamCode = useAppSelector((state) => state.filters.teamCode);
     const searchQuery = useAppSelector((state) => state.filters.searchQuery);
@@ -19,11 +21,10 @@ export function PlayersTable(): JSX.Element {
     const filteredColumns = useFilteredColumns();
     const elements_stats = useAppSelector((state) => state.generalInformation.data?.element_stats);
 
-    const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
-    
     useEffect(() => {
         if (elements_stats) {
-            setColumnDefs(playersTableConfig.getColumnDefs(filteredColumns));
+            const columns = tableConfig.generatePlayersColumnDefs(filteredColumns)
+            setColumnDefs(columns);
         }
     }, [elements_stats, filteredColumns]);
     
@@ -39,9 +40,9 @@ export function PlayersTable(): JSX.Element {
                 <AgGridReact 
                     columnDefs={memoizedColumnDefs}
                     rowData={memoizedPlayers}
-                    defaultColDef={playersTableConfig.defaultColDef}
+                    defaultColDef={tableConfig.defaultColDef}
+                    autoSizeStrategy={tableConfig.autoSizeStrategy}
                     domLayout="autoHeight"
-                    autoSizeStrategy={playersTableConfig.autoSizeStrategy}
                     getRowHeight={getRowHeight}
                     onGridReady={onGridReady}
                     onFirstDataRendered={onFirstDataRendered}
