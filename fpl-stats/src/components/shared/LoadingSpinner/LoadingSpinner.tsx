@@ -1,6 +1,8 @@
 import { Spinner } from "react-bootstrap"
 import styles from "./LoadingSpinner.module.scss";
 export function LoadingSpinner():JSX.Element {
+    console.log("loading.....");
+    
     return (
         <div className={styles.LoadingSpinnerContainer}>
             <Spinner 
