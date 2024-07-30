@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { LeagueTable } from "../../components/tables/LeagueTable/LeagueTable";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import { LoadingSpinner } from "../../components/shared/LoadingSpinner/LoadingSpinner";
+import { ErrorToast } from "../../components/shared/Toasts/ErrorToast/ErrorToast";
 
 export function Teams(): JSX.Element {
-    const teams = useAppSelector((state) => state.generalInformation.data?.teams || []);
+    const [showToast, setShowToast] = useState(false);
     const status = useAppSelector((state) => state.generalInformation.status);
+    const error = useAppSelector((state) => state.generalInformation.error);
+    const teams = useAppSelector((state) => state.generalInformation.data?.teams || []);
+
     return (
         <div>
             {status === 'loading' && <LoadingSpinner />}
@@ -14,7 +19,12 @@ export function Teams(): JSX.Element {
                 </div>
             )}
             {status === 'failed' && (
-                <div>Error loading data</div>
+                <ErrorToast 
+                    show={showToast} 
+                    onClose={() => setShowToast(false)} 
+                    errorHeader="Error!"
+                    errorMessage={error as string}
+                    />
             )}
         </div>
     );

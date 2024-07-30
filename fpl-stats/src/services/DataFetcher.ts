@@ -3,7 +3,7 @@ import api from "../utils/axiosConfig";
 
 class DataFetcher {
     public async getGeneralInformation():Promise<GeneralInformation> {
-        const response = await api.get('general-information');
+        const response = await api.get('general-infdormation');
         console.log(response.data);
         return response.data;
     }
