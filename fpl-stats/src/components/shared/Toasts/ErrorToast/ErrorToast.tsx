@@ -9,7 +9,7 @@ interface ErrorToastProps {
 
 export function ErrorToast({ show, onClose,errorHeader,errorMessage}: ErrorToastProps): JSX.Element {
     return (
-        <ToastContainer position="top-center" className="p-4">
+        <ToastContainer position="top-end" className="p-4">
             <Toast onClose={onClose} show={show} delay={3000} autohide bg="danger">
                 <ToastHeader>{errorHeader}</ToastHeader>
                 <ToastBody>{errorMessage}</ToastBody>
