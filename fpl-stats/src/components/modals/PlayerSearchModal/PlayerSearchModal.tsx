@@ -7,10 +7,12 @@ interface PlayerSearchModalProps {
 }
 
 export function PlayerSearchModal({ show, onHide}: PlayerSearchModalProps) {
+    console.log('modal show type:', typeof show);
+    
     return (
         <Modal
-            show={show}
             onHide={onHide}
+            show={show}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
