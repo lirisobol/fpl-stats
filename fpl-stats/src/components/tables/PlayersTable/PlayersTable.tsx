@@ -12,7 +12,7 @@ import { tableConfig } from '../TableConfig';
 import { LoadingSpinner } from '../../shared/LoadingSpinner/LoadingSpinner';
 
 export function PlayersTable(): JSX.Element {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
 
     const positionType = useAppSelector((state) => state.filters.positionType);
@@ -25,6 +25,7 @@ export function PlayersTable(): JSX.Element {
 
     useEffect(() => {
         if (elements_stats) {
+            setLoading(true)
             const columns = tableConfig.generatePlayersColumnDefs(filteredColumns)
             setColumnDefs(columns);
             setLoading(false)

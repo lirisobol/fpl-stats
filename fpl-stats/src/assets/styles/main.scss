@@ -8,6 +8,10 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-image: url('../../assets/svg/homeBackground.svg'); // Reference the SVG file here
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
   
 body {

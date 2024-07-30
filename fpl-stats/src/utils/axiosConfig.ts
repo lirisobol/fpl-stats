@@ -1,8 +1,9 @@
 import axios from "axios";
+import { appConfig } from "./appConfig";
 
 // Base URL for your Express server
 const api = axios.create({
-  baseURL: "http://localhost:3001/api/",
+  baseURL: appConfig.GeneralInformationEndpoint,
   headers: {
     'Content-Type': 'application/json',
   },

@@ -5,44 +5,38 @@
     height: 94.3%;
     font-family: Dosis;
     width: 100%;
-    background-color: $accent-secondary;
-    background-image: url('../../assets/svg/homeBackground.svg'); // Reference the SVG file here
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    padding: 3rem;
+    padding-top: 0.5rem;
+    padding-left: 3rem;
     .Header{
-        color: $primary;
-        font-size: 7rem;
+        color: $dark;
         font-weight: 400;
         @media(min-width:$breakpoint-xs) {
             font-size: 4rem;
         }
         @media(min-width:$breakpoint-sm) {
-            font-size: 5rem;
+            font-size: 7rem;
         }
         @media(min-width:$breakpoint-lg) {
-            font-size: 6rem;
+            font-size: 10rem;
         }
     }
     .Description {
-        color: $primary;
-        font-size: 3rem;
+        color: $dark;
+        font-size: 5rem;
         font-weight: 100;
         @media(min-width:$breakpoint-xs) {
-            font-size:1.4rem;
+            font-size:3rem;
             width: 90%;
         }
         @media(min-width:$breakpoint-sm) {
-            font-size: 2rem;
+            font-size: 3rem;
         }
         @media(min-width:$breakpoint-lg) {
             font-size: 3rem;
-            width: 50%;
         }
     }
 }
