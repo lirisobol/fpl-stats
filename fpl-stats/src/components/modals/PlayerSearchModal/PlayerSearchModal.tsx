@@ -1,14 +1,12 @@
 import { Button, Modal } from "react-bootstrap";
 import { PlayersTableSelectable } from "../../tables/PlayersTableSelectable/PlayersTableSelectable";
-import { PlayerData } from "../../../models/Player";
 
 interface PlayerSearchModalProps {
     show: boolean;
     onHide: () => void;
-    onPlayerSelect: (player: PlayerData) => void; // Add this prop
 }
 
-export function PlayerSearchModal({ show, onHide, onPlayerSelect}: PlayerSearchModalProps) {
+export function PlayerSearchModal({ show, onHide}: PlayerSearchModalProps) {
     return (
         <Modal
             onHide={onHide}
@@ -24,7 +22,7 @@ export function PlayerSearchModal({ show, onHide, onPlayerSelect}: PlayerSearchM
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <PlayersTableSelectable onHide={onHide} onPlayerSelect={onPlayerSelect}/>
+                <PlayersTableSelectable onHide={onHide}/>
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={onHide}>Close</Button>
