@@ -17,20 +17,13 @@ export function Compare(): JSX.Element {
     }, [selectedPlayersFromRedux]);
 
     const handleModalOpen = () => {
-        console.log('inside handleModalOpen before:',typeof modalShow);
         setModalShow(true);
-        console.log('inside handleModalOpen after:',typeof modalShow);
         
     };
 
     const handleModalClose = () => {
-        console.log('inside handleModalClose, before:',typeof modalShow);
         setModalShow(false);
-        console.log('inside handleModalClose, after:',typeof modalShow);
-
     };
-    console.log(typeof modalShow);
-    
     return (
         <div className={styles.CompareWrapper}>
             <Button
