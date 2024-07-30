@@ -27,7 +27,7 @@ export function LeagueTable({ teams }: LeagueTableProps): JSX.Element {
                 loadingOverlayComponent={LoadingSpinner}
                 columnDefs={columnDefs}
                 rowData={teams}
-                defaultColDef={tableConfig.defaultColDef}
+                defaultColDef={tableConfig.defaultColDefFlexed}
                 domLayout="autoHeight"
                 getRowHeight={getRowHeight}
                 onGridReady={onGridReady}

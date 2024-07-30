@@ -62,6 +62,7 @@ export function PlayersTableSelectable({ onHide }: PlayersTableSelectableProps):
                     defaultColDef={tableConfig.defaultColDef}
                     autoSizeStrategy={tableConfig.autoSizeStrategy}
                     rowSelection={"single"}
+                    domLayout='autoHeight'
                     getRowHeight={getRowHeight}
                     onGridReady={onGridReady}
                     onFirstDataRendered={onFirstDataRendered}
