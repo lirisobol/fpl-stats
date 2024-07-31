@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-export async function handler(event, context) {
+const handler = async (event, context) => {
   try {
     const response = await fetch('https://fantasy.premierleague.com/api/bootstrap-static/');
     const data = await response.json();
@@ -14,9 +14,13 @@ export async function handler(event, context) {
       },
     };
   } catch (error) {
+    console.error('Failed to fetch data:', error);
+
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Failed to fetch data' }),
     };
   }
-}
+};
+
+export { handler };
