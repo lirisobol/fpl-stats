@@ -38,7 +38,7 @@ export function Compare(): JSX.Element {
             <div className={styles.ButtonWrapper}>
                 <Button
                     className='btn'
-                    variant={isButtonDisabled ? 'secondary' : 'dark'}
+                    variant={isButtonDisabled ? 'secondary' : 'outline-dark'}
                     onClick={handleModalOpen}
                     disabled={isButtonDisabled}
 
