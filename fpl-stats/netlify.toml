@@ -1,5 +1,5 @@
 [[redirects]]
   from = "/api/general-information"
-  to = "https://fantasy.premierleague.com/api/bootstrap-static/"
+  to = "/.netlify/functions/proxy"
   status = 200
   force = true
