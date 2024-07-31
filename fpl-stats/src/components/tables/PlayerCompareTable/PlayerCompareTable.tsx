@@ -6,6 +6,7 @@ import { PlayerData} from "../../../models/Player";
 import { ColDef } from "ag-grid-community";
 import { tableConfig } from "../TableConfig";
 import { LoadingSpinner } from "../../shared/LoadingSpinner/LoadingSpinner";
+import { NoRowsComponent } from "./NoRowsComponent/NoRowsComponent";
 
 
 /* 
@@ -59,6 +60,7 @@ export function PlayerCompareTable({ selectedPlayers }: PlayerCompareTableProps)
                 columnDefs={columnDefs}
                 rowData={rowData}
                 domLayout="autoHeight"
+                noRowsOverlayComponent={NoRowsComponent}
             />
         </div>
     );
