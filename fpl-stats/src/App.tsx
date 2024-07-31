@@ -32,8 +32,10 @@ function App() {
                 errorHeader="Error !" 
                 errorMessage={error as string} 
             />
-            <Navigation />
-            <Routing />
+            <div className={styles.MainContent}>
+                <Navigation />
+                <Routing />
+            </div>
         </div>
     );
 }
