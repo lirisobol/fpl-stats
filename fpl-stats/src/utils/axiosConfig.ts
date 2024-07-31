@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
-// Base URL for your Express server
 const api = axios.create({
-  headers: {
+    baseURL: import.meta.env.VITE_API_URL || 'https://fantasy.premierleague.com/api/bootstrap-static/',
+    headers: {
     'Content-Type': 'application/json',
   },
 });
