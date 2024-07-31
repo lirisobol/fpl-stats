@@ -4,6 +4,7 @@
 @import "./components/buttons.scss";
 @import "./components/tables.scss";
 @import "./components/alerts.scss";
+
 html, body {
     height: 100%;
     margin: 0;
@@ -13,19 +14,26 @@ html, body {
     background-position: center;
     background-repeat: no-repeat;
 }
-  
+
 body {
     margin: 0;
     padding: 0;
 }
+
+// Apply the dynamic viewport height for modern browsers and iOS
+html {
+    --vh: 1vh; // Fallback value
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(var(--vh, 1vh) * 100); /* Ensure full viewport height */
+}
+
 // very specific case for compare table overflowing.
 .ag-header-cell-comp-wrapper {
     white-space: nowrap; /* Prevents text from wrapping */
     overflow: hidden; /* Hides overflowed text */
     text-overflow: ellipsis; /* Adds an ellipsis (...) to overflowed text */
-}
-#root {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensure full viewport height */
 }
