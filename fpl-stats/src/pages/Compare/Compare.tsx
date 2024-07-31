@@ -5,7 +5,7 @@ import { PlayerSearchModal } from '../../components/modals/PlayerSearchModal/Pla
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { PlayerCompareTable } from '../../components/tables/PlayerCompareTable/PlayerCompareTable';
 import { PlayerData } from '../../models/Player';
-import { WarningAlert } from '../../components/alerts/WarningAlert';
+import { WarningAlert } from '../../components/shared/alerts/WarningAlert';
 import { LoadingSpinner } from '../../components/shared/LoadingSpinner/LoadingSpinner';
 
 export function Compare(): JSX.Element {
@@ -35,8 +35,8 @@ export function Compare(): JSX.Element {
             {status === 'loading' && <LoadingSpinner />}
             <div className={styles.ButtonWrapper}>
                 <Button
-                    className='btn-sm'
-                    variant={isButtonDisabled ? 'secondary' : 'outline-dark'}
+                    className='btn'
+                    variant={isButtonDisabled ? 'secondary' : 'dark'}
                     onClick={handleModalOpen}
                     disabled={isButtonDisabled}
                 >
@@ -44,7 +44,7 @@ export function Compare(): JSX.Element {
                 </Button>
 
                 {isButtonDisabled && (
-                    <WarningAlert size="sm" message="Cannot Add More Than 3 Players"/>
+                    <WarningAlert size="sm" message="Cannot Compare More Than 3 Players"/>
                 )}
             </div>
 
