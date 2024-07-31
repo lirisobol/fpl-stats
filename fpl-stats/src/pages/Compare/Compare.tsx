@@ -7,6 +7,8 @@ import { PlayerCompareTable } from '../../components/tables/PlayerCompareTable/P
 import { PlayerData } from '../../models/Player';
 import { WarningAlert } from '../../components/shared/alerts/WarningAlert';
 import { LoadingSpinner } from '../../components/shared/LoadingSpinner/LoadingSpinner';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export function Compare(): JSX.Element {
     const status = useAppSelector((state) => state.generalInformation.status);
@@ -39,8 +41,10 @@ export function Compare(): JSX.Element {
                     variant={isButtonDisabled ? 'secondary' : 'dark'}
                     onClick={handleModalOpen}
                     disabled={isButtonDisabled}
+
                 >
                     Add Players
+                    <FontAwesomeIcon icon={faPlus} style={{marginLeft:'12px'}}/>
                 </Button>
 
                 {isButtonDisabled && (
