@@ -2,6 +2,12 @@
 .NavWrapper{
     width: 100%;
     padding: 0;
+    margin: 0;
+    .NavContainer{
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
     .NavBrand {
         display: flex;
         flex-direction: row;

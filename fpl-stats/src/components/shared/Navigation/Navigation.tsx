@@ -14,8 +14,8 @@ export function Navigation() {
 
   return (
     <div className={styles.NavWrapper}>
-        <Navbar expand="lg" className="p-1">
-            <Container className={`${styles.NavContainer} ms-4`}>
+        <Navbar expand="lg" className="p-1 w-100">
+            <Container className={styles.NavContainer}>
                 <Navbar.Brand className={`${styles.NavBrand} me-5`} as={Link} to="/">
                     <LogoIcon />
                     FPLStats
@@ -34,7 +34,7 @@ export function Navigation() {
                     </Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <Nav className='me-auto'>
+                    <Nav className='me-auto '>
                         <Nav.Link className={styles.NavLink} as={Link} to="/" onClick={handleClose}>
                             <FontAwesomeIcon icon={faHouse} className={styles.NavIcon} />
                             Home
