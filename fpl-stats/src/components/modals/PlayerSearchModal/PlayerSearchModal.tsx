@@ -19,14 +19,14 @@ export function PlayerSearchModal({ show, onHide}: PlayerSearchModalProps) {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Select Player To Compare
+                    Select Player
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <PlayersTableSelectable onHide={onHide}/>
             </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={onHide}>Close</Button>
+            <Modal.Footer className="justify-content-center">
+                <Button onClick={onHide} variant="dark" style={{width:"15%"}}>Close</Button>
             </Modal.Footer>
         </Modal>
     );
