@@ -51,10 +51,10 @@ export function Navigation() {
                             <FontAwesomeIcon icon={faPeopleArrows} className={styles.NavIcon} />
                             Compare
                         </Nav.Link>
-                        <Nav.Link className={styles.NavLink} as={Link} to="/fixtures" onClick={handleClose}>
+                        {/* <Nav.Link className={styles.NavLink} as={Link} to="/fixtures" onClick={handleClose}>
                             <FontAwesomeIcon icon={faFutbol} className={styles.NavIcon} />
                             Fixtures
-                        </Nav.Link>
+                        </Nav.Link> */}
                     </Nav>
                 </Offcanvas.Body>
                 </Navbar.Offcanvas>

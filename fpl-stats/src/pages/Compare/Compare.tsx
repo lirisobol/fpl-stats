@@ -5,8 +5,10 @@ import { PlayerSearchModal } from '../../components/modals/PlayerSearchModal/Pla
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { PlayerCompareTable } from '../../components/tables/PlayerCompareTable/PlayerCompareTable';
 import { PlayerData } from '../../models/Player';
-import { WarningAlert } from '../../components/alerts/WarningAlert';
+import { WarningAlert } from '../../components/shared/alerts/WarningAlert';
 import { LoadingSpinner } from '../../components/shared/LoadingSpinner/LoadingSpinner';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export function Compare(): JSX.Element {
     const status = useAppSelector((state) => state.generalInformation.status);
@@ -35,16 +37,19 @@ export function Compare(): JSX.Element {
             {status === 'loading' && <LoadingSpinner />}
             <div className={styles.ButtonWrapper}>
                 <Button
-                    className='btn-sm'
+                    className='btn'
+                    style={{width:"15%"}}
                     variant={isButtonDisabled ? 'secondary' : 'outline-dark'}
                     onClick={handleModalOpen}
                     disabled={isButtonDisabled}
+
                 >
                     Add Players
+                    <FontAwesomeIcon icon={faPlus} style={{marginLeft:'12px'}}/>
                 </Button>
 
                 {isButtonDisabled && (
-                    <WarningAlert size="sm" message="Cannot Add More Than 3 Players"/>
+                    <WarningAlert size="sm" message="Cannot Compare More Than 3 Players"/>
                 )}
             </div>
 

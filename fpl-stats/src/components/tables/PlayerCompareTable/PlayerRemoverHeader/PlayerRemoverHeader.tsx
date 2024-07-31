@@ -1,5 +1,8 @@
+import { Button } from 'react-bootstrap';
 import { useAppDispatch } from '../../../../hooks/redux-hooks';
 import { removePlayerFromCompare } from '../../../../store/slices/compareSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface PlayerRemoverHeaderProps {
     playerId: number;
@@ -16,8 +19,16 @@ export function PlayerRemoverHeader({playerId, playerName}:PlayerRemoverHeaderPr
 
     return (
         <div className="custom-header">
-            <span>{playerName}</span>
-            <button onClick={handleRemove} className='btn btn-outline-dark btn-sm ms-3' style={{fontSize:'0.6rem'}}>X</button>
+            <Button
+                className='btn-sm border border-0'
+                onClick={handleRemove}
+                variant='outline-dark'
+                >
+                {playerName}
+                <FontAwesomeIcon icon={faTrash} style={{marginLeft:'12px'}}/>
+            </Button>
+            {/* <span>{playerName}</span> */}
+            {/* <button onClick={handleRemove} className='btn btn-outline-dark btn-sm ms-3' style={{fontSize:'0.6rem'}}>X</button> */}
         </div>
     );
 }
