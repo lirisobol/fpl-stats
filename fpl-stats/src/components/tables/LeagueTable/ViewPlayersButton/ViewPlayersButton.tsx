@@ -16,7 +16,7 @@ export const ViewPlayersButtons: React.FC<ViewPlayersButtonsProps> = ({value}:Vi
     }
     
     return (
-        <button onClick={handleTeamClick} className="btn btn-outline-dark btn-sm" >
+        <button onClick={handleTeamClick} className="btn btn-outline-dark btn-sm border-0" >
             Players
             <FontAwesomeIcon icon={faPeopleGroup} className={styles.buttonIcon}/>
         </button>
