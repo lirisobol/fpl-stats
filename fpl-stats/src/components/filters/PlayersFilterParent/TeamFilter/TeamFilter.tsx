@@ -12,7 +12,7 @@ export function TeamFilter():JSX.Element {
     }
     return (
         <select value={teamCode} onChange={handleTeamChange} className="form-select">
-            <option key='all-teams' value="0">All Teams</option>
+            <option key='all-teams' value="0">Clubs</option>
             {teams && teams.map(team => (
                 <option key={team.code} value={team.code}>
                     {team.name}
