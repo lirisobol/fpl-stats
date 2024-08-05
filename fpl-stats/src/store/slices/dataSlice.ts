@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { dataFetcher } from "../../services/DataFetcher";
-import { GeneralInformation } from "../../models/general-info/GeneralInformation";
+import GeneralInformation from "../../models/general-info/GeneralInformation";
 
 
 interface GeneralInformationState {
@@ -40,6 +40,8 @@ const generalInformationSlice = createSlice({
             .addCase(fetchGeneralInformation.fulfilled, (state,action) => {
                 state.status = 'succeeded';
                 state.data = action.payload;
+                console.log('redux state:',state.data);
+                
             })
             .addCase(fetchGeneralInformation.rejected, (state, action) => {
                 state.status = 'failed';

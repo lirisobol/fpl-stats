@@ -1,7 +1,7 @@
 import { CellClassParams, ColDef, ValueFormatterParams, ValueGetterParams } from "ag-grid-community";
-import { PlayerData, PlayerStat, playerStatsModel } from "../../models/Player";
 import { PlayerRemoverHeader } from "./PlayerCompareTable/PlayerRemoverHeader/PlayerRemoverHeader";
 import { ViewPlayersButtons } from "./LeagueTable/ViewPlayersButton/ViewPlayersButton";
+import { PlayerData, PlayerStat, playerStatsModel } from "../../models/general-info/Player";
 
 interface RowData {
     stat: string;
