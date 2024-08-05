@@ -1,4 +1,4 @@
-import { GeneralInformation } from "../models/GeneralInformation";
+import { GeneralInformation } from "../models/general-info/GeneralInformation";
 import { appConfig } from "../utils/appConfig";
 import { localServerApi, netlifyProxyApi } from "../utils/axiosConfig";
 

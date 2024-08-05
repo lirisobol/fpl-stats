@@ -10,7 +10,7 @@ import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
 import useFilteredColumns from "../../../hooks/useFilteredColumns";
 import { tableConfig } from '../TableConfig';
 import { LoadingSpinner } from '../../shared/LoadingSpinner/LoadingSpinner';
-import FiltersCollapse from '../../filters/FiltersCollapse/FiltersCollapse';
+// import FiltersCollapse from '../../filters/FiltersCollapse/FiltersCollapse';
 
 export function PlayersTable(): JSX.Element {
     const [loading, setLoading] = useState(false);

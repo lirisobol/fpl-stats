@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { dataFetcher } from "../../services/DataFetcher";
-import { GeneralInformation } from "../../models/GeneralInformation";
+import { GeneralInformation } from "../../models/general-info/GeneralInformation";
 
 
 interface GeneralInformationState {

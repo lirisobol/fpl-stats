@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { PlayerData } from "../../models/Player";
+import { PlayerData } from "../../models/general-info/Player";
 
 interface CompareState {
     selectedPlayers: PlayerData[];

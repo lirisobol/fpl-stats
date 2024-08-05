@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import 'ag-grid-community/styles/ag-grid.css'; 
 import 'ag-grid-community/styles/ag-theme-quartz.css';
-import { PlayerData} from "../../../models/Player";
 import { ColDef } from "ag-grid-community";
 import { tableConfig } from "../TableConfig";
 import { LoadingSpinner } from "../../shared/LoadingSpinner/LoadingSpinner";
 import { NoRowsComponent } from "./NoRowsComponent/NoRowsComponent";
+import { PlayerData } from "../../../models/general-info/Player";
 
 
 /* 
