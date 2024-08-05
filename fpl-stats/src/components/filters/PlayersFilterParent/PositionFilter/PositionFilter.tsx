@@ -17,7 +17,7 @@ export function PositionFilter(): JSX.Element {
                 value='0'
                 id='all-positions'
             >
-                All Positions
+                Position
             </option>
             <option
                 key='goalkeepers'
