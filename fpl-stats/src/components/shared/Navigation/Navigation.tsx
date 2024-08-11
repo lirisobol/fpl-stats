@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Offcanvas } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faPeopleGroup, faPeopleArrows, faPerson, faChevronRight ,faFutbol} from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faPeopleGroup, faPeopleArrows, faPerson, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import LogoIcon from '../Logo';
 
 export function Navigation() {
@@ -53,11 +53,6 @@ export function Navigation() {
                         <Nav.Link className={styles.NavLink} as={Link} to="/compare" onClick={handleClose}>
                             <FontAwesomeIcon icon={faPeopleArrows} className={styles.NavIcon} />
                             Compare
-                            <FontAwesomeIcon icon={faChevronRight} className={styles.NavArrowIcon} />
-                        </Nav.Link>
-                        <Nav.Link className={styles.NavLink} as={Link} to="/fixtures" onClick={handleClose}>
-                            <FontAwesomeIcon icon={faFutbol} className={styles.NavIcon} />
-                            Fixtures 
                             <FontAwesomeIcon icon={faChevronRight} className={styles.NavArrowIcon} />
                         </Nav.Link>
                     </Nav>
