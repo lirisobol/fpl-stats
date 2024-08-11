@@ -9,7 +9,7 @@
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx"],
+    "include": ["src/**/*.ts", "src/**/*.tsx", "src/models/general-info/Fixture.ts"],
     "exclude": ["node_modules"]
   }
   

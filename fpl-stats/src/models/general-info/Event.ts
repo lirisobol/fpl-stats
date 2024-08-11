@@ -1,4 +1,4 @@
-import { Fixture } from "../FixtureModel";
+import {Fixture} from "./Fixture"
 
 export interface Event {
     id:number; // event id

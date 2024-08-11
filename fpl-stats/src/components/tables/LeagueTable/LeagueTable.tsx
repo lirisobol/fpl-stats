@@ -7,7 +7,6 @@ import { ColDef } from "ag-grid-community";
 import { tableConfig } from "../TableConfig";
 import { LoadingSpinner } from "../../shared/LoadingSpinner/LoadingSpinner";
 import { Team } from "../../../models/general-info/Team";
-import { dataFetcher } from "../../../services/DataFetcher";
 
 interface LeagueTableProps {
     teams: Team[];
@@ -17,12 +16,8 @@ export function LeagueTable({ teams }: LeagueTableProps): JSX.Element {
     const { getRowHeight, onGridReady, onFirstDataRendered, onGridSizeChanged } = useDynamicRowHeight();
     const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
 
+    
 
-    const fetchFixturesTest = async() => {
-        const data = await dataFetcher.getFixtures();
-        console.log(data);
-        
-    }
 
     useEffect(() => {
         console.log(teams);
@@ -33,7 +28,6 @@ export function LeagueTable({ teams }: LeagueTableProps): JSX.Element {
     }, []); 
     return (
         <div className="ag-theme-quartz" style={{ height: 600, width: '100%', fontSize: "1rem" }}>
-            <button onClick={fetchFixturesTest}>Get Fixtures</button>
             <AgGridReact 
                 loading={loading}
                 loadingOverlayComponent={LoadingSpinner}
