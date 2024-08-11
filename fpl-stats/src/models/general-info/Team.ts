@@ -1,4 +1,4 @@
-import { Fixture } from "./Fixture.ts";
+import { Fixture } from "./Fixture";
 
 export interface Team {
     code: number;

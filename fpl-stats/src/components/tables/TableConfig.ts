@@ -2,13 +2,16 @@ import { CellClassParams, ColDef, ValueFormatterParams, ValueGetterParams } from
 import { PlayerRemoverHeader } from "./PlayerCompareTable/PlayerRemoverHeader/PlayerRemoverHeader";
 import { ViewPlayersButtons } from "./LeagueTable/ViewPlayersButton/ViewPlayersButton";
 import { PlayerData, PlayerStat, playerStatsModel } from "../../models/general-info/Player";
+import { Team } from "../../models/general-info/Team";
 
 interface RowData {
     stat: string;
     [key: string]: unknown; // This allows for dynamic keys and values
 }
 class TableConfig {
-    // Default Setups
+// Default Setups ->
+// -----------------------------------------------------------------------------------------------------------------------------------------
+
     public autoSizeStrategy = {
         type: 'fitGridWidth' as const,
         defaultMinWidth: 75,
@@ -28,6 +31,8 @@ class TableConfig {
         resizable: true,
         flex:1
     };
+// Players Table Defs -> 
+// -----------------------------------------------------------------------------------------------------------------------------------------
     // Players Table Columns Config, used in <PlayersTable> & <PlayersTableSelectable>
     public generatePlayersColumnDefs = (filteredColumns: PlayerStat[]): ColDef[] => {
         const columnDefs = filteredColumns.map(stat => {
@@ -105,6 +110,8 @@ class TableConfig {
     
         return columnDefs;
     };
+/* Compare Table Defs -> 
+// -----------------------------------------------------------------------------------------------------------------------------------------
     // Column and Row definitions used in <PlayersCompareTable>
     /* todo -> 
     1. conditional coloring ->
@@ -120,7 +127,7 @@ class TableConfig {
                 headerName: `${player.first_name} ${player.second_name}`,
                 field: `player${index}`,
                 flex: 1,
-                cellClassRules: this.getCellClassRules(selectedPlayers.length),
+                cellClassRules: this.getCompareCellClassRules(selectedPlayers.length),
                 suppressHeaderFilterButton: true,
                 sortable: false,
                 headerComponent: PlayerRemoverHeader,
@@ -144,32 +151,8 @@ class TableConfig {
                 return row;
             });
     };
-    // League Columns definitions, used in <LeagueTable>
-    public generateLeagueColDef = () => {
-        const columns: ColDef[] = [
-            { headerName: 'ID', field: 'id' },
-            { headerName: 'Name', field: 'name' },
-            { 
-                headerName: 'Players', 
-                field: 'code', 
-                cellRenderer: ViewPlayersButtons // Use the string name of the component
-            }
-        ];
-        return columns
-    };
-    // Helpers
-    // concat first and second names as Player Name field
-    private getPlayerNameColumn = (): ColDef => ({
-        headerName: 'Player Name',
-        field: 'playerName',
-        valueGetter: (params: ValueGetterParams<PlayerData>) => {
-            const firstName = params.data?.first_name || '';
-            const secondName = params.data?.second_name || '';
-            return `${firstName} ${secondName}`;
-        },
-    });
     // Conditional Coloring for comparison table
-    private getCellClassRules = (numPlayers: number) => {
+    private getCompareCellClassRules = (numPlayers: number) => {
         if(numPlayers === 2) return {
             // For two-player comparison
             'compare-high': (params: CellClassParams) => {
@@ -235,7 +218,77 @@ class TableConfig {
             }
         }
     };
+// League Table Defs -> 
+// -----------------------------------------------------------------------------------------------------------------------------------------
+    public generateLeagueColDef = (teams: Team[]): ColDef[] => {
+        const columns: ColDef[] = [
+            { headerName: "Team", field: "name" },
+            { headerName: "Points", field: "points" },
+            { headerName: "Position", field: "position" },
+            {
+                headerName: "Game 1",
+                valueGetter: (params) => {
+                    return this.getOpponentName(params.data, 0, teams);
+                }
+            },
+            {
+                headerName: "Game 2",
+                valueGetter: (params) => {
+                    return this.getOpponentName(params.data, 1, teams);
+                }
+            },
+            {
+                headerName: "Game 3",
+                valueGetter: (params) => {
+                    return this.getOpponentName(params.data, 2, teams);
+                }
+            },
+            {
+                headerName: "Game 4",
+                valueGetter: (params) => {
+                    return this.getOpponentName(params.data, 3, teams);
+                }
+            },
+            {
+                headerName: "Game 5",
+                valueGetter: (params) => {
+                    return this.getOpponentName(params.data, 4, teams);
+                }
+            },
+            { headerName: 'Players', field: 'code', cellRenderer: ViewPlayersButtons }
+        ];
     
+        return columns;
+    };
+    //  League table coloring rules ->
+    private getLeagueCellClassRules = () => {}
 
+
+
+// Helpers ->
+// -----------------------------------------------------------------------------------------------------------------------------------------
+    // Helper function to get opponent name
+    public getOpponentName(team: Team, gameIndex: number, teams: Team[]): string {
+        if (team.next_5_games && team.next_5_games.length > gameIndex) {
+            const game = team.next_5_games[gameIndex];
+            const opponentId = team.id === game.team_h ? game.team_a : game.team_h;
+            return this.getTeamShortNameById(opponentId, teams);
+        }
+        return ""; // Return an empty string if no game or invalid index
+    }
+    public getTeamShortNameById(teamId: number, teams: Team[]): string {
+        const team = teams.find(team => team.id === teamId);
+        return team ? team.short_name : 'Unknown';
+    }
+    // concat first and second names as Player Name field
+    private getPlayerNameColumn = (): ColDef => ({
+        headerName: 'Player Name',
+        field: 'playerName',
+        valueGetter: (params: ValueGetterParams<PlayerData>) => {
+            const firstName = params.data?.first_name || '';
+            const secondName = params.data?.second_name || '';
+            return `${firstName} ${secondName}`;
+        },
+    });
 }
 export const tableConfig = new TableConfig();

@@ -26,6 +26,8 @@ class DataFetcher {
                     event.fixtures = fixtures.filter(fixture => fixture.event === event.id);
                 });
                 this.getNextGamesForTeam(generalInfo);
+                console.log(generalInfo);
+                
                 return generalInfo.toPlainObject();
             } 
             catch (error) {
@@ -47,7 +49,6 @@ class DataFetcher {
         if(appConfig.env === "dev") {
             try {
                 const response = await localServerApi.get<Fixture[]>('fixtures');
-                console.log('Fixtures API Response:', response.data);
                 return response.data;
             } 
             catch (error) {
@@ -58,7 +59,6 @@ class DataFetcher {
         else {
             try {
                 const response = await netlifyProxyApi.get('fixtures');
-                console.log('API Response:', response.data);
                 return response.data;
             } 
             catch (error) {
@@ -89,7 +89,6 @@ class DataFetcher {
                 });
     
                 team.next_5_games = teamUpcomingFixtures.slice(0, 5);
-                console.log(`Team ${team.name} next 5 games:`, team.next_5_games);
             });
         }
     }

@@ -16,13 +16,10 @@ export function LeagueTable({ teams }: LeagueTableProps): JSX.Element {
     const { getRowHeight, onGridReady, onFirstDataRendered, onGridSizeChanged } = useDynamicRowHeight();
     const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
 
-    
-
-
     useEffect(() => {
         console.log(teams);
         
-        const initialColumnDefs = tableConfig.generateLeagueColDef();
+        const initialColumnDefs = tableConfig.generateLeagueColDef(teams);
         setColumnDefs(initialColumnDefs);
         setLoading(false)
     }, []); 
