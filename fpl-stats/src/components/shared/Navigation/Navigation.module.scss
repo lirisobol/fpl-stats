@@ -29,13 +29,31 @@
     font-size: 1rem;
     font-weight: 200;
     @media(min-width:$breakpoint-xs) {
+        font-size: 2rem;
+    }
+    @media(min-width:$breakpoint-lg) {
         font-size: 1rem;
     }
 
     .NavIcon {
-        width: 20px;
+        width: 15px;
         display: inline-block;
         text-align: center;
-        margin-right: 12px;
+        margin: 12px;
+        @media(min-width:$breakpoint-xs) {
+            margin: 15px 10px;
+        }
+        @media(min-width:$breakpoint-lg) {
+            margin: 5px 12px;
+        }
+    }
+    .NavArrowIcon {
+        @media(min-width:$breakpoint-xs) {
+            width: 10px;
+            margin: 5px 10%;
+        }
+        @media(min-width:$breakpoint-lg) {
+            visibility: hidden;
+        }
     }
 }
