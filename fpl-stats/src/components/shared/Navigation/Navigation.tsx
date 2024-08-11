@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Offcanvas } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faPeopleGroup, faFutbol, faPeopleArrows, faPerson } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faPeopleGroup, faPeopleArrows, faPerson, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import LogoIcon from '../Logo';
 
 export function Navigation() {
@@ -37,23 +37,28 @@ export function Navigation() {
                     <Nav className='me-auto '>
                         <Nav.Link className={styles.NavLink} as={Link} to="/" onClick={handleClose}>
                             <FontAwesomeIcon icon={faHouse} className={styles.NavIcon} />
-                            Home
+                            Home 
+                            <FontAwesomeIcon icon={faChevronRight} className={styles.NavArrowIcon} />
                         </Nav.Link>
                         <Nav.Link className={styles.NavLink} as={Link} to="/teams" onClick={handleClose}>
                             <FontAwesomeIcon icon={faPeopleGroup} className={styles.NavIcon} />
                             Teams
+                            <FontAwesomeIcon icon={faChevronRight} className={styles.NavArrowIcon} />
                         </Nav.Link>
                         <Nav.Link className={styles.NavLink} as={Link} to="/players" onClick={handleClose}>
                             <FontAwesomeIcon icon={faPerson} className={styles.NavIcon} />
                             Players
+                            <FontAwesomeIcon icon={faChevronRight} className={styles.NavArrowIcon} />
                         </Nav.Link>
                         <Nav.Link className={styles.NavLink} as={Link} to="/compare" onClick={handleClose}>
                             <FontAwesomeIcon icon={faPeopleArrows} className={styles.NavIcon} />
                             Compare
+                            <FontAwesomeIcon icon={faChevronRight} className={styles.NavArrowIcon} />
                         </Nav.Link>
                         {/* <Nav.Link className={styles.NavLink} as={Link} to="/fixtures" onClick={handleClose}>
                             <FontAwesomeIcon icon={faFutbol} className={styles.NavIcon} />
-                            Fixtures
+                            Fixtures 
+                            <FontAwesomeIcon icon={faChevronRight} className={styles.NavArrowIcon} />
                         </Nav.Link> */}
                     </Nav>
                 </Offcanvas.Body>
