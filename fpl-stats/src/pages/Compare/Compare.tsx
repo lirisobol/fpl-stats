@@ -4,11 +4,11 @@ import { Button} from 'react-bootstrap'; // Import Alert for messaging
 import { PlayerSearchModal } from '../../components/modals/PlayerSearchModal/PlayerSearchModal';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { PlayerCompareTable } from '../../components/tables/PlayerCompareTable/PlayerCompareTable';
-import { PlayerData } from '../../models/Player';
 import { WarningAlert } from '../../components/shared/alerts/WarningAlert';
 import { LoadingSpinner } from '../../components/shared/LoadingSpinner/LoadingSpinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { PlayerData } from '../../models/general-info/Player';
 
 export function Compare(): JSX.Element {
     const status = useAppSelector((state) => state.generalInformation.status);

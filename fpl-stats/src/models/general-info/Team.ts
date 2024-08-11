@@ -1,3 +1,5 @@
+import { Fixture } from "./Fixture";
+
 export interface Team {
     code: number;
     draw: number;
@@ -20,4 +22,5 @@ export interface Team {
     strength_defence_home: number;
     strength_defence_away: number;
     pulse_id: number;
+    next_5_games: Fixture[]
 }

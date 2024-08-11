@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useAppSelector } from './redux-hooks';
-import { PlayerStat, playerStatsModel } from '../models/Player';
+import { PlayerStat, playerStatsModel } from '../models/general-info/Player';
 const useFilteredColumns = (): PlayerStat[] => {
     const columnGroup = useAppSelector((state) => state.filters.columnGroup);
 

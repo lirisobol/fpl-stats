@@ -9,7 +9,7 @@ export function Teams(): JSX.Element {
     const status = useAppSelector((state) => state.generalInformation.status);
     const error = useAppSelector((state) => state.generalInformation.error);
     const teams = useAppSelector((state) => state.generalInformation.data?.teams || []);
-
+    
     return (
         <div>
             {status === 'loading' && <LoadingSpinner />}
