@@ -56,18 +56,27 @@ class TableConfig {
                             return value ? value.toFixed(1) : '';
                         },
                         cellClassRules: {
-                            'table-high-rank': (params: CellClassParams<PlayerData>) => {
+                            'table-very-high-rank': (params: CellClassParams<PlayerData>) => {
                                 const value = params.value as number;
                                 return value < 5.5;
                             },
+                            'table-high-rank': (params: CellClassParams<PlayerData>) => {
+                                const value = params.value as number;
+                                return value >= 5.5 && value < 7.5;
+                            },
                             'table-mid-rank': (params: CellClassParams<PlayerData>) => {
                                 const value = params.value as number;
-                                return value >= 5.5 && value < 10.0;
+                                return value >= 7.5 && value < 10.0;
                             },
                             'table-low-rank': (params: CellClassParams<PlayerData>) => {
                                 const value = params.value as number;
-                                return value >= 10.0;
+                                return value >= 10.0 && value < 12.5;
                             },
+                            'table-very-low-rank': (params: CellClassParams<PlayerData>) => {
+                                const value = params.value as number;
+                                return value >= 12.5;
+                            },
+
                         }
                     };
                 case "Selected":
@@ -77,17 +86,25 @@ class TableConfig {
                         field: stat.name,
                         width:75,
                         cellClassRules: {
-                            'table-high-rank': (params: CellClassParams<PlayerData>) => {
+                            'table-very-high-rank': (params: CellClassParams<PlayerData>) => {
                                 const rankValue = params.data?.[stat.rank as keyof PlayerData] as number;
                                 return rankValue <= 50;
                             },
+                            'table-high-rank': (params: CellClassParams<PlayerData>) => {
+                                const rankValue = params.data?.[stat.rank as keyof PlayerData] as number;
+                                return rankValue >= 50 && rankValue < 100;
+                            },
                             'table-mid-rank': (params: CellClassParams<PlayerData>) => {
                                 const rankValue = params.data?.[stat.rank as keyof PlayerData] as number;
-                                return rankValue > 50 && rankValue <= 150;
+                                return rankValue >= 100 && rankValue < 150;
                             },
                             'table-low-rank': (params: CellClassParams<PlayerData>) => {
                                 const rankValue = params.data?.[stat.rank as keyof PlayerData] as number;
-                                return rankValue > 150;
+                                return rankValue >= 150 && rankValue < 200;
+                            },
+                            'table-very-low-rank': (params: CellClassParams<PlayerData>) => {
+                                const rankValue = params.data?.[stat.rank as keyof PlayerData] as number;
+                                return rankValue > 200;
                             },
                         }
                     };
@@ -220,48 +237,105 @@ class TableConfig {
     };
 // League Table Defs -> 
 // -----------------------------------------------------------------------------------------------------------------------------------------
-    public generateLeagueColDef = (teams: Team[]): ColDef[] => {
-        const columns: ColDef[] = [
-            { headerName: "Team", field: "name" },
-            { headerName: "Points", field: "points" },
-            { headerName: "Position", field: "position" },
-            {
-                headerName: "Game 1",
-                valueGetter: (params) => {
-                    return this.getOpponentName(params.data, 0, teams);
-                }
+public generateLeagueColDef = (teams: Team[]): ColDef[] => {
+    const columns: ColDef[] = [
+        { headerName: "Team", field: "name" },
+        { headerName: "Points", field: "points" },
+        { headerName: "Position", field: "position" },
+        // Define game columns with cell class rules
+        ...this.generateGameColumnsWithRules(teams, 5), // Assuming 5 games to generate
+        { headerName: 'Players', field: 'code', cellRenderer: ViewPlayersButtons}
+    ];
+
+    return columns;
+};
+
+private generateGameColumnsWithRules = (teams: Team[], numGames: number): ColDef[] => {
+    return Array.from({ length: numGames }, (_, i) => ({
+        headerName: `Game ${i + 1}`,
+        valueGetter: (params) => {
+            return this.getOpponentName(params.data, i, teams);
+        },
+        cellClassRules: {
+            'table-very-high-rank': (params) => {
+                return this.determineStrength(params.data, i, teams) === 'very-high';
             },
-            {
-                headerName: "Game 2",
-                valueGetter: (params) => {
-                    return this.getOpponentName(params.data, 1, teams);
-                }
+            'table-high-rank': (params) => {
+                return this.determineStrength(params.data, i, teams) === 'high';
             },
-            {
-                headerName: "Game 3",
-                valueGetter: (params) => {
-                    return this.getOpponentName(params.data, 2, teams);
-                }
+            'table-mid-rank': (params) => {
+                return this.determineStrength(params.data, i, teams) === 'mid';
             },
-            {
-                headerName: "Game 4",
-                valueGetter: (params) => {
-                    return this.getOpponentName(params.data, 3, teams);
-                }
+            'table-low-rank': (params) => {
+                return this.determineStrength(params.data, i, teams) === 'low';
             },
-            {
-                headerName: "Game 5",
-                valueGetter: (params) => {
-                    return this.getOpponentName(params.data, 4, teams);
-                }
-            },
-            { headerName: 'Players', field: 'code', cellRenderer: ViewPlayersButtons }
-        ];
+            'table-very-low-rank': (params) => {
+                return this.determineStrength(params.data, i, teams) === 'very-low';
+            }
+        }
+    }));
+};
+
+private determineStrength = (team: Team, gameIndex: number, teams: Team[]): 'very-high' | 'high' | 'mid' | 'low' | 'very-low' => {
+    if (team.next_5_games && team.next_5_games.length > gameIndex) {
+        const game = team.next_5_games[gameIndex];
+        const currentTeamDifficulty = team.id === game.team_h ? game.team_h_difficulty : game.team_a_difficulty;
+        const opponentId = team.id === game.team_h ? game.team_a : game.team_h;
+        const opponent = teams.find(t => t.id === opponentId);
+        const opponentDifficulty = opponent ? (opponent.id === game.team_h ? game.team_h_difficulty : game.team_a_difficulty) : 0;
+
+        if(currentTeamDifficulty > opponentDifficulty && currentTeamDifficulty - opponentDifficulty > 1) return 'very-low'
+        if (currentTeamDifficulty > opponentDifficulty) return 'low';
+        if (currentTeamDifficulty === opponentDifficulty) return 'mid';
+        if(currentTeamDifficulty < opponentDifficulty && opponentDifficulty - currentTeamDifficulty > 1) return 'very-high'
+        if (currentTeamDifficulty < opponentDifficulty) return 'high';
+    }
+    return 'mid'; // Default case
+};
+    // public generateLeagueColDef = (teams: Team[]): ColDef[] => {
+    //     const columns: ColDef[] = [
+    //         { headerName: "Team", field: "name" },
+    //         { headerName: "Points", field: "points" },
+    //         { headerName: "Position", field: "position" },
+    //         {
+    //             headerName: "Game 1",
+    //             valueGetter: (params) => {
+    //                 return this.getOpponentName(params.data, 0, teams);
+    //             },
+    //         },
+    //         {
+    //             headerName: "Game 2",
+    //             valueGetter: (params) => {
+    //                 return this.getOpponentName(params.data, 1, teams);
+    //             }
+    //         },
+    //         {
+    //             headerName: "Game 3",
+    //             valueGetter: (params) => {
+    //                 return this.getOpponentName(params.data, 2, teams);
+    //             }
+    //         },
+    //         {
+    //             headerName: "Game 4",
+    //             valueGetter: (params) => {
+    //                 return this.getOpponentName(params.data, 3, teams);
+    //             }
+    //         },
+    //         {
+    //             headerName: "Game 5",
+    //             valueGetter: (params) => {
+    //                 return this.getOpponentName(params.data, 4, teams);
+    //             }
+    //         },
+    //         { headerName: 'Players', field: 'code', cellRenderer: ViewPlayersButtons }
+    //     ];
     
-        return columns;
-    };
-    //  League table coloring rules ->
-    private getLeagueCellClassRules = () => {}
+    //     return columns;
+    // };
+    // //  League table coloring rules ->
+    // private getLeagueCellClassRules = () => {
+        
+    // }
 
 
 

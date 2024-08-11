@@ -1,23 +1,30 @@
 @import "../variables.scss";
-
+.table-very-low-rank {
+    background-color: $table-very-low;
+}
 .table-low-rank {
     background-color: $table-low;
-    color: white;
 }
 .table-mid-rank {
-    background-color: $table-mid;
+    background-color: $table-mid-alt;
 }
 .table-high-rank {
     background-color: $table-high;
 }
+.table-very-high-rank {
+    background-color: $table-very-high;
+}
+
+
+
 .compare-high {
-    background-color: $table-high;
+    background-color: $table-very-high;
 }
 .compare-equal {
     background-color: $table-mid-alt;
 }
 .compare-mid {
-    background-color: $table-mid;
+    background-color: $table-high;
 }
 .compare-low {
     background-color: $table-low;
