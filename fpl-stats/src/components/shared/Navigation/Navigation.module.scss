@@ -42,9 +42,11 @@
         margin: 12px;
         @media(min-width:$breakpoint-xs) {
             margin: 15px 10px;
+            visibility: hidden;
         }
         @media(min-width:$breakpoint-lg) {
             margin: 5px 12px;
+            visibility: visible;
         }
     }
     .NavArrowIcon {
