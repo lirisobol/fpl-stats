@@ -239,12 +239,12 @@ class TableConfig {
 // -----------------------------------------------------------------------------------------------------------------------------------------
 public generateLeagueColDef = (teams: Team[]): ColDef[] => {
     const columns: ColDef[] = [
-        { headerName: "Team", field: "name" },
-        { headerName: "Points", field: "points" },
-        { headerName: "Position", field: "position" },
+        { headerName: "Team", field: "name",minWidth:100},
+        { headerName: "Points", field: "points",minWidth:75 },
+        { headerName: "Position", field: "position" ,minWidth:75 },
         // Define game columns with cell class rules
         ...this.generateGameColumnsWithRules(teams, 5), // Assuming 5 games to generate
-        { headerName: 'Players', field: 'code', cellRenderer: ViewPlayersButtons}
+        { headerName: 'Players', field: 'code', cellRenderer: ViewPlayersButtons,minWidth:75 }
     ];
 
     return columns;
@@ -253,6 +253,7 @@ public generateLeagueColDef = (teams: Team[]): ColDef[] => {
 private generateGameColumnsWithRules = (teams: Team[], numGames: number): ColDef[] => {
     return Array.from({ length: numGames }, (_, i) => ({
         headerName: `Game ${i + 1}`,
+        minWidth: 75,
         valueGetter: (params) => {
             return this.getOpponentName(params.data, i, teams);
         },
@@ -292,53 +293,6 @@ private determineStrength = (team: Team, gameIndex: number, teams: Team[]): 'ver
     }
     return 'mid'; // Default case
 };
-    // public generateLeagueColDef = (teams: Team[]): ColDef[] => {
-    //     const columns: ColDef[] = [
-    //         { headerName: "Team", field: "name" },
-    //         { headerName: "Points", field: "points" },
-    //         { headerName: "Position", field: "position" },
-    //         {
-    //             headerName: "Game 1",
-    //             valueGetter: (params) => {
-    //                 return this.getOpponentName(params.data, 0, teams);
-    //             },
-    //         },
-    //         {
-    //             headerName: "Game 2",
-    //             valueGetter: (params) => {
-    //                 return this.getOpponentName(params.data, 1, teams);
-    //             }
-    //         },
-    //         {
-    //             headerName: "Game 3",
-    //             valueGetter: (params) => {
-    //                 return this.getOpponentName(params.data, 2, teams);
-    //             }
-    //         },
-    //         {
-    //             headerName: "Game 4",
-    //             valueGetter: (params) => {
-    //                 return this.getOpponentName(params.data, 3, teams);
-    //             }
-    //         },
-    //         {
-    //             headerName: "Game 5",
-    //             valueGetter: (params) => {
-    //                 return this.getOpponentName(params.data, 4, teams);
-    //             }
-    //         },
-    //         { headerName: 'Players', field: 'code', cellRenderer: ViewPlayersButtons }
-    //     ];
-    
-    //     return columns;
-    // };
-    // //  League table coloring rules ->
-    // private getLeagueCellClassRules = () => {
-        
-    // }
-
-
-
 // Helpers ->
 // -----------------------------------------------------------------------------------------------------------------------------------------
     // Helper function to get opponent name
