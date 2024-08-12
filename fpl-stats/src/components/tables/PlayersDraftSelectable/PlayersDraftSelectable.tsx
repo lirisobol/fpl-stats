@@ -4,13 +4,13 @@ import { AgGridReact } from "ag-grid-react";
 import { useEffect, useState, useMemo, useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux-hooks";
 import { useDynamicRowHeight } from "../../../hooks/useDynamicRowHeight";
-import { PlayersFilter } from "../../filters/PlayersFilterParent/PlayersFilter";
 import { ColDef, SelectionChangedEvent } from "ag-grid-community";
 import { tableConfig } from "../TableConfig";
 import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
-import useFilteredColumns from "../../../hooks/useFilteredColumns";
 import { LoadingSpinner } from '../../shared/LoadingSpinner/LoadingSpinner';
 import {addDraftPlayer} from "../../../store/slices/draftSlice";
+import { DraftPlayersFilter } from '../../filters/DraftPlayersFilterParent/DraftPlayersFilter';
+import useDraftFilteredColumns from '../../../hooks/useDraftFilteredColumns';
 
 interface PlayersDraftSelectableProps {
     onHide: () => void;
@@ -19,11 +19,11 @@ interface PlayersDraftSelectableProps {
 export function PlayersDraftSelectable({ onHide,position}: PlayersDraftSelectableProps): JSX.Element {
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState(false);
-    const teamCode = useAppSelector((state) => state.filters.teamCode);
-    const searchQuery = useAppSelector((state) => state.filters.searchQuery);
+    const teamCode = useAppSelector((state) => state.draft.filters.teamCode);
+    const searchQuery = useAppSelector((state) => state.draft.filters.searchQuery);
 
     const players = useFilteredPlayers(teamCode, position, searchQuery);
-    const filteredColumns = useFilteredColumns();
+    const filteredColumns = useDraftFilteredColumns();
 
     const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
 
@@ -49,7 +49,7 @@ export function PlayersDraftSelectable({ onHide,position}: PlayersDraftSelectabl
     
     return (
         <div>
-            <PlayersFilter />
+            <DraftPlayersFilter />
             <div className="ag-theme-quartz" style={{height: 600, width: '100%', fontSize: "0.8rem"}}>
                 <AgGridReact 
                     loading={loading}

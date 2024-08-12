@@ -68,16 +68,16 @@ const draftSlice = createSlice({
             state.substitutes = [];
         },
         // Filters
-        setPositionType(state, action:PayloadAction<number>) {
+        setDraftPositionType(state, action:PayloadAction<number>) {
             state.filters.positionType = action.payload;
         },
-        setTeam(state, action:PayloadAction<number>) {
+        setDraftTeam(state, action:PayloadAction<number>) {
             state.filters.teamCode = action.payload;
         },
-        setSearchQuery(state, action:PayloadAction<string>) {
+        setDraftSearchQuery(state, action:PayloadAction<string>) {
             state.filters.searchQuery = action.payload;
         },
-        setColumnGroup(state, action:PayloadAction<string>) {
+        setDraftColumnGroup(state, action:PayloadAction<string>) {
             state.filters.columnGroup = action.payload;
         }
     }
@@ -90,6 +90,10 @@ export const {
     addDraftSubstitute,
     removeDraftSubstitute,
     swapDraftPositions,
-    clearDraft
+    clearDraft,
+    setDraftPositionType,
+    setDraftTeam,
+    setDraftSearchQuery,
+    setDraftColumnGroup
 } = draftSlice.actions;
 export default draftSlice.reducer;
