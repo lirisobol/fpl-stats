@@ -9,11 +9,5 @@
     gap: 5rem;
     align-items: space-evenly;
 
-    .GoalKeeper, .Defenders, .Midfielders, .Attackers, .Substitutes {
-        
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
-    }
+
 }

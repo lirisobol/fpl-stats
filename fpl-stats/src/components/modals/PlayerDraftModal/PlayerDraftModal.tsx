@@ -4,10 +4,11 @@ import { PlayersDraftSelectable } from "../../tables/PlayersDraftSelectable/Play
 interface PlayerDraftModalProps {
     show: boolean;
     onHide: () => void;
-    position:number
+    positionType:number;
+    arrayIndex:number;
 }
 
-export function PlayerDraftModal({ show, onHide, position}: PlayerDraftModalProps) {
+export function PlayerDraftModal({ show, onHide, positionType, arrayIndex}: PlayerDraftModalProps) {
     return (
         <Modal
             className="p-1"
@@ -24,7 +25,7 @@ export function PlayerDraftModal({ show, onHide, position}: PlayerDraftModalProp
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <PlayersDraftSelectable onHide={onHide} position={position}/>
+                <PlayersDraftSelectable onHide={onHide} positionType={positionType} arrayIndex={arrayIndex}/>
             </Modal.Body>
             <Modal.Footer className="justify-content-center">
                 <Button onClick={onHide} variant="dark" style={{width:"15%"}}>Close</Button>

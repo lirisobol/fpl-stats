@@ -15,7 +15,7 @@ interface DraftState {
 
 const initialState: DraftState = {
     formation: '4-3-3', // Default formation
-    players: new Array(11).fill(null), // Initialize with null for each expected position
+    players: new Array(11).fill(null),
     substitutes: [], // Substitute bench
     filters: {
         positionType: 0,
@@ -33,12 +33,17 @@ const draftSlice = createSlice({
             state.formation = action.payload;
         },
         addDraftPlayer(state, action: PayloadAction<{ player: PlayerData, position: number }>) {
-                  
+            // Ensure the position is within the valid range
+            if (action.payload.position >= 0 && action.payload.position < state.players.length) {
+                state.players[action.payload.position] = action.payload.player;
+                console.log('added player:', action.payload.player);
+                
+            }
         },
         removeDraftPlayer(state, action: PayloadAction<number>) {
-            // Remove a player from a specific position
-            if (state.players.length > action.payload) {
-                state.players[action.payload] = null;
+            // Check if the position is within the array bounds
+            if (action.payload >= 0 && action.payload < state.players.length) {
+                state.players[action.payload] = null; // Set the player at this position to null
             }
         },
         addDraftSubstitute(state, action: PayloadAction<PlayerData>) {
@@ -60,7 +65,7 @@ const draftSlice = createSlice({
         },
         clearDraft(state) {
             // Clear all players and substitutes
-            state.players = new Array(10).fill(null);
+            state.players = new Array(11).fill(null);
             state.substitutes = [];
         },
         // Filters

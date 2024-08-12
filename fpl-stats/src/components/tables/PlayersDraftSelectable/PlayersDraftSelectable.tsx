@@ -14,15 +14,18 @@ import useDraftFilteredColumns from '../../../hooks/useDraftFilteredColumns';
 
 interface PlayersDraftSelectableProps {
     onHide: () => void;
-    position:number
+    positionType:number;
+    arrayIndex: number;
 }
-export function PlayersDraftSelectable({ onHide,position}: PlayersDraftSelectableProps): JSX.Element {
+export function PlayersDraftSelectable({ onHide,positionType, arrayIndex}: PlayersDraftSelectableProps): JSX.Element {
+    console.log(positionType);
+    
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState(false);
     const teamCode = useAppSelector((state) => state.draft.filters.teamCode);
     const searchQuery = useAppSelector((state) => state.draft.filters.searchQuery);
 
-    const players = useFilteredPlayers(teamCode, position, searchQuery);
+    const players = useFilteredPlayers(teamCode, positionType, searchQuery);
     const filteredColumns = useDraftFilteredColumns();
 
     const [columnDefs, setColumnDefs] = useState<ColDef[]>([]);
@@ -38,18 +41,18 @@ export function PlayersDraftSelectable({ onHide,position}: PlayersDraftSelectabl
     const memoizedPlayers = useMemo(() => players, [players]);
     const memoizedColumnDefs = useMemo(() => columnDefs, [columnDefs]);
 
-    const onSelectionChanged = useCallback((event:SelectionChangedEvent) => {
+    const onSelectionChanged = useCallback((event: SelectionChangedEvent) => {
         const selectedNode = event.api.getSelectedNodes()[0];
         const selectedData = selectedNode ? selectedNode.data : null;
         if (selectedData) {
+            console.log("Selected data: ", selectedData);
+            console.log("Array index for adding player: ", arrayIndex);
             
-            console.log(selectedData);
-            
-            dispatch(addDraftPlayer(selectedData));
+            dispatch(addDraftPlayer({ player: selectedData, position: arrayIndex }));
             
             onHide();
         }
-    }, [dispatch, onHide]);
+    }, [dispatch, onHide, arrayIndex]); // Update dependency array
     
     return (
         <div>
