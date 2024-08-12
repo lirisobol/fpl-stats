@@ -14,8 +14,8 @@ interface DraftState {
 }
 
 const initialState: DraftState = {
-    formation: "4-3-3", // Default formation
-    players: new Array(10).fill(null), // Initialize with null for each expected position
+    formation: '4-3-3', // Default formation
+    players: new Array(11).fill(null), // Initialize with null for each expected position
     substitutes: [], // Substitute bench
     filters: {
         positionType: 0,
@@ -31,13 +31,9 @@ const draftSlice = createSlice({
     reducers: {
         setDraftFormation(state, action: PayloadAction<string>) {
             state.formation = action.payload;
-            // Handle changes in formation - potentially resetting players or handling differently
         },
         addDraftPlayer(state, action: PayloadAction<{ player: PlayerData, position: number }>) {
-            // Add or update a player in a specific position if that position is currently empty or needs updating
-            if (state.players.length > action.payload.position) {
-                state.players[action.payload.position] = action.payload.player;
-            }            
+                  
         },
         removeDraftPlayer(state, action: PayloadAction<number>) {
             // Remove a player from a specific position

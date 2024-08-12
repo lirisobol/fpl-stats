@@ -42,7 +42,11 @@ export function PlayersDraftSelectable({ onHide,position}: PlayersDraftSelectabl
         const selectedNode = event.api.getSelectedNodes()[0];
         const selectedData = selectedNode ? selectedNode.data : null;
         if (selectedData) {
+            
+            console.log(selectedData);
+            
             dispatch(addDraftPlayer(selectedData));
+            
             onHide();
         }
     }, [dispatch, onHide]);
