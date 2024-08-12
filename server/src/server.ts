@@ -18,6 +18,14 @@ class App {
         res.status(500).send('Error fetching data');
       }
     });
+    this.server.get('/api/fixtures', async (req, res) => {
+        try {
+          const response = await axios.get('https://fantasy.premierleague.com/api/fixtures/');
+          res.json(response.data);
+        } catch (error) {
+          res.status(500).send('Error fetching data');
+        }
+      });
 
     // Start the server
     this.server.listen(3001, () => {
