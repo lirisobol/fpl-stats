@@ -1,12 +1,13 @@
 import { Button, Modal } from "react-bootstrap";
-import { PlayersTableSelectable } from "../../tables/PlayersTableSelectable/PlayersTableSelectable";
+import { PlayersDraftSelectable } from "../../tables/PlayersDraftSelectable/PlayersDraftSelectable";
 
-interface PlayerSearchModalProps {
+interface PlayerDraftModalProps {
     show: boolean;
     onHide: () => void;
+    position:number
 }
 
-export function PlayerSearchModal({ show, onHide}: PlayerSearchModalProps) {
+export function PlayerDraftModal({ show, onHide, position}: PlayerDraftModalProps) {
     return (
         <Modal
             className="p-1"
@@ -23,7 +24,7 @@ export function PlayerSearchModal({ show, onHide}: PlayerSearchModalProps) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <PlayersTableSelectable onHide={onHide}/>
+                <PlayersDraftSelectable onHide={onHide} position={position}/>
             </Modal.Body>
             <Modal.Footer className="justify-content-center">
                 <Button onClick={onHide} variant="dark" style={{width:"15%"}}>Close</Button>
