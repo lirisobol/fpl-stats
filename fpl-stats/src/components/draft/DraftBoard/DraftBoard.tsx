@@ -41,7 +41,7 @@ export function DraftBoard(): JSX.Element {
     );
 }
 
-function parseFormation(formation) {
+function parseFormation(formation: string) {
     const parts = formation.split('-').map(Number);  // Convert "4-3-3" into [4, 3, 3]
     return {
         defenders: parts[0],
