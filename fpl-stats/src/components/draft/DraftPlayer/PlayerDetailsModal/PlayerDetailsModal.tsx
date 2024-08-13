@@ -4,6 +4,7 @@ import { useAppDispatch } from "../../../../hooks/redux-hooks";
 import { removeDraftPlayer } from "../../../../store/slices/draftSlice";
 import { faTrash, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { PlayerDetailsTable } from "../../../tables/PlayerDetailsTable/PlayerDetailsTable";
 
 interface PlayerDetailsModalProps {
     onHide: () => void;
@@ -25,6 +26,7 @@ export function PlayerDetailsModal({onHide, show, onChangePlayer, player, arrayI
             show={show}
             aria-labelledby="contained-modal-title-vcenter"
             centered
+            fullscreen
         >
             <Modal.Header closeButton>
                 <Modal.Title>
@@ -32,6 +34,7 @@ export function PlayerDetailsModal({onHide, show, onChangePlayer, player, arrayI
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
+                <PlayerDetailsTable player={player}/>
             </Modal.Body>
             <Modal.Footer className="justify-content-center">
                 <Button 
