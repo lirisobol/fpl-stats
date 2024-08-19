@@ -20,12 +20,12 @@ export function PlayerRemoverHeader({playerId, playerName}:PlayerRemoverHeaderPr
     return (
         <div className="custom-header">
             <Button
-                className='btn-sm border border-0'
+                className='btn-sm border border-0 fs-8'
                 onClick={handleRemove}
-                variant='outline-dark'
+                variant='outline-light'
                 >
                 {playerName}
-                <FontAwesomeIcon icon={faTrash} style={{marginLeft:'12px'}}/>
+                <FontAwesomeIcon icon={faTrash} style={{marginLeft:'1rem'}}/>
             </Button>
             {/* <span>{playerName}</span> */}
             {/* <button onClick={handleRemove} className='btn btn-outline-dark btn-sm ms-3' style={{fontSize:'0.6rem'}}>X</button> */}

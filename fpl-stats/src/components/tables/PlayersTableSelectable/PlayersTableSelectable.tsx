@@ -1,16 +1,14 @@
-import 'ag-grid-community/styles/ag-theme-quartz.css';
-import 'ag-grid-community/styles/ag-grid.css'; 
 import { AgGridReact } from "ag-grid-react";
+import 'ag-grid-community/styles/ag-grid.css'; 
+import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { useEffect, useState, useMemo, useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux-hooks";
-import { useDynamicRowHeight } from "../../../hooks/useDynamicRowHeight";
 import { PlayersFilter } from "../../filters/PlayersFilterParent/PlayersFilter";
 import { addPlayerToCompare } from "../../../store/slices/compareSlice";
 import { ColDef, SelectionChangedEvent } from "ag-grid-community";
-import { tableConfig } from "../TableConfig";
 import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
 import useFilteredColumns from "../../../hooks/useFilteredColumns";
-import { LoadingSpinner } from '../../shared/LoadingSpinner/LoadingSpinner';
+import { PlayersTableConfig } from '../PlayersTable/PlayersTableConfig';
 
 interface PlayersTableSelectableProps {
     onHide: () => void;
@@ -31,12 +29,11 @@ export function PlayersTableSelectable({ onHide }: PlayersTableSelectableProps):
     useEffect(() => {
         setLoading(true)
         if (elements_stats) {
-            setColumnDefs(tableConfig.generatePlayersColumnDefs(filteredColumns));
+            setColumnDefs(PlayersTableConfig.generatePlayersColumnDefs(filteredColumns));
         }
         setLoading(false)
     }, [elements_stats, filteredColumns]);
     
-    const { getRowHeight, onGridReady, onFirstDataRendered, onGridSizeChanged } = useDynamicRowHeight();
     
     const memoizedPlayers = useMemo(() => players, [players]);
     const memoizedColumnDefs = useMemo(() => columnDefs, [columnDefs]);
@@ -53,20 +50,13 @@ export function PlayersTableSelectable({ onHide }: PlayersTableSelectableProps):
     return (
         <div>
             <PlayersFilter />
-            <div className="ag-theme-quartz" style={{height: 600, width: '100%', fontSize: "0.8rem"}}>
+            <div className="ag-theme-quartz-dark" style={{height: "100%", width: '100%', fontSize: "0.8rem"}}>
                 <AgGridReact 
                     loading={loading}
-                    loadingOverlayComponent={LoadingSpinner}
                     columnDefs={memoizedColumnDefs}
                     rowData={memoizedPlayers}
-                    defaultColDef={tableConfig.defaultColDef}
-                    autoSizeStrategy={tableConfig.autoSizeStrategy}
                     rowSelection={"single"}
                     domLayout='autoHeight'
-                    getRowHeight={getRowHeight}
-                    onGridReady={onGridReady}
-                    onFirstDataRendered={onFirstDataRendered}
-                    onGridSizeChanged={onGridSizeChanged}
                     onSelectionChanged={onSelectionChanged}
                 />
             </div>

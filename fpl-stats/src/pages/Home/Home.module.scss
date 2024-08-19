@@ -2,47 +2,8 @@
 
 
 .HomeWrapper {
-    height: 94.3%;
     font-family: Dosis;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
-    padding-top: 0.5rem;
-    padding-left: 3rem;
-    @media(min-width:$breakpoint-lg) {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    .Header{
-        color: $dark;
-        font-weight: 400;
-        @media(min-width:$breakpoint-xs) {
-            font-size: 4rem;
-        }
-        @media(min-width:$breakpoint-sm) {
-            font-size: 7rem;
-        }
-        @media(min-width:$breakpoint-lg) {
-            font-size: 10rem;
-        }
-    }
-    .Description {
-        color: $dark;
-        font-size: 5rem;
-        font-weight: 100;
-        @media(min-width:$breakpoint-xs) {
-            font-size:2rem;
-            width: 90%;
-        }
-        @media(min-width:$breakpoint-sm) {
-            font-size: 3rem;
-            width: 50%;
-        }
-        @media(min-width:$breakpoint-lg) {
-            font-size: 3rem;
-            width:20%;
-        }
-    }
 }

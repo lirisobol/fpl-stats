@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Offcanvas } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
-import LogoIcon from '../Logo';
-
 export function Navigation() {
   const [show, setShow] = useState(false);
 
@@ -14,19 +12,16 @@ export function Navigation() {
 
   return (
     <div className={styles.NavWrapper}>
-        <Navbar expand="lg" className="p-1 w-100">
+        <Navbar expand="xs" className="p-1 w-100" bg="dark" data-bs-theme="dark">
             <Container className={styles.NavContainer}>
-                <Navbar.Brand className={`${styles.NavBrand} me-5`} as={Link} to="/">
-                    <LogoIcon />
-                    FPLStats
-                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShow} />
                 <Navbar.Offcanvas
                     id="offcanvasNavbar"
                     aria-labelledby="offcanvasNavbarLabel"
-                    placement="end"
+                    placement="start"
                     show={show}
                     onHide={handleClose}
+                    data-bs-theme="dark"
                 >
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title id="offcanvasNavbarLabel">
