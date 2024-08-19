@@ -7,7 +7,7 @@ import { useAppSelector } from "../../../hooks/redux-hooks";
 import { PlayersFilter } from "../../filters/PlayersFilterParent/PlayersFilter";
 import useFilteredPlayers from "../../../hooks/useFilteredPlayers";
 import useFilteredColumns from "../../../hooks/useFilteredColumns";
-import { playersTableConfig } from './PlayersTableConfig';
+import { PlayersTableConfig } from './PlayersTableConfig';
 // import FiltersCollapse from '../../filters/FiltersCollapse/FiltersCollapse';
 
 export function PlayersTable(): JSX.Element {
@@ -23,7 +23,7 @@ export function PlayersTable(): JSX.Element {
 
     useEffect(() => {
         if (elements_stats) {
-            const columns = playersTableConfig.generatePlayersColumnDefs(filteredColumns)
+            const columns = PlayersTableConfig.generatePlayersColumnDefs(filteredColumns)
             setColumnDefs(columns);
         }
     }, [elements_stats, filteredColumns]);

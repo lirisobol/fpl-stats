@@ -188,8 +188,8 @@ export class TableConfig {
         const team = teams.find(team => team.id === teamId);
         return team ? team.short_name : 'Unknown';
     }
-    // concat first and second names as Player Name field
-    public getPlayerNameColumn = (): ColDef => ({
+    // Static method to generate column definitions for player name
+    public static getPlayerNameColumn = (): ColDef => ({
         headerName: 'Player Name',
         field: 'playerName',
         valueGetter: (params: ValueGetterParams<PlayerData>) => {

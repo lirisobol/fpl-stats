@@ -6,9 +6,9 @@ export class LeagueTableConfig extends TableConfig {
     // Generate column definitions for the league table
     public static generateLeagueColDef = (teams: Team[]): ColDef[] => {
         const columns: ColDef[] = [
-            { headerName: "Team", field: "name", minWidth: 100, width:100,maxWidth:150, flex:1 },
-            { headerName: "Points", field: "points", minWidth: 75 , width:75,maxWidth:150, flex:1},
-            { headerName: "Position", field: "position", minWidth: 75 , width:75,maxWidth:150, flex:1},
+            { headerName: "Team", field: "name", minWidth: 100, width:100, maxWidth:150, flex:1 },
+            { headerName: "Points", field: "points", minWidth: 75, width:75, maxWidth:150, flex:1},
+            { headerName: "Position", field: "position", minWidth: 75, width:75, maxWidth:150, flex:1},
             ...LeagueTableConfig.generateGameColumnsWithRules(teams, 5),  // Assuming 5 games to generate
         ];
         return columns;
