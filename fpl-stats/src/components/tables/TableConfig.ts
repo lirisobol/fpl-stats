@@ -2,6 +2,7 @@ import { CellClassParams, ColDef, ValueGetterParams } from "ag-grid-community";
 import { PlayerRemoverHeader } from "./PlayerCompareTable/PlayerRemoverHeader/PlayerRemoverHeader";
 import { advancedStatsModel, PlayerData,  playerStatsModel } from "../../models/general-info/Player";
 import { Team } from "../../models/general-info/Team";
+import CustomPlayerName from "./CustomPlayerName/CustomPlayerName";
 
 interface RowData {
     stat: string;
@@ -197,6 +198,7 @@ export class TableConfig {
             const secondName = params.data?.second_name || '';
             return `${firstName} ${secondName}`;
         },
+        cellRenderer:CustomPlayerName
     });
 }
 export const tableConfig = new TableConfig();

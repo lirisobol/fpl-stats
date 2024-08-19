@@ -28,7 +28,6 @@ export function PlayersTable(): JSX.Element {
         }
     }, [elements_stats, filteredColumns]);
     
-    
     const memoizedPlayers = useMemo(() => players, [players]);
     const memoizedColumnDefs = useMemo(() => columnDefs, [columnDefs]);
 
