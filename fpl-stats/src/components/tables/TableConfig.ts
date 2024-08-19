@@ -1,7 +1,7 @@
 import { CellClassParams, ColDef, ValueFormatterParams, ValueGetterParams } from "ag-grid-community";
 import { PlayerRemoverHeader } from "./PlayerCompareTable/PlayerRemoverHeader/PlayerRemoverHeader";
 import { ViewPlayersButtons } from "./LeagueTable/ViewPlayersButton/ViewPlayersButton";
-import { PlayerData, PlayerStat, playerStatsModel } from "../../models/general-info/Player";
+import { advancedStatsModel, PlayerData, PlayerStat, playerStatsModel } from "../../models/general-info/Player";
 import { Team } from "../../models/general-info/Team";
 
 interface RowData {
@@ -235,6 +235,39 @@ class TableConfig {
             }
         }
     };
+// Player Details Table Defs -> 
+// -----------------------------------------------------------------------------------------------------------------------------------------
+    // Generate column definitions
+    public generatePlayerDetailsColumnsDef = (player: PlayerData) => {
+        const columns: ColDef[] = [
+            { headerName: "Stat", field: "stat", pinned: 'left', resizable: true ,width:110},
+            { headerName: `${player.first_name} ${player.second_name}`, field: 'value',sortable: false, resizable: false },
+        ];
+        return columns;
+    };
+
+    // Generate row data
+    public generatePlayerDetailsRowsDef = (player: PlayerData) => {
+
+        return advancedStatsModel
+            .filter(stat => stat.name !== "player_name") 
+            .map(stat => {
+                let value = player[stat.name];
+                if (value === null || value === undefined) {
+                    value = 'N/A'; // Handling null and undefined values
+                } else if (typeof value === 'number') {
+                    // Optionally format numbers here if necessary
+                    value = Number(value).toFixed(2);
+                }
+                const row = {
+                    stat: stat.label,
+                    value: value
+                };
+
+                return row;
+            });
+    };
+
 // League Table Defs -> 
 // -----------------------------------------------------------------------------------------------------------------------------------------
     public generateLeagueColDef = (teams: Team[]): ColDef[] => {

@@ -1,0 +1,46 @@
+
+.DraftPlayerWrapper {
+    width: 80%;
+    height: 100%;
+    .PlayerButton {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+
+        img {
+            height: 40%;
+        }
+        .PlayerDetails {
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            font-size: 0.7rem;
+            padding: 0.5rem;
+            .PlayerName {
+                font-weight: 500;
+                overflow-y: hidden;
+            }
+            .PlayerStats {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+
+                .PlayerPrice {
+                    span {
+                        overflow: hidden;
+                        width: 50%;
+                    }
+                }
+                .PlayerSelected {
+                    span {
+                        overflow: hidden;
+                        width: 50%;
+                    }
+                }
+            }
+        }
+    }
+}
+

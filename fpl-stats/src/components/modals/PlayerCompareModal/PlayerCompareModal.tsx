@@ -1,12 +1,12 @@
 import { Button, Modal } from "react-bootstrap";
 import { PlayersTableSelectable } from "../../tables/PlayersTableSelectable/PlayersTableSelectable";
 
-interface PlayerSearchModalProps {
+interface PlayerCompareModalProps {
     show: boolean;
     onHide: () => void;
 }
 
-export function PlayerSearchModal({ show, onHide}: PlayerSearchModalProps) {
+export function PlayerCompareModal({ show, onHide}: PlayerCompareModalProps) {
     return (
         <Modal
             className="p-1"

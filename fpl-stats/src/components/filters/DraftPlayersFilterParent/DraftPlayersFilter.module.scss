@@ -1,0 +1,15 @@
+@import "../../../assets/styles/variables.scss";
+.PlayersFilterContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 0.5rem;
+    @media(min-width: $breakpoint-xs) {
+        flex-direction: row;
+        gap: 0.2rem;
+        padding: 0.2rem;
+    }
+    @media(min-width: $breakpoint-lg) {
+        flex-direction: row;
+    }
+}
