@@ -33,35 +33,53 @@ export function DraftPlayer({ arrayIndex, player, positionType }: DraftPlayerPro
     };
 
     const jerseyImagePath = player ? `/assets/images/kits/${player.team_code}.png` : '/assets/images/kits/default.png';
-    
+    const formattedPrice = player ? (player.now_cost / 10).toFixed(1) : 'N/A';  // Format price to show as decimal
+
     return (
         <div className={styles.DraftPlayerWrapper}>
             {player ? (
-                <div className={styles.PlayerInfo}>
-                    <button className={styles.PlayerButton} onClick={handlePlayerDetailsModalOpen}>
-                        <img src={jerseyImagePath} alt={`${player.team_code} Jersey`}/>
+                <button className={styles.PlayerButton} onClick={handlePlayerDetailsModalOpen}>
+                    <img src={jerseyImagePath} alt={`${player.team_code} Jersey`}/>
+                    <div className={styles.PlayerDetails}>
                         <div className={styles.PlayerName}>{player.first_name} {player.second_name}</div>
-                    </button>
-                </div>
+                        <div className={styles.PlayerStats}>
+                            <div className={styles.PlayerPrice}>
+                                <span>Price</span>
+                                <span>
+                                    {formattedPrice}
+                                </span>
+                            </div>
+                            <div className={styles.PlayerSelected}>
+                                <span>Selected</span>
+                                <span>
+                                    {player.selected_by_percent}
+                                </span>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    
+                </button>
             ) : (
                 <button className={styles.EmptyPlayer} onClick={handlePlayerDraftModalOpen}>
                     <FontAwesomeIcon icon={faPlus} style={{ padding: 12 ,width:30, height:30}}/>
                 </button>
             )}
             
-            <PlayerDraftModal
-                onHide={handlePlayerDraftModalClose}
-                show={playerDraftModalShow}
-                positionType={positionType}
-                arrayIndex={arrayIndex}
-            />
-            <PlayerDetailsModal
-                onHide={handlePlayerDetailsModalClose}
-                show={playerDetailsModal}
-                onChangePlayer={handlePlayerDraftModalOpen} 
-                player={player}
-                arrayIndex={arrayIndex}
-            />
+        <PlayerDraftModal
+            onHide={handlePlayerDraftModalClose}
+            show={playerDraftModalShow}
+            positionType={positionType}
+            arrayIndex={arrayIndex}
+        />
+        <PlayerDetailsModal
+            onHide={handlePlayerDetailsModalClose}
+            show={playerDetailsModal}
+            onChangePlayer={handlePlayerDraftModalOpen} 
+            player={player}
+            arrayIndex={arrayIndex}
+        />
         </div>
+        
     );
 }

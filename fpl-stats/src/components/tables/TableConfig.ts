@@ -248,7 +248,6 @@ class TableConfig {
 
     // Generate row data
     public generatePlayerDetailsRowsDef = (player: PlayerData) => {
-        console.log(player);
 
         return advancedStatsModel
             .filter(stat => stat.name !== "player_name") 
@@ -264,7 +263,6 @@ class TableConfig {
                     stat: stat.label,
                     value: value
                 };
-                console.log(row);
 
                 return row;
             });
