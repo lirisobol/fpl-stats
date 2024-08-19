@@ -1,6 +1,5 @@
 import { CellClassParams, ColDef, ValueGetterParams } from "ag-grid-community";
 import { PlayerRemoverHeader } from "./PlayerCompareTable/PlayerRemoverHeader/PlayerRemoverHeader";
-import { ViewPlayersButtons } from "./LeagueTable/ViewPlayersButton/ViewPlayersButton";
 import { advancedStatsModel, PlayerData,  playerStatsModel } from "../../models/general-info/Player";
 import { Team } from "../../models/general-info/Team";
 
@@ -173,64 +172,7 @@ export class TableConfig {
             });
     };
 
-// League Table Defs -> 
-// -----------------------------------------------------------------------------------------------------------------------------------------
-    public generateLeagueColDef = (teams: Team[]): ColDef[] => {
-        const columns: ColDef[] = [
-            { headerName: "Team", field: "name",minWidth:100},
-            { headerName: "Points", field: "points",minWidth:75 },
-            { headerName: "Position", field: "position" ,minWidth:75 },
-            // Define game columns with cell class rules
-            ...this.generateGameColumnsWithRules(teams, 5), // Assuming 5 games to generate
-            { headerName: 'Players', field: 'code', cellRenderer: ViewPlayersButtons,minWidth:75 }
-        ];
 
-        return columns;
-    };
-
-    private generateGameColumnsWithRules = (teams: Team[], numGames: number): ColDef[] => {
-        return Array.from({ length: numGames }, (_, i) => ({
-            headerName: `Game ${i + 1}`,
-            minWidth: 75,
-            valueGetter: (params) => {
-                return this.getOpponentName(params.data, i, teams);
-            },
-            cellClassRules: {
-                'table-very-high-rank': (params) => {
-                    return this.determineStrength(params.data, i, teams) === 'very-high';
-                },
-                'table-high-rank': (params) => {
-                    return this.determineStrength(params.data, i, teams) === 'high';
-                },
-                'table-mid-rank': (params) => {
-                    return this.determineStrength(params.data, i, teams) === 'mid';
-                },
-                'table-low-rank': (params) => {
-                    return this.determineStrength(params.data, i, teams) === 'low';
-                },
-                'table-very-low-rank': (params) => {
-                    return this.determineStrength(params.data, i, teams) === 'very-low';
-                }
-            }
-        }));
-    };
-
-    private determineStrength = (team: Team, gameIndex: number, teams: Team[]): 'very-high' | 'high' | 'mid' | 'low' | 'very-low' => {
-        if (team.next_5_games && team.next_5_games.length > gameIndex) {
-            const game = team.next_5_games[gameIndex];
-            const currentTeamDifficulty = team.id === game.team_h ? game.team_h_difficulty : game.team_a_difficulty;
-            const opponentId = team.id === game.team_h ? game.team_a : game.team_h;
-            const opponent = teams.find(t => t.id === opponentId);
-            const opponentDifficulty = opponent ? (opponent.id === game.team_h ? game.team_h_difficulty : game.team_a_difficulty) : 0;
-
-            if(currentTeamDifficulty > opponentDifficulty && currentTeamDifficulty - opponentDifficulty > 1) return 'very-low'
-            if (currentTeamDifficulty > opponentDifficulty) return 'low';
-            if (currentTeamDifficulty === opponentDifficulty) return 'mid';
-            if(currentTeamDifficulty < opponentDifficulty && opponentDifficulty - currentTeamDifficulty > 1) return 'very-high'
-            if (currentTeamDifficulty < opponentDifficulty) return 'high';
-        }
-        return 'mid'; // Default case
-    };
 // Helpers ->
 // -----------------------------------------------------------------------------------------------------------------------------------------
     // Helper function to get opponent name

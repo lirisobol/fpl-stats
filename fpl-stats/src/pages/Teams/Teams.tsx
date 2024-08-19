@@ -3,6 +3,7 @@ import { LeagueTable } from "../../components/tables/LeagueTable/LeagueTable";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import { LoadingSpinner } from "../../components/shared/LoadingSpinner/LoadingSpinner";
 import { ErrorToast } from "../../components/shared/Toasts/ErrorToast/ErrorToast";
+import styles from "./Teams.module.scss";
 
 export function Teams(): JSX.Element {
     const [showToast, setShowToast] = useState(false);
@@ -11,10 +12,10 @@ export function Teams(): JSX.Element {
     const teams = useAppSelector((state) => state.generalInformation.data?.teams || []);
     
     return (
-        <div>
+        <div className={styles.TeamsWrapper}>
             {status === 'loading' && <LoadingSpinner />}
             {status === 'succeeded' && (
-                <div>
+                <div className={styles.TeamsTableWrapper}>
                     <LeagueTable teams={teams} />
                 </div>
             )}
