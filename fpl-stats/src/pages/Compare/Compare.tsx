@@ -4,20 +4,17 @@ import { Button} from 'react-bootstrap'; // Import Alert for messaging
 import { PlayerCompareModal } from '../../components/modals/PlayerCompareModal/PlayerCompareModal';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { PlayerCompareTable } from '../../components/tables/PlayerCompareTable/PlayerCompareTable';
-import { WarningAlert } from '../../components/shared/alerts/WarningAlert';
-import { LoadingSpinner } from '../../components/shared/LoadingSpinner/LoadingSpinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PlayerData } from '../../models/general-info/Player';
 
 export function Compare(): JSX.Element {
-    const status = useAppSelector((state) => state.generalInformation.status);
     const [modalShow, setModalShow] = useState<boolean>(false);
     const selectedPlayersFromRedux = useAppSelector((state) => state.compare.selectedPlayers ?? []);
     const [selectedPlayers, setSelectedPlayers] = useState<PlayerData[]>(selectedPlayersFromRedux);
     
     // Determine if the "Add Players" button should be disabled
-    const isButtonDisabled = selectedPlayers.length >= 3;
+    const isButtonDisabled = selectedPlayers.length >= 2;
 
     useEffect(() => {
         setSelectedPlayers(selectedPlayersFromRedux);
@@ -34,11 +31,10 @@ export function Compare(): JSX.Element {
     };
     return (
         <div className={styles.CompareWrapper}>
-            {status === 'loading' && <LoadingSpinner />}
             <div className={styles.ButtonWrapper}>
                 <Button
-                    className='btn'
-                    variant={isButtonDisabled ? 'secondary' : 'outline-dark'}
+                    className='btn w-25'
+                    variant={isButtonDisabled ? 'secondary' : 'outline-light'}
                     onClick={handleModalOpen}
                     disabled={isButtonDisabled}
 
@@ -47,15 +43,13 @@ export function Compare(): JSX.Element {
                     <FontAwesomeIcon icon={faPlus} style={{marginLeft:'12px'}}/>
                 </Button>
 
-                {isButtonDisabled && (
-                    <WarningAlert size="sm" message="Cannot Compare More Than 3 Players"/>
-                )}
             </div>
 
             <div className={styles.ComparedPlayersWrapper}>
                 <PlayerCompareTable selectedPlayers={selectedPlayers} />
             </div>
 
+            
             <PlayerCompareModal 
                 onHide={handleModalClose}
                 show={modalShow}

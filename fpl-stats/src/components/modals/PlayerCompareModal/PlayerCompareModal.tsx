@@ -26,7 +26,7 @@ export function PlayerCompareModal({ show, onHide}: PlayerCompareModalProps) {
                 <PlayersTableSelectable onHide={onHide}/>
             </Modal.Body>
             <Modal.Footer className="justify-content-center">
-                <Button onClick={onHide} variant="dark" style={{width:"15%"}}>Close</Button>
+                <Button onClick={onHide} variant="light" style={{width:"15%"}}>Close</Button>
             </Modal.Footer>
         </Modal>
     );

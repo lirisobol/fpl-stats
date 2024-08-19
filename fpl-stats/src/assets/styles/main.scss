@@ -34,3 +34,10 @@ html {
     overflow: hidden; /* Hides overflowed text */
     text-overflow: ellipsis; /* Adds an ellipsis (...) to overflowed text */
 }
+.nav-item .nav-link {
+    color: white;
+}
+.nav-item .nav-link.active {
+    background-color: $table-mid-alt;
+    color: $dark;
+}

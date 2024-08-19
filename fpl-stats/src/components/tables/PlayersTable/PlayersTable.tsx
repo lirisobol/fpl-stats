@@ -41,6 +41,7 @@ export function PlayersTable(): JSX.Element {
                 <AgGridReact 
                     columnDefs={memoizedColumnDefs}
                     rowData={memoizedPlayers}
+                    domLayout='autoHeight'
                 />
             </div>
         </>

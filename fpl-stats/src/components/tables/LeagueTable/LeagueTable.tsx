@@ -22,6 +22,7 @@ export function LeagueTable({ teams }: LeagueTableProps): JSX.Element {
             <AgGridReact 
                 columnDefs={columnDefs}
                 rowData={teams}
+                domLayout="autoHeight"
             />
         </div>
     );
