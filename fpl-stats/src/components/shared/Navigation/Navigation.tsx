@@ -14,12 +14,8 @@ export function Navigation() {
 
   return (
     <div className={styles.NavWrapper}>
-        <Navbar expand="lg" className="p-1 w-100">
+        <Navbar expand="xs" className="p-1 w-100" bg="dark" data-bs-theme="dark">
             <Container className={styles.NavContainer}>
-                <Navbar.Brand className={`${styles.NavBrand} me-5`} as={Link} to="/">
-                    <LogoIcon />
-                    FPLStats
-                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShow} />
                 <Navbar.Offcanvas
                     id="offcanvasNavbar"
@@ -27,6 +23,7 @@ export function Navigation() {
                     placement="end"
                     show={show}
                     onHide={handleClose}
+                    data-bs-theme="dark"
                 >
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title id="offcanvasNavbarLabel">
